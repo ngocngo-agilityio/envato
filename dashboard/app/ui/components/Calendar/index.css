@@ -194,8 +194,9 @@
 }
 
 .rbc-time-view .rbc-event .rbc-event-content {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 16px;
 }
 
 /* Calendar */

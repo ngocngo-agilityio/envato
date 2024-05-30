@@ -92,7 +92,7 @@ const CustomToolbar = ({ label, view, onView, onNavigate }: ToolbarProps) => {
           <Button
             size="sm"
             w={{ base: '100%', md: '60px' }}
-            bg={view === Views.MONTH ? 'primary.600' : 'primary.500'}
+            bg={view === Views.MONTH ? 'green.900' : 'primary.500'}
             onClick={handleViewMonth}
           >
             Month
@@ -101,7 +101,7 @@ const CustomToolbar = ({ label, view, onView, onNavigate }: ToolbarProps) => {
           <Button
             size="sm"
             w={{ base: '100%', md: '60px' }}
-            bg={view === Views.WEEK ? 'primary.600' : 'primary.500'}
+            bg={view === Views.WEEK ? 'green.900' : 'primary.500'}
             onClick={handleViewWeek}
           >
             Week
@@ -109,7 +109,7 @@ const CustomToolbar = ({ label, view, onView, onNavigate }: ToolbarProps) => {
           <Button
             size="sm"
             w={{ base: '100%', md: '60px' }}
-            bg={view === Views.DAY ? 'primary.600' : 'primary.500'}
+            bg={view === Views.DAY ? 'green.900' : 'primary.500'}
             onClick={handleViewDay}
           >
             Day
