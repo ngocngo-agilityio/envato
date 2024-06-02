@@ -8,10 +8,11 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
 
 // Components
 import { Eye, EyeSlash } from '@/ui/components/Icons';
-import { Modal, PinCode } from '..';
+import { PinCode } from '..';
 
 // Constants
 import {
@@ -32,6 +33,9 @@ import { customToast, formatDecimalNumber } from '@/lib/utils';
 
 // Types
 import { TPinCodeForm } from '@/lib/interfaces';
+
+// Lazy loading components
+const Modal = dynamic(() => import('@/ui/components/common/Modal'));
 
 type TBalanceStatus = {
   balance: string;

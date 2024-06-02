@@ -57,6 +57,10 @@ const nextConfig = {
       '@chakra-ui/icons',
       '@/ui/components/Icons',
       '@/ui/themes/bases',
+      '@chakra-ui/react',
+      'react',
+      'firebase/firestore',
+      'firebase/app',
     ],
   },
 

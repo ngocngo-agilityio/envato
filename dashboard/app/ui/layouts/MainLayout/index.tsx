@@ -9,6 +9,7 @@ import {
   useMediaQuery,
   useToast,
 } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
 
 // Component
 import { Header, SideBar } from '@/ui/layouts';
@@ -27,13 +28,18 @@ import { TAuthStoreData, authStore } from '@/lib/stores';
 import { isWindowDefined } from '@/lib/utils';
 
 // Provider
-import { CheckPinCodeProvider } from '@/ui/providers';
+// import { CheckPinCodeProvider } from '@/ui/providers';
 
 // firebase
 import { getMessaging, onMessage } from 'firebase/messaging';
 
 // Interfaces
 import { TUserDetail } from '@/lib/interfaces';
+
+// Lazy loading components
+const CheckPinCodeProvider = dynamic(
+  () => import('@/ui/providers/CheckPinCode'),
+);
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [isDesktop] = useMediaQuery('(min-width: breakpoints.4xl)');

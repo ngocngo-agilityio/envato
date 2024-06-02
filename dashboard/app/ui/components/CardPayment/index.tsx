@@ -4,9 +4,9 @@ import { memo, useCallback } from 'react';
 import { Box, Heading, useDisclosure, useToast } from '@chakra-ui/react';
 import { SubmitHandler } from 'react-hook-form';
 import { AxiosError } from 'axios';
+import dynamic from 'next/dynamic';
 
 // Components
-import { PinCodeModal } from '@/ui/components';
 import CardBalance from './CardBalance';
 import UserSelector from './UserSelector';
 import EnterMoney from './EnterMoney';
@@ -37,6 +37,9 @@ import {
 
 // Types
 import { TPinCodeForm, TSendMoney, TMoneyResponse } from '@/lib/interfaces';
+
+// Lazy loading components
+const PinCodeModal = dynamic(() => import('@/ui/components/PinCodeModal'));
 
 export type TTransfer = {
   amount: string;
@@ -299,31 +302,33 @@ const CardPaymentComponent = (): JSX.Element => {
         </Box>
       </Box>
       {/*Set/Confirm PIN code Modal */}
-      <PinCodeModal
-        title={
-          isSetPinCodeModalOpen
-            ? 'Please set the PIN code to your account'
-            : 'Please enter your PIN code'
-        }
-        control={hasPinCode ? confirmPinCodeControl : setPinCodeControl}
-        isOpen={isSetPinCodeModalOpen || isConfirmPinCodeModalOpen}
-        isDisabled={
-          hasPinCode
-            ? !isConfirmValid || isConfirmSubmitting
-            : !isSetValid || isSetSubmitting
-        }
-        isLoading={hasPinCode ? isConfirmSubmitting : isSetSubmitting}
-        onclose={
-          isSetPinCodeModalOpen
-            ? handleCloseSetPinCodeModal
-            : handleCloseConfirmPinCodeModal
-        }
-        onSubmit={
-          hasPinCode
-            ? handleSubmitConfirmPinCode(onSubmitPinCode)
-            : handleSubmitSetPinCode(onSubmitPinCode)
-        }
-      />
+      {(isSetPinCodeModalOpen || isConfirmPinCodeModalOpen) && (
+        <PinCodeModal
+          title={
+            isSetPinCodeModalOpen
+              ? 'Please set the PIN code to your account'
+              : 'Please enter your PIN code'
+          }
+          control={hasPinCode ? confirmPinCodeControl : setPinCodeControl}
+          isOpen={true}
+          isDisabled={
+            hasPinCode
+              ? !isConfirmValid || isConfirmSubmitting
+              : !isSetValid || isSetSubmitting
+          }
+          isLoading={hasPinCode ? isConfirmSubmitting : isSetSubmitting}
+          onclose={
+            isSetPinCodeModalOpen
+              ? handleCloseSetPinCodeModal
+              : handleCloseConfirmPinCodeModal
+          }
+          onSubmit={
+            hasPinCode
+              ? handleSubmitConfirmPinCode(onSubmitPinCode)
+              : handleSubmitSetPinCode(onSubmitPinCode)
+          }
+        />
+      )}
     </>
   );
 };
