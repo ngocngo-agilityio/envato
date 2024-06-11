@@ -16,3 +16,4 @@ export * from './useImageUploader';
 export * from './useProducts';
 export * from './useRecentActivities';
 export * from './useEvent';
+export * from './useMultiImagesUploader';

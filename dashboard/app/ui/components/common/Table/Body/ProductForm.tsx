@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { AxiosResponse } from 'axios';
 import isEqual from 'react-fast-compare';
@@ -41,7 +41,7 @@ import {
 import { authStore } from '@/lib/stores';
 
 // Hooks
-import { useUploadImage, useUploadProductImageFiles } from '@/lib/hooks';
+import { useUploadImages, useUploadProductImageFiles } from '@/lib/hooks';
 
 // Utils
 import {
@@ -80,7 +80,7 @@ const ProductForm = ({
   // const [imageFiles, setImageFiles] = useState<File[]>([]);
   // const [isImagesDirty, setIsImagesDirty] = useState(false);
 
-  const { uploadImage } = useUploadImage();
+  const { uploadImages } = useUploadImages();
 
   const {
     getRootProps,
@@ -181,39 +181,33 @@ const ProductForm = ({
     async (data: TProductRequest) => {
       const imagesUpload: string[] = [];
 
-      await Promise.all(
-        imageFiles.map(async (file) => {
-          const formData = new FormData();
-          formData.append('image', file);
+      const payloads = imageFiles.map((imageFile) => {
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        return formData;
+      });
 
-          uploadImage(formData, {
-            onSuccess: (res: AxiosResponse<IUploadImageResponse>) => {
-              console.log('res?', res);
+      uploadImages(payloads, {
+        onSuccess: (res: AxiosResponse<IUploadImageResponse>[]) => {
+          const uploadedImages = res.map((item) => item.data?.data.url);
+          imagesUpload.push(...uploadedImages);
+          const requestData = {
+            ...data,
+            imageURLs: imagesUpload.length ? imagesUpload : previewURLs,
+            stock: parseFormattedNumber(data.stock).toString(),
+            amount: parseFormattedNumber(data.amount).toString(),
+            userId,
+          };
 
-              const { data } = res?.data || {};
-              const { url: imageURL = '' } = data || {};
-
-              imagesUpload.push(imageURL);
-            },
-            onError: handleUploadImageError,
-          });
-        }),
-      );
-
-      const requestData = {
-        ...data,
-        imageURLs: imagesUpload.length ? imagesUpload : previewURLs,
-        stock: parseFormattedNumber(data.stock).toString(),
-        amount: parseFormattedNumber(data.amount).toString(),
-        userId,
-      };
-
-      console.log(' requestData.imageURLs', requestData.imageURLs);
-      data._id
-        ? onUpdateProduct && onUpdateProduct(requestData)
-        : onCreateProduct && onCreateProduct(requestData);
-      reset(requestData);
-      onCloseModal && onCloseModal();
+          console.log(' requestData.imageURLs', requestData.imageURLs);
+          data._id
+            ? onUpdateProduct && onUpdateProduct(requestData)
+            : onCreateProduct && onCreateProduct(requestData);
+          reset(requestData);
+          onCloseModal && onCloseModal();
+        },
+        onError: handleUploadImageError,
+      });
     },
     [
       handleUploadImageError,
@@ -223,7 +217,7 @@ const ProductForm = ({
       onUpdateProduct,
       previewURLs,
       reset,
-      uploadImage,
+      uploadImages,
       userId,
     ],
   );
