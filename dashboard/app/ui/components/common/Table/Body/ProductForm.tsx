@@ -41,7 +41,7 @@ import {
 import { authStore } from '@/lib/stores';
 
 // Hooks
-import { useUploadImage } from '@/lib/hooks';
+import { useUploadImage, useUploadProductImageFiles } from '@/lib/hooks';
 
 // Utils
 import {
@@ -76,11 +76,21 @@ const ProductForm = ({
   } = product || {};
 
   const toast = useToast();
-  const [previewURLs, setPreviewURL] = useState<string[]>(imageURLs || []);
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
-  const [isImagesDirty, setIsImagesDirty] = useState(false);
+  // const [previewURLs, setPreviewURL] = useState<string[]>(imageURLs || []);
+  // const [imageFiles, setImageFiles] = useState<File[]>([]);
+  // const [isImagesDirty, setIsImagesDirty] = useState(false);
 
   const { uploadImage } = useUploadImage();
+
+  const {
+    getRootProps,
+    getInputProps,
+    isFileDialogActive,
+    handleRemoveImage,
+    previewURLs,
+    imageFiles,
+    isImagesDirty,
+  } = useUploadProductImageFiles(imageURLs);
 
   const {
     control,
@@ -114,45 +124,45 @@ const ProductForm = ({
     [toast],
   );
 
-  const handleFilesChange = useCallback(
-    (files: File[]) => {
-      const imagesPreview: React.SetStateAction<string[]> = [];
+  // const handleFilesChange = useCallback(
+  //   (files: File[]) => {
+  //     const imagesPreview: React.SetStateAction<string[]> = [];
 
-      if (files.length > LIMIT_PRODUCT_IMAGES) {
-        return handleShowErrorMessage(ERROR_MESSAGES.UPLOAD_IMAGE_ITEM);
-      }
+  //     if (files.length > LIMIT_PRODUCT_IMAGES) {
+  //       return handleShowErrorMessage(ERROR_MESSAGES.UPLOAD_IMAGE_ITEM);
+  //     }
 
-      files.map(async (file) => {
-        if (!file) {
-          return;
-        }
+  //     files.map(async (file) => {
+  //       if (!file) {
+  //         return;
+  //       }
 
-        // Check type of image
-        if (!REGEX.IMG.test(file.name)) {
-          return handleShowErrorMessage(ERROR_MESSAGES.UPLOAD_IMAGE);
-        }
+  //       // Check type of image
+  //       if (!REGEX.IMG.test(file.name)) {
+  //         return handleShowErrorMessage(ERROR_MESSAGES.UPLOAD_IMAGE);
+  //       }
 
-        const previewImage: string = URL.createObjectURL(file);
-        imagesPreview.push(previewImage);
-      });
+  //       const previewImage: string = URL.createObjectURL(file);
+  //       imagesPreview.push(previewImage);
+  //     });
 
-      setImageFiles(files);
-      setPreviewURL(imagesPreview);
-      setIsImagesDirty(true);
-    },
-    [handleShowErrorMessage],
-  );
+  //     setImageFiles(files);
+  //     setPreviewURL(imagesPreview);
+  //     setIsImagesDirty(true);
+  //   },
+  //   [handleShowErrorMessage],
+  // );
 
-  const handleRemoveImage = useCallback(
-    (index: number) => {
-      const updatedImages = [...previewURLs];
-      updatedImages.splice(index, 1);
+  // const handleRemoveImage = useCallback(
+  //   (index: number) => {
+  //     const updatedImages = [...previewURLs];
+  //     updatedImages.splice(index, 1);
 
-      setPreviewURL(updatedImages);
-      setIsImagesDirty(true);
-    },
-    [previewURLs],
-  );
+  //     setPreviewURL(updatedImages);
+  //     setIsImagesDirty(true);
+  //   },
+  //   [previewURLs],
+  // );
 
   const handleChangeValue = useCallback(
     <T,>(field: keyof TProductRequest, changeHandler: (value: T) => void) =>
@@ -178,6 +188,8 @@ const ProductForm = ({
 
           uploadImage(formData, {
             onSuccess: (res: AxiosResponse<IUploadImageResponse>) => {
+              console.log('res?', res);
+
               const { data } = res?.data || {};
               const { url: imageURL = '' } = data || {};
 
@@ -196,6 +208,7 @@ const ProductForm = ({
         userId,
       };
 
+      console.log(' requestData.imageURLs', requestData.imageURLs);
       data._id
         ? onUpdateProduct && onUpdateProduct(requestData)
         : onCreateProduct && onCreateProduct(requestData);
@@ -393,7 +406,10 @@ const ProductForm = ({
             <UploadImages
               label="Gallery Thumbnail"
               previewURLs={previewURLs}
-              onChange={handleFilesChange}
+              getRootProps={getRootProps}
+              getInputProps={getInputProps}
+              isFileDialogActive={isFileDialogActive}
+              // onChange={handleFilesChange}
               onRemove={handleRemoveImage}
             />
           </FormControl>
