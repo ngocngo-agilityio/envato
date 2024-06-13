@@ -6,11 +6,11 @@ import { FAQ_DATA } from '@/lib/constants';
 // Components
 import { FaqItem } from '@/ui/components';
 
-const FaqPageComponent = () =>
+const FaqPage = () =>
   FAQ_DATA.map(({ id, question, answer }) => (
     <FaqItem key={id} question={question} answer={answer} />
   ));
 
-const FaqPage = memo(FaqPageComponent);
+const FaqPageMemorized = memo(FaqPage);
 
-export default FaqPage;
+export default FaqPageMemorized;

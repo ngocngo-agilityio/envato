@@ -78,7 +78,7 @@ const TransactionModal = ({
       reset(updateData);
       onCloseModal && onCloseModal();
     },
-    [onUpdateTransaction],
+    [onCloseModal, onUpdateTransaction, reset],
   );
 
   return isDelete ? (

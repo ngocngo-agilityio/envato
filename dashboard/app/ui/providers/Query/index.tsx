@@ -1,7 +1,7 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { memo, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { useState } from 'react';
 
 // Constants
@@ -11,7 +11,7 @@ type TQueryProvider = {
   children: ReactNode;
 };
 
-const QueryProviderComponent = ({ children }: TQueryProvider) => {
+const QueryProvider = ({ children }: TQueryProvider) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -28,7 +28,5 @@ const QueryProviderComponent = ({ children }: TQueryProvider) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
-
-const QueryProvider = memo(QueryProviderComponent);
 
 export default QueryProvider;

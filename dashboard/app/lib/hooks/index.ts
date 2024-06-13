@@ -15,3 +15,4 @@ export * from './useChat';
 export * from './useImageUploader';
 export * from './useProducts';
 export * from './useRecentActivities';
+export * from './useEvent';

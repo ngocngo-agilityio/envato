@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, memo } from 'react';
+import { ReactNode } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 
 // Themes
@@ -16,4 +16,4 @@ const ThemesProvider = ({ children }: TChakraProvider): JSX.Element => (
   </ChakraProvider>
 );
 
-export default memo(ThemesProvider);
+export default ThemesProvider;

@@ -1,6 +1,6 @@
 'use client';
 
-// import Link from 'next/link';
+// Libs
 import Image from 'next/image';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { Box, Flex, Td, Text, Th, useToast } from '@chakra-ui/react';
@@ -58,7 +58,7 @@ import {
 } from '@/lib/interfaces';
 import { TOption } from '../common/Select';
 
-const ProductsTableComponent = () => {
+const ProductsTable = () => {
   const toast = useToast();
   const userId = authStore((state) => state.user?.id);
   const { get, setSearchParam: setSearchTransaction } = useSearch();
@@ -459,6 +459,6 @@ const ProductsTableComponent = () => {
   );
 };
 
-const ProductionsTable = memo(ProductsTableComponent);
+const ProductionsTableMemorized = memo(ProductsTable);
 
-export default ProductionsTable;
+export default ProductionsTableMemorized;

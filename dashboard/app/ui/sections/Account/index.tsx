@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, memo, useMemo } from 'react';
+import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import { Box, Flex } from '@chakra-ui/react';
 
@@ -18,21 +18,17 @@ type TAccountProps = {
   children?: ReactNode;
 };
 
-const AccountSection = ({ children }: TAccountProps): JSX.Element => {
+const Account = ({ children }: TAccountProps): JSX.Element => {
   const pathname = usePathname();
 
   const pathForgotPassword = pathname === `/${ROUTES.FORGOT_PASSWORD}`;
   const pathLogin = pathname === `/${ROUTES.LOGIN}`;
 
-  const title: string = useMemo(
-    (): string =>
-      pathForgotPassword
-        ? TITLES.FORGOT_PASSWORD
-        : pathLogin
-          ? TITLES.SIGN_IN
-          : TITLES.SIGN_UP,
-    [pathForgotPassword, pathLogin],
-  );
+  const title = pathForgotPassword
+    ? TITLES.FORGOT_PASSWORD
+    : pathLogin
+      ? TITLES.SIGN_IN
+      : TITLES.SIGN_UP;
 
   return (
     <Flex width="100%" minH="100vh">
@@ -78,6 +74,4 @@ const AccountSection = ({ children }: TAccountProps): JSX.Element => {
   );
 };
 
-const Accounts = memo(AccountSection);
-
-export default Accounts;
+export default Account;

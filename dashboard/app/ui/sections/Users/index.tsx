@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { Controller, useForm } from 'react-hook-form';
 import { CloseIcon } from '@chakra-ui/icons';
@@ -40,11 +40,13 @@ import { TUserDetail } from '@/lib/interfaces';
 // Lazy loading components
 const UsersTable = dynamic(() => import('@/ui/components/UsersTable'));
 
-const UsersSections = () => {
+const Users = () => {
   const toast = useToast();
   const user = authStore((state) => state.user);
 
   const { get, setSearchParam: setSearchUser } = useSearch();
+
+  const { id: userId = '' } = user || {};
 
   const { control, resetField } = useForm<TSearchValue>({
     defaultValues: {
@@ -56,7 +58,7 @@ const UsersSections = () => {
     filterDataUser,
     isLoading: isLoadingUser,
     isError: isUserError,
-  } = useGetUserDetails(user?.id || '', {
+  } = useGetUserDetails(userId, {
     name: get('name')?.toLowerCase() || '',
   });
 
@@ -84,67 +86,73 @@ const UsersSections = () => {
   const handleResetValue = useCallback(() => {
     resetField('search');
     setSearchUser('name', '');
-  }, []);
+  }, [resetField, setSearchUser]);
 
-  const handleLockUser = useCallback((lockUserData?: TUserDetail) => {
-    managementUser(
-      {
-        urlEndpoint: END_POINTS.LOCK,
-        userId: user?.id,
-        memberId: lockUserData?.id,
-      },
-      {
-        onSuccess: () => {
-          toast(
-            customToast(
-              SUCCESS_MESSAGES.LOCK_USER_SUCCESS.title,
-              SUCCESS_MESSAGES.LOCK_USER_SUCCESS.description,
-              STATUS.SUCCESS,
-            ),
-          );
+  const handleLockUser = useCallback(
+    (lockUserData?: TUserDetail) => {
+      managementUser(
+        {
+          urlEndpoint: END_POINTS.LOCK,
+          userId,
+          memberId: lockUserData?.id,
         },
-        onError: () => {
-          toast(
-            customToast(
-              ERROR_MESSAGES.LOCK_USER_FAIL.title,
-              ERROR_MESSAGES.LOCK_USER_FAIL.description,
-              STATUS.ERROR,
-            ),
-          );
+        {
+          onSuccess: () => {
+            toast(
+              customToast(
+                SUCCESS_MESSAGES.LOCK_USER_SUCCESS.title,
+                SUCCESS_MESSAGES.LOCK_USER_SUCCESS.description,
+                STATUS.SUCCESS,
+              ),
+            );
+          },
+          onError: () => {
+            toast(
+              customToast(
+                ERROR_MESSAGES.LOCK_USER_FAIL.title,
+                ERROR_MESSAGES.LOCK_USER_FAIL.description,
+                STATUS.ERROR,
+              ),
+            );
+          },
         },
-      },
-    );
-  }, []);
+      );
+    },
+    [managementUser, toast, userId],
+  );
 
-  const handleUnlockUser = useCallback((lockUserData?: TUserDetail) => {
-    managementUser(
-      {
-        urlEndpoint: END_POINTS.UNLOCK,
-        userId: user?.id,
-        memberId: lockUserData?.id,
-      },
-      {
-        onSuccess: () => {
-          toast(
-            customToast(
-              SUCCESS_MESSAGES.UNLOCK_USER_SUCCESS.title,
-              SUCCESS_MESSAGES.UNLOCK_USER_SUCCESS.description,
-              STATUS.SUCCESS,
-            ),
-          );
+  const handleUnlockUser = useCallback(
+    (lockUserData?: TUserDetail) => {
+      managementUser(
+        {
+          urlEndpoint: END_POINTS.UNLOCK,
+          userId,
+          memberId: lockUserData?.id,
         },
-        onError: () => {
-          toast(
-            customToast(
-              ERROR_MESSAGES.UNLOCK_USER_FAIL.title,
-              ERROR_MESSAGES.UNLOCK_USER_FAIL.description,
-              STATUS.ERROR,
-            ),
-          );
+        {
+          onSuccess: () => {
+            toast(
+              customToast(
+                SUCCESS_MESSAGES.UNLOCK_USER_SUCCESS.title,
+                SUCCESS_MESSAGES.UNLOCK_USER_SUCCESS.description,
+                STATUS.SUCCESS,
+              ),
+            );
+          },
+          onError: () => {
+            toast(
+              customToast(
+                ERROR_MESSAGES.UNLOCK_USER_FAIL.title,
+                ERROR_MESSAGES.UNLOCK_USER_FAIL.description,
+                STATUS.ERROR,
+              ),
+            );
+          },
         },
-      },
-    );
-  }, []);
+      );
+    },
+    [managementUser, toast, userId],
+  );
 
   return (
     <Indicator isOpen={isSendRequestUser}>
@@ -214,6 +222,4 @@ const UsersSections = () => {
   );
 };
 
-const UsersPage = memo(UsersSections);
-
-export default UsersPage;
+export default Users;

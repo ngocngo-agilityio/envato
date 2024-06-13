@@ -12,7 +12,7 @@ import {
   Box,
   theme,
 } from '@chakra-ui/react';
-import { MouseEventHandler, memo, useState } from 'react';
+import { MouseEventHandler, memo, useMemo, useState } from 'react';
 import isEqual from 'react-fast-compare';
 
 // Components
@@ -30,7 +30,6 @@ type TSelectProps = Pick<MenuProps, 'size' | 'variant'> & {
   title?: string;
   options?: TOption[];
   renderTitle: (option: TOption) => JSX.Element;
-  renderOption?: (option: TOption) => JSX.Element;
   onSelect?: (option: TOption) => void;
 };
 
@@ -39,11 +38,15 @@ const SelectComponent = ({
   variant = 'primary',
   size = 'md',
   renderTitle,
-  renderOption,
   onSelect,
 }: TSelectProps): JSX.Element => {
   const [selected, setSelected] = useState<number>(0);
   const colorFill = theme.colors.gray[400];
+
+  const memorizedTitle = useMemo(
+    () => renderTitle(options[selected]),
+    [options, renderTitle, selected],
+  );
 
   return (
     <Menu matchWidth>
@@ -58,7 +61,7 @@ const SelectComponent = ({
         size={size}
       >
         {options[selected]?.label === 'Default' ? (
-          renderTitle(options[selected])
+          memorizedTitle
         ) : (
           <Flex justifyContent="center">
             <Text
@@ -113,7 +116,7 @@ const SelectComponent = ({
                 fontWeight="semibold"
                 textTransform="capitalize"
               >
-                {renderOption ? renderOption(option) : label}
+                {label}
               </Text>
             </MenuItem>
           );

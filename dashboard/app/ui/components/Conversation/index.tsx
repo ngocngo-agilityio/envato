@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { Box, Heading, Flex } from '@chakra-ui/react';
+import isEqual from 'react-fast-compare';
 
 // Components
 import { ChatMember, ListMessages } from '..';
@@ -58,6 +59,6 @@ const Conversation = ({
   );
 };
 
-const ConversationMemorized = memo(Conversation);
+const ConversationMemorized = memo(Conversation, isEqual);
 
 export default ConversationMemorized;

@@ -10,34 +10,35 @@ exports[`DashBoardSection render Should render match with snapshot. 1`] = `
     >
       <div
         class="css-drd224"
+      />
+      <div
+        class="css-1lqaber"
       >
         <div
-          class="css-0"
-        >
-          <div
-            class="css-1enh6ms"
-          >
-            <div
-              class="css-2k2qf4"
-            >
-              <div
-                class="chakra-stack css-ddke4u"
-              >
-                <img
-                  alt="Total earn icon"
-                  class="chakra-image css-ey5hrf"
-                  src="/icons/total-earn.svg"
-                />
-                <h2
-                  class="chakra-text css-8nf7ox"
-                />
-              </div>
-            </div>
-            <div
-              class="chakra-skeleton css-l9u3de"
-            />
-          </div>
-        </div>
+          class="css-1b0f144"
+        />
+        <div
+          class="css-1myajjl"
+        />
+      </div>
+      <section
+        class="css-q5tdat"
+      >
+         
+      </section>
+    </div>
+    <div
+      class="css-13fssc0"
+    >
+      <div
+        class="chakra-stack css-txpvqp"
+      >
+        <div
+          class="css-1ki54i"
+        />
+        <div
+          class="css-1o7vdud"
+        />
       </div>
     </div>
   </div>

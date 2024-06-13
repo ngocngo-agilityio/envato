@@ -1,7 +1,9 @@
 'use client';
 
+// Libs
 import { memo } from 'react';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import isEqual from 'react-fast-compare';
 
 // Components
 import { CardIssues, Loading } from '@/ui/components';
@@ -54,11 +56,30 @@ const CustomerIssues = ({
           },
         }}
       >
-        {dataList?.map((item) => (
-          <Flex key={item._id}>
-            <CardIssues data={item} />
-          </Flex>
-        ))}
+        {dataList?.map((item) => {
+          const {
+            _id = '',
+            firstName = '',
+            lastName = '',
+            title = '',
+            description = '',
+            avatar = '',
+            createdAt = '',
+          } = item || {};
+
+          return (
+            <Flex key={_id}>
+              <CardIssues
+                firstName={firstName}
+                lastName={lastName}
+                title={title}
+                description={description}
+                avatar={avatar}
+                createdAt={createdAt}
+              />
+            </Flex>
+          );
+        })}
       </Box>
     )}
 
@@ -86,5 +107,5 @@ const CustomerIssues = ({
   </Box>
 );
 
-const CustomerIssuesMemorize = memo(CustomerIssues);
+const CustomerIssuesMemorize = memo(CustomerIssues, isEqual);
 export default CustomerIssuesMemorize;

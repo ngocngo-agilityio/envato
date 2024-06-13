@@ -5,17 +5,13 @@ import { memo } from 'react';
 // Components
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 
-interface ProductProps {
+interface Props {
   itemName?: string;
-  onDeleteProduct?: () => void;
-  onCloseModal?: () => void;
+  onDelete: () => void;
+  onCancel: () => void;
 }
 
-const ConfirmDeleteModal = ({
-  itemName,
-  onDeleteProduct,
-  onCloseModal,
-}: ProductProps) => (
+const ConfirmDeleteModalBody = ({ itemName, onDelete, onCancel }: Props) => (
   <Box>
     <Text fontSize="md" w={{ base: 364 }} noOfLines={2}>
       Are you sure delete
@@ -29,7 +25,7 @@ const ConfirmDeleteModal = ({
         w={44}
         bg="green.600"
         mr={3}
-        onClick={onDeleteProduct}
+        onClick={onDelete}
         data-testid="accept-del"
       >
         Delete
@@ -38,7 +34,7 @@ const ConfirmDeleteModal = ({
         w={44}
         bg="orange.300"
         _hover={{ bg: 'orange.400' }}
-        onClick={onCloseModal}
+        onClick={onCancel}
       >
         Cancel
       </Button>
@@ -46,5 +42,5 @@ const ConfirmDeleteModal = ({
   </Box>
 );
 
-const ConfirmDeleteModalMemorized = memo(ConfirmDeleteModal);
+const ConfirmDeleteModalMemorized = memo(ConfirmDeleteModalBody);
 export default ConfirmDeleteModalMemorized;

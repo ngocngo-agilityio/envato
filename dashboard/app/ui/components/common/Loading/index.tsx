@@ -1,5 +1,7 @@
 'use client';
 
+// Libs
+import { memo } from 'react';
 import { Flex, Spinner } from '@chakra-ui/react';
 
 const Loading = () => (
@@ -8,4 +10,6 @@ const Loading = () => (
   </Flex>
 );
 
-export default Loading;
+const LoadingMemorized = memo(Loading);
+
+export default LoadingMemorized;

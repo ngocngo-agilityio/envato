@@ -31,7 +31,6 @@
     "dayjs": "^1.11.10",
     "firebase": "^10.7.1",
     "framer-motion": "^10.16.16",
-    "moment": "^2.30.1",
     "next": "14.0.5-canary.53",
     "react": "^18",
     "react-apexcharts": "^1.4.1",

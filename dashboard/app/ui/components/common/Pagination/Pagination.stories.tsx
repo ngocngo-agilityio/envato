@@ -29,7 +29,7 @@ type Story = StoryObj<typeof Pagination>;
 export const Default: Story = {
   args: {
     pageSize: 8,
-    arrOfCurrButtons: [1, 2, 3, '...', 7],
+    arrOfCurrButtons: ['1', '2', '3', '...', '7'],
     currentPage: 1,
   },
 };

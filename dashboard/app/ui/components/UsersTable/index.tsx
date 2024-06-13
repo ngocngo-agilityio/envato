@@ -31,7 +31,7 @@ import { formatUserResponse } from '@/lib/utils';
 type TUsersProps = {
   users: TUserDetail[];
   data?: PaginationType;
-  arrOfCurrButtons?: (string | number)[];
+  arrOfCurrButtons?: string[];
   isDisabledPrev?: boolean;
   isDisableNext?: boolean;
   onChangeLimit: (limit: TOption) => void;
@@ -42,7 +42,7 @@ type TUsersProps = {
   onUnlockUser: (user?: TUserDetail) => void;
 };
 
-const UsersComponent = ({
+const Users = ({
   users,
   data,
   arrOfCurrButtons,
@@ -169,6 +169,6 @@ const UsersComponent = ({
   );
 };
 
-const Users = memo(UsersComponent, isEqual);
+const UsersMemorized = memo(Users, isEqual);
 
-export default Users;
+export default UsersMemorized;

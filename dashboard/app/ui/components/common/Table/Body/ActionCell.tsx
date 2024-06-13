@@ -16,14 +16,15 @@ import {
 import { DeleteIcon, EditIcon, LockIcon, UnlockIcon } from '@chakra-ui/icons';
 
 // Components
-import { Dot, Modal, ProductForm } from '@/ui/components';
+import {
+  Dot,
+  Modal,
+  ProductForm,
+  ConfirmDeleteModalBody,
+} from '@/ui/components';
 
 const TransactionModal = dynamic(
   () => import('@/ui/components/common/Table/Body/TransactionModal'),
-);
-
-const ConfirmDeleteModal = dynamic(
-  () => import('@/ui/components/common/Table/Body/ConfirmDeleteModal'),
 );
 
 // Interfaces
@@ -247,12 +248,10 @@ const ActionCellComponent = ({
           onClose={handleToggleModal}
           title={titleDelete}
           body={
-            <ConfirmDeleteModal
+            <ConfirmDeleteModalBody
               itemName={itemName}
-              onDeleteProduct={
-                product ? handleDeleteProduct : handleDeleteActivities
-              }
-              onCloseModal={handleToggleModal}
+              onDelete={product ? handleDeleteProduct : handleDeleteActivities}
+              onCancel={handleToggleModal}
             />
           }
           haveCloseButton

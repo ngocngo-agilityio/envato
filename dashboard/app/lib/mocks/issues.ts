@@ -57,8 +57,8 @@ export const ISSUES: IIssues = {
   email: 'Joel@gmail.com',
   title: 'When is the Sketch version available for download?',
   userId: '1',
-  createdAt: '12h',
-  updatedAt: '15h',
+  createdAt: '2024-05-09T06:46:08.760Z',
+  updatedAt: '2024-05-09T06:46:08.760Z',
   phone: '091929282',
   description:
     'Love this so much! What tools do you use to create your 3d illustrations ?',

@@ -88,9 +88,9 @@ export const useProducts = (queryParam?: TSearchProduct) => {
   const productData: TProduct[] = data?.result || [];
   const totalPage = data?.totalPage as number;
 
-  const arrOfCurrButtons: number[] = Array.from(
+  const arrOfCurrButtons: string[] = Array.from(
     { length: totalPage },
-    (_, index) => index,
+    (_, index) => index.toString(),
   );
 
   const pageArray = formatPageArray({

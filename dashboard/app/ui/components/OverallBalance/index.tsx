@@ -1,7 +1,7 @@
 'use client';
 
+// Libs
 import { memo, useCallback, useMemo, useState } from 'react';
-import isEqual from 'react-fast-compare';
 import dynamic from 'next/dynamic';
 import { Box, Flex, Heading, Skeleton, Text } from '@chakra-ui/react';
 
@@ -40,7 +40,7 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 
 type TOverallData = Omit<IRevenueFlow, 'pending'>[];
 
-const OverallBalanceComponent = () => {
+const OverallBalance = () => {
   const {
     data: overallBalanceData = INITIAL_OVERALL_BALANCE,
     isLoading: isLoadingOverallBalance,
@@ -203,6 +203,6 @@ const OverallBalanceComponent = () => {
   );
 };
 
-const OverallBalance = memo(OverallBalanceComponent, isEqual);
+const OverallBalanceMemorized = memo(OverallBalance);
 
-export default OverallBalance;
+export default OverallBalanceMemorized;

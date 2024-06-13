@@ -45,7 +45,7 @@ import { useUploadImage } from '@/lib/hooks';
 // Interfaces
 import { IUploadImageResponse, TUserDetail } from '@/lib/interfaces';
 
-const UserFormComponent = () => {
+const UserForm = () => {
   const [avatarFile, setAvatarFile] = useState<File>();
   const [isAvatarDirty, setIsAvatarDirty] = useState(false);
 
@@ -574,10 +574,10 @@ const UserFormComponent = () => {
 
 const WrappedUserForm = () => (
   <QueryProvider>
-    <UserFormComponent />
+    <UserForm />
   </QueryProvider>
 );
 
-const UserForm = memo(WrappedUserForm);
+const UserFormMemorized = memo(WrappedUserForm);
 
-export default UserForm;
+export default UserFormMemorized;

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import { useCallback, useEffect, useId } from 'react';
+import { useCallback, useEffect, useId, memo } from 'react';
 import { VStack, Flex, Text } from '@chakra-ui/react';
 import 'react-quill/dist/quill.snow.css';
 import { Controller, useForm } from 'react-hook-form';
@@ -10,7 +10,7 @@ import { SendIconLight } from '..';
 import CustomButton from '@/ui/components/common/Button';
 
 // Constants
-import { IMAGES, REGEX } from '@/lib/constants';
+import { IMAGES, QUILL_SCHEMA, REGEX } from '@/lib/constants';
 
 // Hooks
 import { sendMessage } from '@/lib/utils';
@@ -115,6 +115,7 @@ const Quill = ({
       <Flex direction="column" width="full">
         <Controller
           control={control}
+          rules={QUILL_SCHEMA.MESSAGES}
           name="text"
           render={({ field: { onChange, ...rest } }) => (
             <Flex direction="row" alignItems="center">
@@ -164,4 +165,6 @@ const Quill = ({
   );
 };
 
-export default Quill;
+const QuillMemorized = memo(Quill);
+
+export default QuillMemorized;

@@ -18,6 +18,6 @@ type Story = StoryObj<typeof CardIssues>;
 
 export const Default: Story = {
   args: {
-    data: ISSUES,
+    ...ISSUES,
   },
 };

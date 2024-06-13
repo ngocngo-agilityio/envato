@@ -1,5 +1,7 @@
+// Libs
+import { ReactNode, memo } from 'react';
 import { Center, Spinner } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import isEqual from 'react-fast-compare';
 
 type TIndicatorProps = {
   isOpen?: boolean;
@@ -33,4 +35,6 @@ const Indicator = ({
   </>
 );
 
-export default Indicator;
+const IndicatorMemorized = memo(Indicator, isEqual);
+
+export default IndicatorMemorized;

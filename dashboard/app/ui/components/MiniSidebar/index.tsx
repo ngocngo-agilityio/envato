@@ -1,5 +1,5 @@
+// Libs
 import { memo } from 'react';
-import isEqual from 'react-fast-compare';
 import {
   Box,
   Center,
@@ -130,5 +130,5 @@ const MiniSidebar = ({
   );
 };
 
-const MiniSidebarComponent = memo(MiniSidebar, isEqual);
-export default MiniSidebarComponent;
+const MiniSidebarMemorized = memo(MiniSidebar);
+export default MiniSidebarMemorized;

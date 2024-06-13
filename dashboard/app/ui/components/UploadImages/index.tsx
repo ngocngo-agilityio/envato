@@ -9,6 +9,7 @@ import {
   FormLabel,
   Flex,
 } from '@chakra-ui/react';
+import isEqual from 'react-fast-compare';
 
 // Components
 import { Loading, ProductGallery } from '@/ui/components';
@@ -20,7 +21,7 @@ export type TUploadImageImagesProps = {
   onRemove: (index: number) => void;
 };
 
-const UploadImagesComponent = ({
+const UploadImages = ({
   label = 'Upload images',
   previewURLs = [],
   onChange,
@@ -100,6 +101,6 @@ const UploadImagesComponent = ({
   );
 };
 
-const UploadImages = memo(UploadImagesComponent);
+const UploadImagesMemorized = memo(UploadImages, isEqual);
 
-export default UploadImages;
+export default UploadImagesMemorized;

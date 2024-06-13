@@ -1,6 +1,7 @@
 'use client';
 
-import { ChangeEvent, useCallback, useState } from 'react';
+// Libs
+import { ChangeEvent, useCallback, useState, memo } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import {
   Box,
@@ -13,6 +14,7 @@ import {
   InputLeftElement,
   FormLabel,
 } from '@chakra-ui/react';
+import isEqual from 'react-fast-compare';
 
 // Constants
 import {
@@ -153,4 +155,6 @@ const UpdateProfile = ({
   );
 };
 
-export default UpdateProfile;
+const UpdateProfileMemorized = memo(UpdateProfile, isEqual);
+
+export default UpdateProfileMemorized;

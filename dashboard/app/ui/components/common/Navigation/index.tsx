@@ -30,6 +30,6 @@ const Navigation = ({
   );
 };
 
-const NavigationComponent = memo(Navigation, isEqual);
+const NavigationMemorized = memo(Navigation, isEqual);
 
-export default NavigationComponent;
+export default NavigationMemorized;

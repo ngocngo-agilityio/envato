@@ -9,4 +9,4 @@ export { default as TransactionSection } from './Transaction';
 export { default as HistorySection } from './History';
 export { default as ProductsSection } from './Products';
 export { default as RecentActivitiesSection } from './RecentActivities';
-export { default as CalendarSection } from './Calendar';
+export { default as Calendar } from './Calendar';

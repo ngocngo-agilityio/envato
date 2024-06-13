@@ -2,6 +2,7 @@
 import { memo, useCallback } from 'react';
 import { Box, Flex, Hide, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+import isEqual from 'react-fast-compare';
 
 // Constants
 import { IMAGES } from '@/lib/constants';
@@ -163,6 +164,6 @@ const ChatMember = ({
   );
 };
 
-const ChatMemberMemorized = memo(ChatMember);
+const ChatMemberMemorized = memo(ChatMember, isEqual);
 
 export default ChatMemberMemorized;

@@ -1,7 +1,7 @@
 import { CircularProgress, Flex } from '@chakra-ui/react';
 import { memo } from 'react';
 
-const RefetchComponent = (): JSX.Element => (
+const Refetch = (): JSX.Element => (
   <Flex
     justifyContent="center"
     alignItems="center"
@@ -13,6 +13,6 @@ const RefetchComponent = (): JSX.Element => (
   </Flex>
 );
 
-const EfficiencyRefetch = memo(RefetchComponent);
+const EfficiencyRefetch = memo(Refetch);
 
 export default EfficiencyRefetch;

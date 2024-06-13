@@ -8,12 +8,12 @@ import { ISSUES } from '@/lib/mocks';
 
 describe('CardIssues render', () => {
   it('Should render match with snapshot.', () => {
-    const { container } = render(<CardIssues data={ISSUES} />);
+    const { container } = render(<CardIssues {...ISSUES} />);
     expect(container).toMatchSnapshot();
   });
 
   it('displays user information correctly', () => {
-    const { getByText } = render(<CardIssues data={ISSUES} />);
+    const { getByText } = render(<CardIssues {...ISSUES} />);
 
     expect(
       getByText(`${ISSUES.firstName} ${ISSUES.lastName}`),

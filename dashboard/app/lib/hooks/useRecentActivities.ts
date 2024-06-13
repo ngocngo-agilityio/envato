@@ -82,9 +82,9 @@ export const useRecentActivities = (queryParam?: TAction) => {
   const activitiesData: TRecentActivities[] = data?.data.result || [];
   const totalPage = data?.data.totalPage as number;
 
-  const arrOfCurrButtons: number[] = Array.from(
+  const arrOfCurrButtons: string[] = Array.from(
     { length: totalPage },
-    (_, index) => index,
+    (_, index) => index.toString(),
   );
 
   const pageArray = formatPageArray({

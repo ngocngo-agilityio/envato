@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import Link from 'next/link';
 import { Button, HStack, Text, VStack, Box, useToast } from '@chakra-ui/react';
 import { Controller, SubmitHandler } from 'react-hook-form';
@@ -31,7 +31,7 @@ type TForgotPasswordForm = {
   email: string;
 };
 
-const ForgotPasswordSection = (): JSX.Element => {
+const ForgotPassword = (): JSX.Element => {
   // Control form
   const {
     control,
@@ -133,7 +133,5 @@ const ForgotPasswordSection = (): JSX.Element => {
     </VStack>
   );
 };
-
-const ForgotPassword = memo(ForgotPasswordSection);
 
 export default ForgotPassword;

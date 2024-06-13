@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { Controller, useForm } from 'react-hook-form';
 import {
@@ -43,7 +43,7 @@ import { useColorfill } from '@/ui/themes/bases';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-const SupportsSection = () => {
+const Supports = () => {
   const toast = useToast();
   const user = authStore((state) => state.user);
   const {
@@ -345,6 +345,4 @@ const SupportsSection = () => {
   );
 };
 
-const SettingMemorize = memo(SupportsSection);
-
-export default SettingMemorize;
+export default Supports;

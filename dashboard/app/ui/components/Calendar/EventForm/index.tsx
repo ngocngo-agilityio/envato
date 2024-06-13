@@ -9,45 +9,46 @@ import { Button, Flex, VStack } from '@chakra-ui/react';
 import { TEvent } from '@/lib/interfaces';
 
 // Constants
-import { EVENT_SCHEMA } from '@/lib/constants';
+import { EVENT_SCHEMA, ERROR_MESSAGES } from '@/lib/constants';
 
 // Components
 import InputField from '@/ui/components/common/InputField';
 
-interface TEventForm extends TEvent {
+export interface TEventForm extends TEvent {
   date: string;
 }
 
-interface AddEventFormProps {
-  _id?: string;
+interface EventFormProps {
+  id?: string;
   eventName?: string;
   date?: string;
   startTime?: string;
   endTime?: string;
-  onCloseModal: () => void;
+  onCancel: () => void;
   onAddEvent?: (data: Omit<TEvent, '_id'>) => void;
   onEditEvent?: (data: TEvent) => void;
 }
 
-const EventFormComponent = ({
-  _id = '',
+const EventForm = ({
+  id = '',
   eventName = '',
   date = '',
   startTime = '',
   endTime = '',
-  onCloseModal,
+  onCancel,
   onAddEvent,
   onEditEvent,
-}: AddEventFormProps) => {
+}: EventFormProps) => {
   const {
     control,
     clearErrors,
     handleSubmit,
-    formState: { isDirty, isValid },
+    watch,
+    formState: { isDirty },
     reset,
   } = useForm<TEventForm>({
     defaultValues: {
-      _id: _id,
+      _id: id,
       eventName: eventName,
       startTime: startTime,
       endTime: endTime,
@@ -55,7 +56,16 @@ const EventFormComponent = ({
     },
   });
 
-  const isEnable = isDirty && isValid;
+  const endTimeValidationRule = {
+    ...EVENT_SCHEMA.END_TIME,
+    validate: (endTime: string) => {
+      const startTime = watch('startTime');
+
+      return startTime && endTime <= startTime
+        ? ERROR_MESSAGES.END_TIME_EVENT
+        : true;
+    },
+  };
 
   const handleChangeValue = useCallback(
     <T,>(field: keyof TEventForm, changeHandler: (value: T) => void) =>
@@ -80,14 +90,14 @@ const EventFormComponent = ({
         : onEditEvent && onEditEvent(requestData);
 
       reset(requestData);
-      onCloseModal();
+      onCancel();
     },
-    [onAddEvent, onCloseModal, onEditEvent, reset],
+    [onAddEvent, onCancel, onEditEvent, reset],
   );
 
   return (
     <VStack as="form" onSubmit={handleSubmit(handleSubmitForm)}>
-      <Flex w="100%" mb={5}>
+      <Flex w="100%" minW={{ md: 500 }} mb={5}>
         <Controller
           control={control}
           name="eventName"
@@ -138,7 +148,7 @@ const EventFormComponent = ({
             }) => (
               <InputField
                 {...rest}
-                label="Start"
+                label="Start time"
                 type="time"
                 variant="authentication"
                 bg="background.body.primary"
@@ -154,13 +164,13 @@ const EventFormComponent = ({
           <Controller
             control={control}
             name="endTime"
-            rules={EVENT_SCHEMA.END_TIME}
+            rules={endTimeValidationRule}
             render={({
               field: { onChange, ...rest },
               fieldState: { error },
             }) => (
               <InputField
-                label="End"
+                label="End time"
                 type="time"
                 variant="authentication"
                 bg="background.body.primary"
@@ -174,21 +184,27 @@ const EventFormComponent = ({
         </Flex>
       </Flex>
 
-      <Flex my={4}>
+      <Flex
+        w="100%"
+        my={4}
+        flexDir={{ base: 'column', md: 'row' }}
+        justifyContent="space-between"
+        wrap="wrap"
+        gap={3}
+      >
         <Button
           type="submit"
-          w={44}
           bg="green.600"
-          mr={3}
-          isDisabled={!isEnable}
+          w={{ md: 240 }}
+          isDisabled={!isDirty}
         >
           Save
         </Button>
         <Button
-          w={44}
           bg="orange.300"
+          w={{ md: 240 }}
           _hover={{ bg: 'orange.400' }}
-          onClick={onCloseModal}
+          onClick={onCancel}
         >
           Cancel
         </Button>
@@ -197,5 +213,5 @@ const EventFormComponent = ({
   );
 };
 
-const EventForm = memo(EventFormComponent);
-export default EventForm;
+const EventFormMemorized = memo(EventForm);
+export default EventFormMemorized;

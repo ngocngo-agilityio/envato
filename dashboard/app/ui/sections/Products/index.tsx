@@ -8,7 +8,7 @@ const ProductsTable = dynamic(() => import('@/ui/components/ProductsTable'));
 const CardPayment = dynamic(() => import('@/ui/components/CardPayment'));
 const BoxChat = dynamic(() => import('@/ui/components/BoxChat'));
 
-const ProductsSection = () => (
+const Products = () => (
   <Grid
     bg="background.body.primary"
     py={12}
@@ -45,4 +45,4 @@ const ProductsSection = () => (
   </Grid>
 );
 
-export default ProductsSection;
+export default Products;

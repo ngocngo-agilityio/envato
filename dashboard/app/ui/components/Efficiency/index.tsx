@@ -24,7 +24,7 @@ import { Arrow } from '@/ui/components/Icons';
 // Themes
 import { useColorfill } from '@/ui/themes/bases';
 
-const EfficiencyComponent = () => {
+const Efficiency = () => {
   const [efficiencyType, setEfficiencyType] = useState<string>('weekly');
 
   const [isLoadingSelectEfficiencyType, setLoadingSelectEfficiencyType] =
@@ -110,6 +110,6 @@ const EfficiencyComponent = () => {
   );
 };
 
-const Efficiency = memo(EfficiencyComponent);
+const EfficiencyMemorized = memo(Efficiency);
 
-export default Efficiency;
+export default EfficiencyMemorized;

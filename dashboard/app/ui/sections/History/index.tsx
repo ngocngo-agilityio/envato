@@ -9,7 +9,7 @@ const CardPayment = dynamic(() => import('@/ui/components/CardPayment'));
 const BoxChat = dynamic(() => import('@/ui/components/BoxChat'));
 const HistoriesTable = dynamic(() => import('@/ui/components/HistoriesTable'));
 
-const HistorySection = () => (
+const History = () => (
   <Grid
     bg="background.body.primary"
     py={12}
@@ -42,4 +42,4 @@ const HistorySection = () => (
   </Grid>
 );
 
-export default HistorySection;
+export default History;

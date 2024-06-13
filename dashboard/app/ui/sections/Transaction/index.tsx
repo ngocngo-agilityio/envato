@@ -11,7 +11,7 @@ const TransactionTable = dynamic(
 const CardPayment = dynamic(() => import('@/ui/components/CardPayment'));
 const BoxChat = dynamic(() => import('@/ui/components/BoxChat'));
 
-const TransactionSection = () => (
+const Transaction = () => (
   <Grid
     bg="background.body.primary"
     py={12}
@@ -44,4 +44,4 @@ const TransactionSection = () => (
   </Grid>
 );
 
-export default TransactionSection;
+export default Transaction;

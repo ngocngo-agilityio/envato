@@ -9,6 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Control, Controller } from 'react-hook-form';
+import isEqual from 'react-fast-compare';
 
 // Constants
 import { AUTH_SCHEMA } from '@/lib/constants';
@@ -24,7 +25,7 @@ export type TEnterMoneyProps = {
   isDisabled?: boolean;
 };
 
-const EnterMoneyComponent = ({
+const EnterMoney = ({
   control,
   isDisabled = false,
 }: TEnterMoneyProps): JSX.Element => (
@@ -105,5 +106,5 @@ const EnterMoneyComponent = ({
   </>
 );
 
-const EnterMoney = memo(EnterMoneyComponent);
-export default EnterMoney;
+const EnterMoneyMemorized = memo(EnterMoney, isEqual);
+export default EnterMoneyMemorized;

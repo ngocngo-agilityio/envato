@@ -1,5 +1,6 @@
+// Libs
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import Image from 'next/image';
 
 // Constants
@@ -109,4 +110,6 @@ const Message = ({
     </Flex>
   );
 };
-export default Message;
+
+const MessageMemorized = memo(Message);
+export default MessageMemorized;

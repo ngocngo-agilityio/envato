@@ -11,7 +11,7 @@ const TransactionTable = dynamic(
 const Efficiency = dynamic(() => import('@/ui/components/Efficiency'));
 const OverallBalance = dynamic(() => import('@/ui/components/OverallBalance'));
 
-const MyWalletsSection = () => (
+const MyWallet = () => (
   <InView>
     {({ inView, ref }) => (
       <Flex direction="column" gap={6} ref={ref}>
@@ -45,4 +45,4 @@ const MyWalletsSection = () => (
   </InView>
 );
 
-export default MyWalletsSection;
+export default MyWallet;

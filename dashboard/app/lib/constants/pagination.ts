@@ -17,4 +17,5 @@ export const PREV = 'prev';
 export const NEXT = 'next';
 
 export const PAGE_SIZE = 10;
+export const DEFAULT_PAGE = 1;
 export const TOTAL_COUNT = 100;

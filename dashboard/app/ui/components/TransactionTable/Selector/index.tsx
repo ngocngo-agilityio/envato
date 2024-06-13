@@ -7,7 +7,7 @@ import { FilterIcon } from '@/ui/components/Icons';
 // Themes
 import { useColorfill } from '@/ui/themes/bases/colors';
 
-const SelectorComponent = (): JSX.Element => {
+const Selector = (): JSX.Element => {
   const { senary } = useColorfill();
 
   return (
@@ -24,6 +24,6 @@ const SelectorComponent = (): JSX.Element => {
   );
 };
 
-const Selector = memo(SelectorComponent);
+const SelectorMemorized = memo(Selector);
 
-export default Selector;
+export default SelectorMemorized;

@@ -4,9 +4,9 @@ import { REGEX, DOTS, ERROR_MESSAGES } from '@/lib/constants';
 // Types
 import { FormatPaginationParams, PaginationTableType } from '@/lib/interfaces';
 
-export const formatNumberButton = (numberOfPage: number): number[] =>
-  Array.from({ length: numberOfPage }).map(
-    (_, index: number): number => index + 1,
+export const formatNumberButton = (numberOfPage: number): string[] =>
+  Array.from({ length: numberOfPage }).map((_, index: number): string =>
+    (index + 1).toString(),
   );
 
 export const formatPagination = ({
@@ -14,14 +14,14 @@ export const formatPagination = ({
   limit,
   currentPage,
   arrOfCurrButtons,
-}: FormatPaginationParams): (string | number)[] => {
+}: FormatPaginationParams): string[] => {
   const numberOfPage = Math.ceil(totalCount / limit);
   let tempNumberOfButtons = [...arrOfCurrButtons];
 
   if (formatNumberButton(numberOfPage).length <= 4) {
     const numberOfPages = Array.from(
       { length: formatNumberButton(numberOfPage).length },
-      (_, index) => index + 1,
+      (_, index) => (index + 1).toString(),
     );
     tempNumberOfButtons = numberOfPages;
   } else {
@@ -33,22 +33,21 @@ export const formatPagination = ({
     tempNumberOfButtons = [
       ...(rangeEnd >= formatNumberButton(numberOfPage).length - 1
         ? [
-          ...(formatNumberButton(numberOfPage).length - 3 > 1
-            ? Array.from(
-              { length: 3 },
-              (_, i) => formatNumberButton(numberOfPage).length - 4 + i,
-            )
-            : []),
-          formatNumberButton(numberOfPage).length - 1,
-          formatNumberButton(numberOfPage).length,
-        ]
+            ...(formatNumberButton(numberOfPage).length - 3 > 1
+              ? Array.from({ length: 3 }, (_, i) =>
+                  (formatNumberButton(numberOfPage).length - 4 + i).toString(),
+                )
+              : []),
+            (formatNumberButton(numberOfPage).length - 1).toString(),
+            formatNumberButton(numberOfPage).length.toString(),
+          ]
         : [
-          rangeStart,
-          rangeStart + 1,
-          rangeStart + 2,
-          DOTS,
-          formatNumberButton(numberOfPage).length,
-        ]),
+            rangeStart.toString(),
+            (rangeStart + 1).toString(),
+            (rangeStart + 2).toString(),
+            DOTS,
+            formatNumberButton(numberOfPage).length.toString(),
+          ]),
     ].filter((button) => button !== null);
   }
 
@@ -59,14 +58,14 @@ export const formatPageArray = ({
   totalPage,
   currentPage,
   arrOfCurrButtons,
-}: PaginationTableType): (string | number)[] => {
+}: PaginationTableType): string[] => {
   const numberOfPage = Math.ceil(totalPage);
   let tempNumberOfButtons = arrOfCurrButtons;
 
   if (formatNumberButton(numberOfPage).length <= 4) {
     const numberOfPages = Array.from(
       { length: formatNumberButton(numberOfPage).length },
-      (_, index) => index + 1,
+      (_, index) => (index + 1).toString(),
     );
     tempNumberOfButtons = numberOfPages;
   } else {
@@ -78,22 +77,21 @@ export const formatPageArray = ({
     tempNumberOfButtons = [
       ...(rangeEnd >= formatNumberButton(numberOfPage).length - 1
         ? [
-          ...(formatNumberButton(numberOfPage).length - 3 > 1
-            ? Array.from(
-              { length: 3 },
-              (_, i) => formatNumberButton(numberOfPage).length - 4 + i,
-            )
-            : []),
-          formatNumberButton(numberOfPage).length - 1,
-          formatNumberButton(numberOfPage).length,
-        ]
+            ...(formatNumberButton(numberOfPage).length - 3 > 1
+              ? Array.from({ length: 3 }, (_, i) =>
+                  (formatNumberButton(numberOfPage).length - 4 + i).toString(),
+                )
+              : []),
+            (formatNumberButton(numberOfPage).length - 1).toString(),
+            formatNumberButton(numberOfPage).length.toString(),
+          ]
         : [
-          rangeStart,
-          rangeStart + 1,
-          rangeStart + 2,
-          DOTS,
-          formatNumberButton(numberOfPage).length,
-        ]),
+            rangeStart.toString(),
+            (rangeStart + 1).toString(),
+            (rangeStart + 2).toString(),
+            DOTS,
+            formatNumberButton(numberOfPage).length.toString(),
+          ]),
     ].filter((button) => button !== null);
   }
 

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, ReactNode } from 'react';
 import {
   Modal,
   ModalBody,
@@ -12,7 +12,7 @@ import isEqual from 'react-fast-compare';
 export type TModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  title?: string;
+  title?: ReactNode;
   body?: JSX.Element;
   haveCloseButton?: boolean;
 };
@@ -26,7 +26,10 @@ const ModalComponent = ({
 }: TModalProps) => (
   <Modal isCentered isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
-    <ModalContent minW={320} maxW="fit-content">
+    <ModalContent
+      minW={{ base: '90%', sm: 'auto' }}
+      maxW={{ base: '95%', sm: 'fit-content' }}
+    >
       <ModalHeader
         display="flex"
         justifyContent={haveCloseButton ? 'space-between' : 'center'}

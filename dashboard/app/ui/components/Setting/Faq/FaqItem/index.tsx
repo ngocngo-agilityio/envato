@@ -1,5 +1,7 @@
 'use client';
 
+// Libs
+import { ReactElement, memo } from 'react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import {
   Box,
@@ -9,7 +11,6 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { ReactElement } from 'react';
 
 export type FaqItemProps = {
   question: string;
@@ -64,4 +65,6 @@ const FaqItem = ({ question, answer }: FaqItemProps) => {
   );
 };
 
-export default FaqItem;
+const FaqItemMemorized = memo(FaqItem);
+
+export default FaqItemMemorized;

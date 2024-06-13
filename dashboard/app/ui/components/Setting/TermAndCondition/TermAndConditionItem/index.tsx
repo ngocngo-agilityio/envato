@@ -1,3 +1,5 @@
+// Libs
+import { memo } from 'react';
 import { Box, Text } from '@chakra-ui/react';
 
 export type TermAndConditionProps = {
@@ -41,4 +43,6 @@ const TermAndConditionItem = ({
   </Box>
 );
 
-export default TermAndConditionItem;
+const TermAndConditionItemMemorized = memo(TermAndConditionItem);
+
+export default TermAndConditionItemMemorized;

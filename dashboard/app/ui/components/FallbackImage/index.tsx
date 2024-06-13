@@ -1,4 +1,8 @@
+// Libs
+import { memo } from 'react';
 import { Image, ImageProps } from '@chakra-ui/react';
+
+// Constants
 import { IMAGES } from '@/lib/constants';
 
 interface FallbackImageProps extends ImageProps {
@@ -18,4 +22,6 @@ const FallbackImage = ({
   />
 );
 
-export default FallbackImage;
+const FallbackImageMemorized = memo(FallbackImage);
+
+export default FallbackImageMemorized;

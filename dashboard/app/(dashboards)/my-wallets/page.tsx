@@ -15,7 +15,7 @@ import { IEfficiency, TOverallBalance } from '@/lib/interfaces';
 import { END_POINTS } from '@/lib/constants';
 
 // Utils
-import { prefetchStatistical } from '@/lib/utils';
+import { prefetch } from '@/lib/utils';
 import { MyWalletSection } from '@/ui/sections';
 
 // Lazy loading components
@@ -25,15 +25,9 @@ const TotalBalance = dynamic(() => import('@/ui/components/TotalBalance'));
 const MyWallets = async () => {
   const queryClient = new QueryClient();
 
-  await prefetchStatistical<IEfficiency[]>(
-    `${END_POINTS.EFFICIENCY}/weekly`,
-    queryClient,
-  );
+  await prefetch<IEfficiency[]>(`${END_POINTS.EFFICIENCY}/weekly`, queryClient);
 
-  await prefetchStatistical<TOverallBalance>(
-    END_POINTS.OVERALL_BALANCE,
-    queryClient,
-  );
+  await prefetch<TOverallBalance>(END_POINTS.OVERALL_BALANCE, queryClient);
 
   return (
     <Grid

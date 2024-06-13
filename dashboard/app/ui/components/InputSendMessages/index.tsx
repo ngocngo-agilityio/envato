@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useCallback, RefObject, useId } from 'react';
+import { useState, useCallback, RefObject, useId, memo } from 'react';
 import { VStack, Flex, FormControl, Text } from '@chakra-ui/react';
 import { Controller, useForm } from 'react-hook-form';
+import isEqual from 'react-fast-compare';
 
 // Components
 import { InputField, Button } from '@/ui/components';
@@ -129,4 +130,6 @@ const InputSendMessages = ({ boxRef }: InputSendMessagesProps) => {
   );
 };
 
-export default InputSendMessages;
+const InputSendMessagesMemorized = memo(InputSendMessages, isEqual);
+
+export default InputSendMessagesMemorized;

@@ -34,6 +34,7 @@ export const END_POINTS = {
   SETTINGS: '/settings',
   LOGIN: '/login',
   WALLET: '/my-wallets',
+  EVENT: '/events',
 };
 
 export const SEARCH_PARAM = {

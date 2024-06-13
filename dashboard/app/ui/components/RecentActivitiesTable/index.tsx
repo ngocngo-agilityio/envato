@@ -39,7 +39,7 @@ import {
 // Interfaces
 import { TDataSource, THeaderTable, TRecentActivities } from '@/lib/interfaces';
 
-const RecentActivitiesTableComponent = () => {
+const RecentActivitiesTable = () => {
   const { get, setSearchParam: setSearchTransaction } = useSearch();
   const [filter, setFilter] = useState<string>('');
 
@@ -73,7 +73,10 @@ const RecentActivitiesTableComponent = () => {
     setSearchTransaction('keyword', value);
   }, []);
 
-  const handleClickPage = (value: number) => setCurrentPage(value);
+  const handleClickPage = useCallback(
+    (value: number) => setCurrentPage(value),
+    [setCurrentPage],
+  );
 
   const handlePageChange = useCallback(
     (direction: string) =>
@@ -257,6 +260,6 @@ const RecentActivitiesTableComponent = () => {
   );
 };
 
-const RecentActivitiesTable = memo(RecentActivitiesTableComponent);
+const RecentActivitiesTableMemorized = memo(RecentActivitiesTable);
 
-export default RecentActivitiesTable;
+export default RecentActivitiesTableMemorized;

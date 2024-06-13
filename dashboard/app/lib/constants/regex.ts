@@ -11,7 +11,7 @@ export const REGEX = {
   LIMIT_NUMBER: /^[0-9,]{0,7}((.)|(.\d{0,2})?)$/,
   DECIMAL_PATTERN: /^\d*(\.\d{0,2})?$/,
   FORMAT_MONEY: /(\d)(?=(\d{3})+(?!\d))/,
-  URL: /^(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+([^\s]*)$/i,
+  URL: /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,
   FORMAT_NUMBER: /[^\d.-]/g,
   HTML_TAG_PATTERN: /<\/?[^>]+(>|$)/g,
 };

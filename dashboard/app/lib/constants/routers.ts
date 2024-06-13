@@ -5,7 +5,7 @@ export const ROUTES = {
   TRANSACTION: 'transactions',
   MY_WALLET: 'my-wallets',
   USER: 'users',
-  CALENDAR: 'calendars',
+  CALENDAR: 'calendar',
   HISTORY: 'histories',
   SETTING: 'settings',
   FORGOT_PASSWORD: 'forgot-password',

@@ -33,7 +33,7 @@ const initialUserChat = {
   displayName: '',
 };
 
-const BoxChatComponent = () => {
+const BoxChat = () => {
   const [messages, setMessages] = useState<TMessages[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const user = authStore((state) => state.user);
@@ -145,6 +145,6 @@ const BoxChatComponent = () => {
   );
 };
 
-const BoxChat = memo(BoxChatComponent);
+const BoxChatMemorized = memo(BoxChat);
 
-export default BoxChat;
+export default BoxChatMemorized;

@@ -77,7 +77,7 @@ const ModalContent = ({
 
 const ModalContentMemorized = memo(ModalContent);
 
-const NotificationComponent = ({ colorFill, user }: NotificationProps) => {
+const Notification = ({ colorFill, user }: NotificationProps) => {
   const toast = useToast();
 
   const [isOpenConfirmModal, setIsOpenConfirmModal] = useState<boolean>(false);
@@ -246,5 +246,5 @@ const NotificationComponent = ({ colorFill, user }: NotificationProps) => {
   );
 };
 
-const Notification = memo(NotificationComponent, isEqual);
-export default Notification;
+const NotificationMemorized = memo(Notification, isEqual);
+export default NotificationMemorized;

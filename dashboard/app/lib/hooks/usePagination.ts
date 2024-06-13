@@ -58,7 +58,7 @@ export const usePagination = <T>(transactions: T[]) => {
       });
       resetPage();
     },
-    [data],
+    [data, resetPage],
   );
 
   const handleChangePage = useCallback(
@@ -88,7 +88,7 @@ export const usePagination = <T>(transactions: T[]) => {
         currentPage: value,
       });
     },
-    [currentPage, data],
+    [data],
   );
 
   return {

@@ -26,7 +26,10 @@ const NotificationItem = ({
   onToggleModal,
   onUpdateNotification,
 }: NotificationProps) => {
-  const handleUpdateData = () => onUpdateNotification(notification);
+  const handleUpdateData = useCallback(
+    () => onUpdateNotification(notification),
+    [notification, onUpdateNotification],
+  );
 
   const handleClickDeleteIcon = useCallback(
     (event: React.MouseEvent<SVGElement, MouseEvent>) =>

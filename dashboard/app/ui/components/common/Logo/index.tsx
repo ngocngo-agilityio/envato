@@ -1,5 +1,7 @@
 'use client';
 
+// Libs
+import { memo } from 'react';
 import { Text } from '@chakra-ui/react';
 import Link from 'next/link';
 
@@ -19,4 +21,6 @@ const Logo = () => {
   );
 };
 
-export default Logo;
+const LogoMemorized = memo(Logo);
+
+export default LogoMemorized;

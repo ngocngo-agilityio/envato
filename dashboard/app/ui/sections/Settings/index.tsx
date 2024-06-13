@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactElement, memo, useCallback, useState } from 'react';
+import { ReactElement, useMemo, useState } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 
@@ -47,7 +47,7 @@ const SecurityPage = dynamic(() => import('@/ui/components/Setting/Security'), {
   loading: () => <Indicator isOpen={true} />,
 });
 
-const SettingsSection = () => {
+const Settings = () => {
   const [activeItemId, setActiveItemId] = useState<string>(
     OPTION_SETTING.USER_FORM,
   );
@@ -59,9 +59,7 @@ const SettingsSection = () => {
     [OPTION_SETTING.TERM_AND_CONDITION]: <TermAndCondition />,
   };
 
-  const handleItemClick = useCallback((id: string) => setActiveItemId(id), []);
-
-  const renderSettingOptions = useCallback(() => {
+  const renderSettingOptions = useMemo(() => {
     const ITEMS = [
       {
         id: OPTION_SETTING.USER_FORM,
@@ -94,14 +92,14 @@ const SettingsSection = () => {
         key={id}
         id={id}
         activeItemId={activeItemId}
-        onClick={handleItemClick}
+        onClick={setActiveItemId}
         title={title}
         content={content}
       >
         {icon}
       </ItemSideBarSetting>
     ));
-  }, [activeItemId, handleItemClick]);
+  }, [activeItemId]);
 
   return (
     <Grid
@@ -115,7 +113,7 @@ const SettingsSection = () => {
       py={12}
     >
       <GridItem px={4} py={6} colSpan={3} bg="background.body.quaternary">
-        {renderSettingOptions()}
+        {renderSettingOptions}
       </GridItem>
 
       <GridItem colSpan={9} px={10} py={8} bg="background.body.quaternary">
@@ -124,7 +122,5 @@ const SettingsSection = () => {
     </Grid>
   );
 };
-
-const Settings = memo(SettingsSection);
 
 export default Settings;

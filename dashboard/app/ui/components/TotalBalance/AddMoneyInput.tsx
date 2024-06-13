@@ -1,3 +1,4 @@
+// Libs
 import { memo } from 'react';
 import {
   Box,
@@ -8,6 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Control, Controller } from 'react-hook-form';
+import isEqual from 'react-fast-compare';
 
 // Constants
 import { AUTH_SCHEMA } from '@/lib/constants';
@@ -80,4 +82,4 @@ const AddMoneyInputField = ({
   </Box>
 );
 
-export const AddMoneyInput = memo(AddMoneyInputField);
+export const AddMoneyInput = memo(AddMoneyInputField, isEqual);

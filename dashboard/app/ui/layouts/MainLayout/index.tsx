@@ -26,9 +26,6 @@ import { TAuthStoreData, authStore } from '@/lib/stores';
 // Utils
 import { isWindowDefined } from '@/lib/utils';
 
-// Provider
-import { CheckPinCodeProvider } from '@/ui/providers';
-
 // firebase
 import { getMessaging, onMessage } from 'firebase/messaging';
 
@@ -116,7 +113,6 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           </Box>
         </Flex>
       </Indicator>
-      {!user?.pinCode && <CheckPinCodeProvider />}
     </>
   );
 };

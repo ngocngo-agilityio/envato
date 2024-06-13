@@ -15,7 +15,7 @@ import { INITIAL_TOTAL_STATISTICS } from '@/lib/mocks';
 // Types
 import { ISpendingStatistics } from '@/lib/interfaces';
 
-const TotalStatisticListComponent = () => {
+const TotalStatisticList = () => {
   const {
     data = INITIAL_TOTAL_STATISTICS,
     isLoading,
@@ -46,6 +46,6 @@ const TotalStatisticListComponent = () => {
   );
 };
 
-const TotalStatisticList = memo(TotalStatisticListComponent);
+const TotalStatisticListMemorized = memo(TotalStatisticList);
 
-export default TotalStatisticList;
+export default TotalStatisticListMemorized;

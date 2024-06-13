@@ -1,7 +1,9 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+// Libs
+import { useRef, useEffect, memo } from 'react';
 import { Box } from '@chakra-ui/react';
+import isEqual from 'react-fast-compare';
 
 // Components
 import { MessageAdmin, Quill } from '@/ui/components';
@@ -11,6 +13,8 @@ import { authStore } from '@/lib/stores';
 
 // Interface
 import { TMessages } from '@/lib/interfaces';
+
+// Utils
 import { convertTimeMessage } from '@/lib/utils';
 
 export type Props = {
@@ -76,4 +80,6 @@ const ListMessages = ({ messages, adminUid, userAvatar, userName }: Props) => {
   );
 };
 
-export default ListMessages;
+const ListMessagesMemorized = memo(ListMessages, isEqual);
+
+export default ListMessagesMemorized;

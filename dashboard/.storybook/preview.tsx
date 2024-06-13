@@ -9,6 +9,9 @@ import { ChakraProvider, QueryProvider } from '../app/ui/providers';
 // Themes
 import { configThemes } from '../app/ui/themes';
 
+// Styles
+import '../app/ui/styles/index.css';
+
 interface ColorModeProps {
   colorMode: 'light' | 'dark';
   children: JSX.Element;

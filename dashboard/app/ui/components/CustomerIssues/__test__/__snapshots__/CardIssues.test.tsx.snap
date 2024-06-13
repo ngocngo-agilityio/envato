@@ -23,7 +23,7 @@ exports[`CardIssues render Should render match with snapshot. 1`] = `
           <span
             class="chakra-text css-1y8hbw7"
           >
-            Invalid Date
+            13:46:8
           </span>
         </p>
       </div>

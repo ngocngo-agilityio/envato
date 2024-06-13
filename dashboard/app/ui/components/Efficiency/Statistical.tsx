@@ -7,7 +7,7 @@ type TStatisticalProps = {
   value: number;
 };
 
-const StatisticalComponent = ({
+const Statistical = ({
   title,
   color,
   value,
@@ -28,6 +28,6 @@ const StatisticalComponent = ({
   </Flex>
 );
 
-const Statistical = memo(StatisticalComponent);
+const StatisticalMemorized = memo(Statistical);
 
-export default Statistical;
+export default StatisticalMemorized;

@@ -34,7 +34,7 @@ const Chart = dynamic(() => import('react-apexcharts'), {
   loading: () => <Skeleton bg="background.component.primary" h={230} />,
 });
 
-const RevenueFlowComponent = () => {
+const RevenueFlow = () => {
   const [option, setOption] = useState<string>('Jan,Dec');
   const { data = INITIAL_REVENUE_FLOW, isLoading, isError } = useGetRevenue();
 
@@ -196,6 +196,6 @@ const RevenueFlowComponent = () => {
   );
 };
 
-const RevenueFlow = memo(RevenueFlowComponent);
+const RevenueFlowMemorized = memo(RevenueFlow);
 
-export default RevenueFlow;
+export default RevenueFlowMemorized;

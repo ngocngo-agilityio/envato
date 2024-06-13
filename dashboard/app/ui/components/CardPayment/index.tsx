@@ -46,7 +46,7 @@ export type TTransfer = {
 
 const REQUIRE_FIELDS = ['amount', 'memberId'];
 
-const CardPaymentComponent = (): JSX.Element => {
+const CardPayment = (): JSX.Element => {
   const user = authStore((state) => state.user);
 
   const { setUser } = useAuth();
@@ -122,39 +122,44 @@ const CardPaymentComponent = (): JSX.Element => {
 
   const hasPinCode = user?.pinCode;
 
-  const handleTransferMoneySuccess = (success: {
-    title: string;
-    description: string;
-  }) => {
-    toast(customToast(success.title, success.description, STATUS.SUCCESS));
-    if (user?.bonusTimes) {
-      setUser({
-        user: {
-          ...user,
-          bonusTimes: --user.bonusTimes,
-        },
-      });
-    }
-  };
-
-  const handleTransferMoneyError = (
-    error: Error,
-    defaultError: {
-      title: string;
-      description: string;
+  const handleTransferMoneySuccess = useCallback(
+    (success: { title: string; description: string }) => {
+      toast(customToast(success.title, success.description, STATUS.SUCCESS));
+      if (user?.bonusTimes) {
+        setUser({
+          user: {
+            ...user,
+            bonusTimes: --user.bonusTimes,
+          },
+        });
+      }
     },
-  ) => {
-    const responseErrorMessage = getErrorMessageFromAxiosError(
-      error as AxiosError<TMoneyResponse>,
-      defaultError.description,
-    );
+    [setUser, toast, user],
+  );
 
-    toast(customToast(defaultError.title, responseErrorMessage, STATUS.ERROR));
-  };
+  const handleTransferMoneyError = useCallback(
+    (
+      error: Error,
+      defaultError: {
+        title: string;
+        description: string;
+      },
+    ) => {
+      const responseErrorMessage = getErrorMessageFromAxiosError(
+        error as AxiosError<TMoneyResponse>,
+        defaultError.description,
+      );
 
-  const handleOnSubmitSendMoney = () => {
+      toast(
+        customToast(defaultError.title, responseErrorMessage, STATUS.ERROR),
+      );
+    },
+    [toast],
+  );
+
+  const handleOnSubmitSendMoney = useCallback(() => {
     hasPinCode ? onOpenConfirmPinCodeModal() : onOpenSetPinCodeModal();
-  };
+  }, [hasPinCode, onOpenConfirmPinCodeModal, onOpenSetPinCodeModal]);
 
   const onSubmitSendMoney: SubmitHandler<TTransfer> = useCallback(
     (data) => {
@@ -172,7 +177,13 @@ const CardPaymentComponent = (): JSX.Element => {
       });
       resetSendMoneyForm();
     },
-    [getMemberId, resetSendMoneyForm, sendMoneyToUserWallet],
+    [
+      getMemberId,
+      handleTransferMoneyError,
+      handleTransferMoneySuccess,
+      resetSendMoneyForm,
+      sendMoneyToUserWallet,
+    ],
   );
 
   const onSubmitPinCode: SubmitHandler<TPinCodeForm> = useCallback(
@@ -328,6 +339,6 @@ const CardPaymentComponent = (): JSX.Element => {
   );
 };
 
-const CardPayment = memo(CardPaymentComponent);
+const CardPaymentMemorized = memo(CardPayment);
 
-export default CardPayment;
+export default CardPaymentMemorized;

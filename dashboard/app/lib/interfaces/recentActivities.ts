@@ -31,4 +31,7 @@ export enum EActivity {
   SAVE_PASSWORD = 'Save change password',
   CREATE_PIN_CODE = 'Create pin code',
   ACTIVE_PIN_CODE = 'Active pin code',
+  ADD_EVENT = 'Add event',
+  UPDATE_EVENT = 'Update event',
+  DELETE_EVENT = 'Delete event',
 }

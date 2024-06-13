@@ -38,7 +38,7 @@ import { formatTransactionResponse } from '@/lib/utils';
 // Types
 import { TDataSource, THeaderTable, TTransaction } from '@/lib/interfaces';
 
-const HistoriesTableComponent = () => {
+const HistoriesTable = () => {
   const { get, setSearchParam: setSearchTransaction } = useSearch();
   const [filter, setFilter] = useState<string>('');
 
@@ -208,6 +208,6 @@ const HistoriesTableComponent = () => {
   );
 };
 
-const HistoriesTable = memo(HistoriesTableComponent);
+const HistoriesTableMemorized = memo(HistoriesTable);
 
-export default HistoriesTable;
+export default HistoriesTableMemorized;

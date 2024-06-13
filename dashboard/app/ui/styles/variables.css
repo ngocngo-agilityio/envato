@@ -1,0 +1,41 @@
+:root {
+  /* Calendar month header */
+  --c-calendar-m-header-title: #0c642f;
+  --c-calendar-m-header-first-title: #c50d0d;
+  --c--calendar-m-header-border-light: #e4f2ff;
+  --c-calendar-m-header-border-dark: #2a313c;
+
+  /* Calendar month cell */
+  --c-calendar-m-cell-light: #2f3032;
+  --c-calendar-m-cell-dark: #ffffff;
+  --c-calendar-m-first-last-column-cell: #c50d0d;
+  --c-calendar-m-off-range-cell: #5b7c7c;
+  --c-calendar-m-first-last-column-off-range-cell: #804242;
+  --c-calendar-m-today-cell: #0c642f;
+
+  /* Calendar month event */
+  --c-calendar-m-event-light: #000000;
+  --c-calendar-m-event-dark: #ffffff;
+  --c-calendar-m-event-hover-light: #f5f5f5;
+  --c-calendar-m-event-hover-dark: #1a1b20;
+  --bg-calendar-m-event-dot: #0c642f;
+
+  /* Calendar time view event*/
+  --bg-calendar-t-event: #0c642f;
+  --c-calendar-t-event-border: #ffffff;
+  --box-shadow-t-event-primary-light: rgba(0, 0, 0, 0.14);
+  --box-shadow-t-event-secondary-light: rgba(0, 0, 0, 0.12);
+  --box-shadow-t-event-tertiary-light: rgba(0, 0, 0, 0.2);
+  --box-shadow-t-event-primary-dark: rgba(255, 255, 255, 0.14);
+  --box-shadow-t-event-secondary-dark: rgba(255, 255, 255, 0.12);
+  --box-shadow-t-event-tertiary-dark: rgba(255, 255, 255, 0.2);
+
+  /* Calendar time view today column*/
+  --bg-calendar-t-today-light: #e4f2ff;
+  --bg-calendar-t-today-dark: #2a313c;
+  --c-calendar-t-day: #dddddd;
+
+  /* Calendar time view header*/
+  --c-calendar-t-header: #0c642f;
+  --c-calendar-t-header-first: #b30000;
+}

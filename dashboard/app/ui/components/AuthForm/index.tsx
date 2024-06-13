@@ -3,7 +3,6 @@
 import { ChangeEvent, memo, useCallback, MouseEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import {
   Button,
@@ -18,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 
 // Components
-import { InputField } from '@/ui/components';
+import { InputField, PasswordSwitcher } from '@/ui/components';
 
 // Constants
 import { ROUTES, AUTH_SCHEMA } from '@/lib/constants';
@@ -53,9 +52,7 @@ interface AuthFormProps {
   isRegister?: boolean;
 }
 
-const AuthFormComponent = ({
-  isRegister = false,
-}: AuthFormProps): JSX.Element => {
+const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
   const { signIn, signUp } = useAuth();
   const router = useRouter();
 
@@ -104,23 +101,6 @@ const AuthFormComponent = ({
 
     return isSubmitting || !isFillAllFields;
   })();
-
-  const renderPasswordIcon = useCallback(
-    (isCorrect: boolean, callback: typeof onShowPassword): JSX.Element => {
-      const Icon = isCorrect ? ViewIcon : ViewOffIcon;
-
-      return (
-        <Icon
-          color="gray.400"
-          w="25px"
-          h="25px"
-          cursor="pointer"
-          onClick={callback}
-        />
-      );
-    },
-    [],
-  );
 
   const handleLogin: SubmitHandler<TAuthForm> = useCallback(
     async (data) => {
@@ -308,7 +288,12 @@ const AuthFormComponent = ({
               type={isShowPassword ? 'text' : 'password'}
               variant="authentication"
               placeholder="Password"
-              rightIcon={renderPasswordIcon(isShowPassword, onShowPassword)}
+              rightIcon={
+                <PasswordSwitcher
+                  isShow={isShowPassword}
+                  onClick={onShowPassword}
+                />
+              }
               isError={!!error?.message}
               errorMessages={error?.message}
               isDisabled={isSubmitting}
@@ -371,10 +356,12 @@ const AuthFormComponent = ({
                   type={isShowConfirmPassword ? 'text' : 'password'}
                   variant="authentication"
                   placeholder="Confirm password"
-                  rightIcon={renderPasswordIcon(
-                    isShowConfirmPassword,
-                    onShowConfirmPassword,
-                  )}
+                  rightIcon={
+                    <PasswordSwitcher
+                      isShow={isShowConfirmPassword}
+                      onClick={onShowConfirmPassword}
+                    />
+                  }
                   {...field}
                   isError={!!error}
                   errorMessages={error?.message}
@@ -498,6 +485,6 @@ const AuthFormComponent = ({
   );
 };
 
-const AuthForm = memo(AuthFormComponent);
+const AuthFormMemorized = memo(AuthForm);
 
-export default AuthForm;
+export default AuthFormMemorized;

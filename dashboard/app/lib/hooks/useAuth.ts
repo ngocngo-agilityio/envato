@@ -122,7 +122,10 @@ export const useAuth = () => {
         if (data) {
           const { _id, ...rest } = data;
           localData = { ...rest, id: _id };
+
+          document.cookie = `userId=${_id}`;
         }
+
         return updateStore({
           user: localData,
           isRemember,

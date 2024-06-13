@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomToolbar component CustomToolbar component renders correctly 1`] = `
+<div>
+  <div
+    class="css-mqqf2i"
+  >
+    <h3
+      class="chakra-heading css-19349et"
+    >
+      Calendar
+    </h3>
+    <h3
+      class="chakra-heading css-1hphexv"
+    >
+      May
+    </h3>
+    <div
+      class="css-x7wzjb"
+    >
+      <div
+        class="css-1ahss91"
+      >
+        <button
+          class="chakra-button css-pwitjq"
+          type="button"
+        >
+          Month
+        </button>
+        <button
+          class="chakra-button css-1le3rq1"
+          type="button"
+        >
+          Week
+        </button>
+        <button
+          class="chakra-button css-1le3rq1"
+          type="button"
+        >
+          Day
+        </button>
+      </div>
+      <div
+        class="css-k008qs"
+      >
+        <button
+          aria-label="btn-back"
+          class="chakra-button css-1r5nxiz"
+          type="button"
+        >
+          <svg
+            fill="none"
+            height="30"
+            stroke="#1A202C"
+            style="transform: rotate(90deg);"
+            viewBox="0 0 24 24"
+            width="30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 10L12 14L17 10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+        <button
+          aria-label="btn-next"
+          class="chakra-button css-1r5nxiz"
+          type="button"
+        >
+          <svg
+            fill="none"
+            height="30"
+            stroke="#1A202C"
+            style="transform: rotate(-90deg);"
+            viewBox="0 0 24 24"
+            width="30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 10L12 14L17 10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

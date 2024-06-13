@@ -7,8 +7,6 @@ const MainLayout = dynamic(() => import('@/ui/layouts/MainLayout'));
 const Layout = ({ children }: { children: React.ReactNode }) => (
   <>
     <Head>
-      <link rel="preconnect" href="https://identitytoolkit.googleapis.com/" />
-      <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com/" />
       <link rel="preconnect" href="https://succinct-shrouded-acorn.glitch.me" />
       <link
         rel="dns-prefetch"

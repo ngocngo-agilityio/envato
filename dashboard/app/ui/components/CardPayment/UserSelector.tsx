@@ -1,3 +1,4 @@
+// Libs
 import {
   Box,
   IconButton,
@@ -17,15 +18,16 @@ import {
   useState,
 } from 'react';
 import { Control, Controller } from 'react-hook-form';
+import isEqual from 'react-fast-compare';
 
 // Components
-import { ChevronIcon } from '@/ui/components/Icons';
+import { ChevronIcon, InputField } from '@/ui/components';
 
 // Hooks
 import { useDebounce } from '@/lib/hooks';
+
+// Constants
 import { AUTH_SCHEMA, COMMON_MESSAGES } from '@/lib/constants';
-import { InputField } from '..';
-import isEqual from 'react-fast-compare';
 
 // Types
 import { TTransfer } from '.';
@@ -114,7 +116,7 @@ const UserList = ({
 
 const UserListMemorized = memo(UserList, isEqual);
 
-const UserSelectorComponent = ({
+const UserSelector = ({
   control,
   listUser = [],
 }: TUseSelectorProps): JSX.Element => {
@@ -271,6 +273,6 @@ const UserSelectorComponent = ({
   );
 };
 
-const UserSelector = memo(UserSelectorComponent);
+const UserSelectorMemorized = memo(UserSelector, isEqual);
 
-export default UserSelector;
+export default UserSelectorMemorized;

@@ -13,7 +13,7 @@ type TUserInfoProps = Pick<ImageProps, 'loading' | 'priority'> & {
   email: string;
 };
 
-const UserInfoComponent = ({
+const UserInfo = ({
   imageURL,
   name,
   email,
@@ -74,6 +74,6 @@ const UserInfoComponent = ({
   </Td>
 );
 
-const UserInfoCell = memo(UserInfoComponent);
+const UserInfoCellMemorized = memo(UserInfo);
 
-export default UserInfoCell;
+export default UserInfoCellMemorized;

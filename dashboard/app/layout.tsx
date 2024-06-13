@@ -23,6 +23,9 @@ import { colors } from '@/ui/themes/bases';
 // Constants
 import { THEMES } from '@/lib/constants';
 
+// Styles
+import '@/ui/styles/index.css';
+
 export const metadata: Metadata = {
   title: 'Envato Market - Manage users and transactions on every purchase',
   description:

@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventForm component EventForm component renders correctly 1`] = `
+<div>
+  <form
+    class="chakra-stack css-tl3ftk"
+  >
+    <div
+      class="css-15kzxzi"
+    >
+      <div
+        class="chakra-form-control css-1kxonj9"
+        role="group"
+      >
+        <label
+          class="chakra-form__label css-1rh809e"
+          for="field-:r0:"
+          id="field-:r0:-label"
+        >
+          Title
+        </label>
+        <div
+          class="chakra-input__group css-1091msq"
+          data-group="true"
+        >
+          <input
+            class="chakra-input css-1ji05xh"
+            id="field-:r0:"
+            name="eventName"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-j8td0s"
+    >
+      <div
+        class="chakra-form-control css-1kxonj9"
+        role="group"
+      >
+        <label
+          class="chakra-form__label css-1rh809e"
+          for="field-:r1:"
+          id="field-:r1:-label"
+        >
+          Date
+        </label>
+        <div
+          class="chakra-input__group css-1091msq"
+          data-group="true"
+        >
+          <input
+            class="chakra-input css-1ji05xh"
+            id="field-:r1:"
+            name="date"
+            type="date"
+            value="2024-05-27"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-bwbm8i"
+    >
+      <div
+        class="css-j8td0s"
+      >
+        <div
+          class="chakra-form-control css-1kxonj9"
+          role="group"
+        >
+          <label
+            class="chakra-form__label css-1rh809e"
+            for="field-:r2:"
+            id="field-:r2:-label"
+          >
+            Start time
+          </label>
+          <div
+            class="chakra-input__group css-1091msq"
+            data-group="true"
+          >
+            <input
+              class="chakra-input css-1127nk9"
+              id="field-:r2:"
+              name="startTime"
+              type="time"
+              value="10:00"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-j8td0s"
+      >
+        <div
+          class="chakra-form-control css-1kxonj9"
+          role="group"
+        >
+          <label
+            class="chakra-form__label css-1rh809e"
+            for="field-:r3:"
+            id="field-:r3:-label"
+          >
+            End time
+          </label>
+          <div
+            class="chakra-input__group css-1091msq"
+            data-group="true"
+          >
+            <input
+              class="chakra-input css-1ji05xh"
+              id="field-:r3:"
+              name="endTime"
+              type="time"
+              value="11:00"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-6dra2j"
+    >
+      <button
+        class="chakra-button css-1il83h3"
+        disabled=""
+        type="submit"
+      >
+        Save
+      </button>
+      <button
+        class="chakra-button css-t98rwl"
+        type="button"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;

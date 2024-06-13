@@ -1,5 +1,5 @@
 export interface PaginationType {
-  arrOfCurrButtons: (number | string)[];
+  arrOfCurrButtons: string[];
   currentPage: number;
   limit: number;
 }
@@ -9,7 +9,7 @@ export interface FormatPaginationParams extends PaginationType {
 }
 
 export interface PaginationTableType {
-  arrOfCurrButtons: (number | string)[];
+  arrOfCurrButtons: string[];
   currentPage: number;
-  totalPage: number
+  totalPage: number;
 }

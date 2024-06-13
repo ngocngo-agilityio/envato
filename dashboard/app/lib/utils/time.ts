@@ -1,9 +1,24 @@
 import dayjs from 'dayjs';
 
+// Constants
+import {
+  DATE_FORMAT,
+  DISPLAY_DATE_FORMAT,
+  MONTH_FORMAT,
+} from '@/lib/constants';
+
 export const getCurrentYear = (): number => {
   const currentYear = new Date().getFullYear();
   return currentYear;
 };
+
+export const getNextMonth = (): string =>
+  dayjs().add(1, 'month').format(MONTH_FORMAT);
+
+export const getCurrentDate = (): string => dayjs().format(DATE_FORMAT);
+
+export const getCurrentDisplayDate = (): string =>
+  dayjs().format(DISPLAY_DATE_FORMAT);
 
 export const getCurrentTimeSeconds = (): number => Date.now() / 1000;
 

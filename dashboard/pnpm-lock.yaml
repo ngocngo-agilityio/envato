@@ -44,9 +44,6 @@ dependencies:
   framer-motion:
     specifier: ^10.16.16
     version: 10.17.4(react-dom@18.2.0)(react@18.2.0)
-  moment:
-    specifier: ^2.30.1
-    version: 2.30.1
   next:
     specifier: 14.0.5-canary.53
     version: 14.0.5-canary.53(@babel/core@7.23.7)(react-dom@18.2.0)(react@18.2.0)

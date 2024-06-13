@@ -1,8 +1,10 @@
 'use client';
 
+// Libs
 import { memo } from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Image, HStack, Text, Flex, Skeleton } from '@chakra-ui/react';
+import isEqual from 'react-fast-compare';
 
 // Constants
 import { IMAGES } from '@/lib/constants';
@@ -23,7 +25,7 @@ interface TotalCardComponentProps {
   isLoading?: boolean;
 }
 
-const TotalCardComponent = ({
+const TotalCard = ({
   title = 'Total',
   total = 0,
   growth = 0,
@@ -128,6 +130,6 @@ const TotalCardComponent = ({
   </Box>
 );
 
-const TotalCard = memo(TotalCardComponent);
+const TotalCardMemorized = memo(TotalCard, isEqual);
 
-export default TotalCard;
+export default TotalCardMemorized;

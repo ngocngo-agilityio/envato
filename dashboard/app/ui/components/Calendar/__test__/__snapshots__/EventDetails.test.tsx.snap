@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventDetails component Should render match with snapshot. 1`] = `
+<div>
+  <div
+    class="css-7pwkux"
+  >
+    <h2
+      class="chakra-heading css-1olp4r4"
+    >
+      Team Scrum
+    </h2>
+    <p
+      class="chakra-text css-ywgxgu"
+    >
+      Sunday, May 19 5:30 – 7:30am
+    </p>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;

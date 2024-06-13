@@ -1,6 +1,8 @@
+// Libs
 import { memo } from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Flex, Skeleton, Text, useColorMode } from '@chakra-ui/react';
+import isEqual from 'react-fast-compare';
 
 // Components
 import Statistical from './Statistical';
@@ -23,7 +25,7 @@ const Chart = dynamic(() => import('react-apexcharts'), {
   loading: () => <Skeleton bg="background.component.primary" h={145} />,
 });
 
-const EfficiencyComponent = ({
+const EfficiencyInfo = ({
   statistical,
   arrival,
   spending,
@@ -111,6 +113,6 @@ const EfficiencyComponent = ({
   );
 };
 
-const EfficiencyInfo = memo(EfficiencyComponent);
+const EfficiencyInfoMemorized = memo(EfficiencyInfo, isEqual);
 
-export default EfficiencyInfo;
+export default EfficiencyInfoMemorized;

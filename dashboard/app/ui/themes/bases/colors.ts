@@ -38,6 +38,10 @@ export const colors = {
     1100: '#718096',
   },
 
+  gray: {
+    650: '#5F6364',
+  },
+
   common: {
     white: '#FFF',
   },
@@ -307,12 +311,8 @@ export const colors = {
   },
 };
 
-
 export const useColorfill = () => {
-  const primary = useColorModeValue(
-    theme.colors.gray[800],
-    theme.colors.white,
-  );
+  const primary = useColorModeValue(theme.colors.gray[800], theme.colors.white);
 
   const secondary = useColorModeValue(
     colors.secondary[200],
@@ -326,15 +326,14 @@ export const useColorfill = () => {
 
   const quaternary = useColorModeValue('secondary.200', 'secondary.600');
 
-  const quinary = useColorModeValue(
-    theme.colors.white,
-    colors.secondary[400],
-  );
+  const quinary = useColorModeValue(theme.colors.white, colors.secondary[400]);
 
   const senary: string = useColorModeValue(
     colors.secondary[400] ?? '',
     colors.primary[500] ?? '',
   );
+
+  const septenary = useColorModeValue('gray.650', 'common.white');
 
   return {
     primary,
@@ -342,6 +341,7 @@ export const useColorfill = () => {
     tertiary,
     quaternary,
     quinary,
-    senary
+    senary,
+    septenary,
   };
 };
