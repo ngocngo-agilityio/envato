@@ -21,14 +21,14 @@ import { TPinCodeForm } from '@/lib/interfaces';
 // Components
 import { PinCodeModal } from '@/ui/components';
 
-export type TWithPinCode<T> = {
+export type TWithBalance<T> = {
   isShowBalance: boolean;
   onToggleShowBalance: () => void;
   balance: number;
 } & T;
 
 const withBalance = <T,>(
-  WrappedComponent: (props: TWithPinCode<T>) => ReactNode,
+  WrappedComponent: (props: TWithBalance<T>) => ReactNode,
 ) => {
   const BalanceWrapper = (props: T) => {
     const toast = useToast();
