@@ -6,8 +6,8 @@ import { redirect, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 type TValidateRoute = {
-  id: number;
-  path: string;
+  id?: number;
+  path?: string;
 };
 
 const CheckAuthenticationProvider = ({
@@ -17,7 +17,10 @@ const CheckAuthenticationProvider = ({
 }) => {
   const pathname = usePathname();
   const user = authStore((state): TAuthStoreData['user'] => state.user);
-  const isMatchPrivateRoute: boolean = PRIVATE_ROUTES.some(
+
+  const { role = '' } = user || {};
+
+  const isMatchPrivateRoute: boolean = PRIVATE_ROUTES(role).some(
     (route: TValidateRoute) =>
       pathname === ROUTES.ROOT || `/${route.path}` === pathname,
   );
@@ -26,7 +29,7 @@ const CheckAuthenticationProvider = ({
   );
 
   useEffect(() => {
-    if (isMatchPublicRoute && !!user) {
+    if (!!user && (isMatchPublicRoute || !isMatchPrivateRoute)) {
       return redirect(ROUTES.ROOT);
     }
 
