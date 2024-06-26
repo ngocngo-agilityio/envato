@@ -3,7 +3,6 @@
 // Libs
 import { memo, useCallback, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { AxiosResponse } from 'axios';
 import isEqual from 'react-fast-compare';
 import {
   Button,
@@ -13,61 +12,30 @@ import {
   FormLabel,
   Input,
   VStack,
-  useToast,
 } from '@chakra-ui/react';
 
 // Components
 import { UploadImages, InputField } from '@/ui/components';
 
 // Interfaces
-import {
-  IUploadImageResponse,
-  TProductRequest,
-  TProductResponse,
-} from '@/lib/interfaces';
+import { TProductRequest, TProductResponse } from '@/lib/interfaces';
 
 // Constants
-import {
-  AUTH_SCHEMA,
-  CURRENCY_PRODUCT,
-  ERROR_MESSAGES,
-  STATUS,
-  STATUS_SUBMIT,
-} from '@/lib/constants';
-
-// Stores
-import { authStore } from '@/lib/stores';
+import { AUTH_SCHEMA, CURRENCY_PRODUCT, STATUS_SUBMIT } from '@/lib/constants';
 
 // Hooks
 import { useUploadProductImageFiles } from '@/lib/hooks';
 
 // Utils
-import {
-  customToast,
-  formatAmountNumber,
-  parseFormattedNumber,
-} from '@/lib/utils';
-import { UseMutateFunction } from '@tanstack/react-query';
+import { formatAmountNumber } from '@/lib/utils';
 
 interface ProductProps {
   data?: TProductResponse;
-  onCreateProduct?: (productData: Omit<TProductRequest, 'id'>) => void;
-  onUpdateProduct?: (productData: TProductRequest) => void;
   onCloseModal: () => void;
-  uploadImages?: UseMutateFunction<
-    AxiosResponse<IUploadImageResponse>[],
-    Error,
-    FormData[]
-  >;
+  onSubmit?: (product: TProductRequest, imageFiles: File[]) => void;
 }
 
-const ProductForm = ({
-  data,
-  uploadImages,
-  onCreateProduct,
-  onUpdateProduct,
-  onCloseModal,
-}: ProductProps) => {
+const ProductForm = ({ data, onSubmit, onCloseModal }: ProductProps) => {
   const { product } = data || {};
   const {
     _id = '',
@@ -79,8 +47,6 @@ const ProductForm = ({
     description = '',
     createdAt = '',
   } = product || {};
-
-  const toast = useToast();
 
   const {
     getRootProps,
@@ -110,18 +76,10 @@ const ProductForm = ({
       createdAt: createdAt,
     },
   });
-  const userId = authStore((state) => state.user?.id);
 
   const disabled = useMemo(
     () => !(isDirty || isImagesDirty) || status === STATUS_SUBMIT.PENDING,
     [isDirty, isImagesDirty],
-  );
-
-  const handleShowErrorMessage = useCallback(
-    (message: string) => {
-      toast(customToast('', message, STATUS.ERROR));
-    },
-    [toast],
   );
 
   const handleChangeValue = useCallback(
@@ -133,68 +91,13 @@ const ProductForm = ({
     [clearErrors],
   );
 
-  const handleUploadImageSuccess = useCallback(
-    (
-      product: TProductRequest,
-      res: AxiosResponse<IUploadImageResponse>[] = [],
-    ) => {
-      const imagesUpload: string[] = [];
-
-      const uploadedImages = res.map((resItem) => {
-        const { data: productImageData } = resItem || {};
-        const { data } = productImageData || {};
-        const { url: imageURL = '' } = data || {};
-
-        return imageURL;
-      });
-
-      imagesUpload.push(...uploadedImages);
-
-      const requestData = {
-        ...product,
-        imageURLs: imagesUpload.length ? imagesUpload : previewURLs,
-        stock: parseFormattedNumber(product.stock).toString(),
-        amount: parseFormattedNumber(product.amount).toString(),
-        userId,
-      };
-
-      product._id
-        ? onUpdateProduct && onUpdateProduct(requestData)
-        : onCreateProduct && onCreateProduct(requestData);
-      reset(requestData);
-    },
-    [onCreateProduct, onUpdateProduct, previewURLs, reset, userId],
-  );
-
-  const handleUploadImageError = useCallback(() => {
-    handleShowErrorMessage(ERROR_MESSAGES.UPDATE_FAIL.title);
-  }, [handleShowErrorMessage]);
-
   const handleSubmitForm = useCallback(
-    async (data: TProductRequest) => {
-      const payload = imageFiles.map((imageFile) => {
-        const formData = new FormData();
-        formData.append('image', imageFile);
-        return formData;
-      });
-
-      uploadImages &&
-        uploadImages(payload, {
-          onSuccess: (res: AxiosResponse<IUploadImageResponse>[]) => {
-            handleUploadImageSuccess(data, res);
-          },
-          onError: handleUploadImageError,
-        });
-
+    (data: TProductRequest) => {
+      onSubmit && onSubmit(data, imageFiles);
       onCloseModal();
+      reset();
     },
-    [
-      handleUploadImageError,
-      handleUploadImageSuccess,
-      imageFiles,
-      onCloseModal,
-      uploadImages,
-    ],
+    [onSubmit, imageFiles, onCloseModal, reset],
   );
 
   return (

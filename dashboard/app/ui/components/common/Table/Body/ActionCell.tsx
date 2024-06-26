@@ -29,16 +29,12 @@ const TransactionModal = dynamic(
 
 // Interfaces
 import {
-  IUploadImageResponse,
-  TProduct,
   TProductRequest,
   TProductResponse,
   TRecentActivities,
   TTransaction,
   TUserDetail,
 } from '@/lib/interfaces';
-import { UseMutateFunction } from '@tanstack/react-query';
-import { AxiosResponse } from 'axios';
 
 interface ActionCallProps {
   user?: TUserDetail;
@@ -51,10 +47,8 @@ interface ActionCallProps {
   isOpenUserAction?: boolean;
   onDeleteTransaction?: (transactionData: TTransaction) => void;
   onUpdateTransaction?: (transactionData: TTransaction) => void;
-  onUpdateProduct?: (productData: TProductRequest) => void;
-  onDeleteProduct?: (
-    productData: Partial<TProduct & { userId: string; productId: string }>,
-  ) => void;
+  onDeleteProduct?: (id: string) => void;
+  onUpdateProduct?: (product: TProductRequest, imageFiles: File[]) => void;
   onDeleteActivity?: (
     activitiesData: Partial<
       TRecentActivities & { userId: string; activitiesId: string }
@@ -62,11 +56,6 @@ interface ActionCallProps {
   ) => void;
   onLockUser?: (userData?: TUserDetail) => void;
   onUnlockUser?: (userData?: TUserDetail) => void;
-  onUploadImages?: UseMutateFunction<
-    AxiosResponse<IUploadImageResponse>[],
-    Error,
-    FormData[]
-  >;
 }
 
 const ActionCellComponent = ({
@@ -85,13 +74,14 @@ const ActionCellComponent = ({
   onDeleteProduct,
   onUpdateProduct,
   onUpdateTransaction,
-  onUploadImages,
 }: ActionCallProps) => {
   const [isOpenConfirmModal, setIsOpenConfirmModal] = useState<boolean>(false);
   const [isDelete, setIsDelete] = useState<boolean>(false);
 
   const customerId = transaction?.customer.customerId || activities?._id;
   const optionDelete = product || activities;
+
+  const { _id: productId = '' } = product || {};
 
   const handleOpenConfirmModal = useCallback(
     (isDeleteModal: boolean) => () => {
@@ -112,11 +102,8 @@ const ActionCellComponent = ({
 
   const handleDeleteProduct = useCallback(() => {
     handleToggleModal();
-    onDeleteProduct &&
-      onDeleteProduct(
-        product as Partial<TProduct & { userId: string; productId: string }>,
-      );
-  }, [handleToggleModal, onDeleteProduct, product]);
+    onDeleteProduct && onDeleteProduct(productId);
+  }, [handleToggleModal, onDeleteProduct, productId]);
 
   const handleDeleteActivities = useCallback(() => {
     handleToggleModal();
@@ -275,8 +262,7 @@ const ActionCellComponent = ({
           body={
             <ProductForm
               data={product}
-              uploadImages={onUploadImages}
-              onUpdateProduct={onUpdateProduct}
+              onSubmit={onUpdateProduct}
               onCloseModal={handleToggleModal}
             />
           }
