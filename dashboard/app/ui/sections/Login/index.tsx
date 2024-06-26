@@ -1,20 +1,26 @@
 'use client';
 
-// Components
-import { ROUTES } from '@/lib/constants';
-import { useAuth } from '@/lib/hooks';
-import { TUserDetail } from '@/lib/interfaces';
-import { isWindowDefined, requestForToken, app } from '@/lib/utils';
-import { AuthForm } from '@/ui/components';
-import { getMessaging } from 'firebase/messaging';
+// Libs
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
-type TAuthForm = Omit<TUserDetail, 'id' | 'createdAt'> & {
-  confirmPassword: string;
-  isAcceptPrivacyPolicy: boolean;
-  isRemember: false;
-};
+// Constants
+import { ROUTES } from '@/lib/constants';
+
+// Hooks
+import { useAuth } from '@/lib/hooks';
+
+// Types
+import { TAuthForm } from '@/lib/interfaces';
+
+// Utils
+import { isWindowDefined, requestForToken, app } from '@/lib/utils';
+
+// Fire base
+import { getMessaging } from 'firebase/messaging';
+
+// Components
+import { AuthForm } from '@/ui/components';
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');

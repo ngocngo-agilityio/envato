@@ -11,7 +11,7 @@ import { ROUTES } from '@/lib/constants';
 import { useAuth } from '@/lib/hooks';
 
 // Types
-import { TUserDetail } from '@/lib/interfaces';
+import { TAuthForm } from '@/lib/interfaces';
 
 // Utils
 import { isWindowDefined, requestForToken, app } from '@/lib/utils';
@@ -21,12 +21,6 @@ import { getMessaging } from 'firebase/messaging';
 
 // Components
 import { AuthForm } from '@/ui/components';
-
-type TAuthForm = Omit<TUserDetail, 'id' | 'createdAt'> & {
-  confirmPassword: string;
-  isAcceptPrivacyPolicy: boolean;
-  isRemember: false;
-};
 
 const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState('');

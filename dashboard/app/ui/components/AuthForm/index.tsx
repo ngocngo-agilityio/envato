@@ -28,16 +28,10 @@ import { useForm } from '@/lib/hooks';
 import { validatePassword } from '@/lib/utils';
 
 // Types
-import { TUserDetail } from '@/lib/interfaces';
+import { TAuthForm } from '@/lib/interfaces';
 
 // Layouts
 import { AuthFooter } from '@/ui/layouts';
-
-type TAuthForm = Omit<TUserDetail, 'id' | 'createdAt'> & {
-  confirmPassword: string;
-  isAcceptPrivacyPolicy: boolean;
-  isRemember: false;
-};
 
 interface AuthFormProps {
   isRegister?: boolean;
