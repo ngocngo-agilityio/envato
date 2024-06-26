@@ -36,7 +36,7 @@ const Products = () => {
   const user = authStore((state) => state.user);
 
   // Upload images
-  const { uploadImages, isPending: isUploadImages } = useUploadImages();
+  const { uploadImages, isPending: isLoadingUploadImages } = useUploadImages();
 
   // Products
   const {
@@ -276,7 +276,7 @@ const Products = () => {
             isDisablePrev={isDisablePrev}
             pageArray={pageArray}
             isLoading={
-              isUploadImages ||
+              isLoadingUploadImages ||
               isLoadingCreateProduct ||
               isLoadingDeleteProduct ||
               isLoadingUpdateProduct
