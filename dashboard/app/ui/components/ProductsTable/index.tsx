@@ -2,33 +2,22 @@
 
 // Libs
 import { memo, useCallback, useMemo, useState } from 'react';
-import { Box, Flex, useToast } from '@chakra-ui/react';
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 
 // Constants
 import {
   COLUMNS_PRODUCTS,
   STATUS_LABEL,
-  SUCCESS_MESSAGES,
-  STATUS,
-  ERROR_MESSAGES,
   FILTER_PRODUCT,
   PRODUCT_STATUS,
   PREV,
 } from '@/lib/constants';
 
 // Hooks
-import {
-  useDebounce,
-  useProducts,
-  useSearch,
-  useUploadImages,
-} from '@/lib/hooks';
-
-// Stores
-import { authStore } from '@/lib/stores';
+import { useDebounce } from '@/lib/hooks';
 
 // Utils
-import { formatProductResponse, customToast } from '@/lib/utils';
+import { formatProductResponse } from '@/lib/utils';
 
 // Types
 import {
@@ -59,40 +48,44 @@ import PriceCell from './PriceCell';
 import QuantityCell from './QuantityCell';
 import NameCell from './NameCell';
 
-const ProductsTable = () => {
-  const toast = useToast();
-  const userId = authStore((state) => state.user?.id);
-  const { get, setSearchParam: setSearchTransaction } = useSearch();
+interface ProductsTableProps {
+  isFetching: boolean;
+  products: TProduct[];
+  limit: number;
+  currentPage: number;
+  isDisableNext: boolean;
+  isDisablePrev: boolean;
+  pageArray: string[];
+  isLoading: boolean;
+  searchValue: string;
+  onSort: (field: TProductSortField) => void;
+  onSearch: (value: string) => void;
+  onChangeLimit: (limit: number) => void;
+  onChangePage: (page: number) => void;
+  onSubmitProductForm: (product: TProductRequest, imageFiles: File[]) => void;
+  onDelete: (id: string) => void;
+}
+
+const ProductsTable = ({
+  isFetching,
+  products,
+  limit,
+  currentPage,
+  isDisableNext,
+  isDisablePrev,
+  pageArray,
+  isLoading,
+  searchValue,
+  onSort,
+  onSearch,
+  onChangeLimit,
+  onChangePage,
+  onSubmitProductForm,
+  onDelete,
+}: ProductsTableProps) => {
   const [filter, setFilter] = useState<string>('');
-  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
-
-  const handleToggleModal = () => setIsOpenConfirmModal((prev) => !prev);
-
-  const {
-    products,
-    isLoading: isLoadingProducts,
-    isError: isProductsError,
-    limit,
-    currentPage,
-    sortBy,
-    createProduct,
-    deleteProduct,
-    updateProduct,
-    resetPage,
-    setCurrentPage,
-    setLimit,
-    isCreateProduct,
-    isDeleteProduct,
-    isUpdateProduct,
-    isDisableNext,
-    isDisablePrev,
-    pageArray,
-  } = useProducts({
-    name: get('keyword')?.toLowerCase() || '',
-  });
-
-  // Upload images
-  const { uploadImages, isPending: isUploadImages } = useUploadImages();
+  const { isOpen: isOpenAddModal, onToggle: onToggleAddModal } =
+    useDisclosure();
 
   const productsMemorized = useMemo(
     () =>
@@ -105,134 +98,28 @@ const ProductsTable = () => {
   );
 
   const handleDebounceSearch = useDebounce((value: string) => {
-    resetPage();
-    setSearchTransaction('keyword', value);
+    onSearch(value);
   }, []);
-
-  const handleClickPage = (value: number) => setCurrentPage(value);
 
   const handlePageChange = useCallback(
     (direction: string) => {
-      setCurrentPage(direction === PREV ? currentPage - 1 : currentPage + 1);
+      onChangePage(direction === PREV ? currentPage - 1 : currentPage + 1);
     },
-    [currentPage, setCurrentPage],
+    [currentPage, onChangePage],
   );
 
   const handleChangeLimit = useCallback(
     (limit: TOption) => {
-      setLimit(+limit.value);
-      resetPage();
+      onChangeLimit(+limit.value);
     },
-    [resetPage, setLimit],
-  );
-
-  const handleCreateProduct = useCallback(
-    (product: Omit<TProductRequest, '_id'>) => {
-      createProduct(
-        {
-          ...product,
-        },
-        {
-          onSuccess: () => {
-            toast(
-              customToast(
-                SUCCESS_MESSAGES.CREATE_PRODUCT_SUCCESS.title,
-                SUCCESS_MESSAGES.CREATE_PRODUCT_SUCCESS.description,
-                STATUS.SUCCESS,
-              ),
-            );
-          },
-          onError: () => {
-            toast(
-              customToast(
-                ERROR_MESSAGES.CREATE_TRANSACTION_FAIL.title,
-                ERROR_MESSAGES.CREATE_TRANSACTION_FAIL.description,
-                STATUS.ERROR,
-              ),
-            );
-          },
-        },
-      );
-    },
-    [createProduct, toast],
-  );
-
-  const handleDeleteProduct = useCallback(
-    (data: Partial<TProduct & { userId: string; productId: string }>) => {
-      deleteProduct(
-        {
-          productId: data._id,
-          userId: userId,
-        },
-        {
-          onSuccess: () => {
-            toast(
-              customToast(
-                SUCCESS_MESSAGES.DELETE_PRODUCT_SUCCESS.title,
-                SUCCESS_MESSAGES.DELETE_PRODUCT_SUCCESS.description,
-                STATUS.SUCCESS,
-              ),
-            );
-          },
-          onError: () => {
-            toast(
-              customToast(
-                ERROR_MESSAGES.DELETE_FAIL.title,
-                ERROR_MESSAGES.DELETE_FAIL.description,
-                STATUS.ERROR,
-              ),
-            );
-          },
-        },
-      );
-    },
-    [deleteProduct, toast, userId],
-  );
-
-  const handleUpdateProduct = useCallback(
-    (data: TProductRequest) => {
-      updateProduct(
-        {
-          productId: data._id,
-          userId: userId,
-          name: data?.name,
-          imageURLs: data?.imageURLs,
-          currency: data?.currency,
-          amount: data?.amount,
-          stock: data?.stock,
-          description: data?.description,
-          createdAt: data?.createdAt,
-        },
-        {
-          onSuccess: () => {
-            toast(
-              customToast(
-                SUCCESS_MESSAGES.UPDATE_PRODUCT_SUCCESS.title,
-                SUCCESS_MESSAGES.UPDATE_PRODUCT_SUCCESS.description,
-                STATUS.SUCCESS,
-              ),
-            );
-          },
-          onError: () => {
-            toast(
-              customToast(
-                ERROR_MESSAGES.UPDATE_PRODUCT_FAIL.title,
-                ERROR_MESSAGES.UPDATE_PRODUCT_FAIL.description,
-                STATUS.ERROR,
-              ),
-            );
-          },
-        },
-      );
-    },
-    [toast, updateProduct, userId],
+    [onChangeLimit],
   );
 
   const renderHead = useCallback(
     (title: string, key: TProductSortField): JSX.Element => (
-      <HeadCell title={title} columnKey={key} onSort={sortBy} />
+      <HeadCell title={title} columnKey={key} onSort={onSort} />
     ),
-    [sortBy],
+    [onSort],
   );
 
   const renderNameUser = useCallback(
@@ -274,12 +161,11 @@ const ProductsTable = () => {
         isOpenModal={true}
         titleDelete="Delete Product"
         itemName={data.name}
-        onUploadImages={uploadImages}
-        onDeleteProduct={handleDeleteProduct}
-        onUpdateProduct={handleUpdateProduct}
+        onUpdateProduct={onSubmitProductForm}
+        onDeleteProduct={onDelete}
       />
     ),
-    [handleDeleteProduct, handleUpdateProduct, uploadImages],
+    [onDelete, onSubmitProductForm],
   );
 
   const columns = useMemo(
@@ -305,16 +191,12 @@ const ProductsTable = () => {
   );
 
   return (
-    <Indicator
-      isOpen={
-        isCreateProduct || isDeleteProduct || isUpdateProduct || isUploadImages
-      }
-    >
+    <Indicator isOpen={isLoading}>
       <Flex flexDirection={{ base: 'column', lg: 'row' }}>
         <SearchBar
           placeholder="Search by name"
           filterOptions={FILTER_PRODUCT}
-          searchValue={get('keyword')?.toLowerCase() || ''}
+          searchValue={searchValue}
           onSearch={handleDebounceSearch}
           onFilter={setFilter}
         />
@@ -326,18 +208,14 @@ const ProductsTable = () => {
           colorScheme="primary"
           bg="primary.500"
           textTransform="capitalize"
-          onClick={handleToggleModal}
+          onClick={onToggleAddModal}
           marginLeft={{ base: 'initial', lg: '20px' }}
           data-testid="button-add"
         >
           Add Product
         </Button>
       </Flex>
-      <Fetching
-        quality={15}
-        isLoading={isLoadingProducts}
-        isError={isProductsError}
-      >
+      <Fetching quality={15} isLoading={isFetching}>
         <Box mt={5}>
           <Table
             columns={columns as unknown as THeaderTable[]}
@@ -353,19 +231,18 @@ const ProductsTable = () => {
         arrOfCurrButtons={pageArray}
         onLimitChange={handleChangeLimit}
         onPageChange={handlePageChange}
-        onClickPage={handleClickPage}
+        onClickPage={onChangePage}
       />
 
-      {isOpenConfirmModal && (
+      {isOpenAddModal && (
         <Modal
-          isOpen={isOpenConfirmModal}
-          onClose={handleToggleModal}
+          isOpen={isOpenAddModal}
+          onClose={onToggleAddModal}
           title="Add Product"
           body={
             <ProductForm
-              onCloseModal={handleToggleModal}
-              onCreateProduct={handleCreateProduct}
-              uploadImages={uploadImages}
+              onCloseModal={onToggleAddModal}
+              onSubmit={onSubmitProductForm}
             />
           }
           haveCloseButton

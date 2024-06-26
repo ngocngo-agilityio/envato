@@ -245,7 +245,7 @@ export const useProducts = (queryParam?: TSearchProduct) => {
                       ? PRODUCT_STATUS.IN_STOCK
                       : PRODUCT_STATUS.SOLD,
                   amount: variables.amount,
-                  product: { ...variables },
+                  description: variables.description,
                 }
               : item,
           ),
