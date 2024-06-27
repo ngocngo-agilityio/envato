@@ -61,9 +61,9 @@ const PinCodeComponent = ({
             variant="filled"
           >
             <PinInputField sx={defaultStyle} data-testid="pin-input" />
-            <PinInputField sx={defaultStyle} />
-            <PinInputField sx={defaultStyle} />
-            <PinInputField sx={defaultStyle} />
+            <PinInputField sx={defaultStyle} data-testid="pin-input" />
+            <PinInputField sx={defaultStyle} data-testid="pin-input" />
+            <PinInputField sx={defaultStyle} data-testid="pin-input" />
           </PinInput>
         )}
       />

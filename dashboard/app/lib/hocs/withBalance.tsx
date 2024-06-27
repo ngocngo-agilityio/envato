@@ -27,7 +27,7 @@ export type TWithBalance<T> = {
   balance: number;
 } & T;
 
-const withBalance = <T,>(
+export const withBalance = <T,>(
   WrappedComponent: (props: TWithBalance<T>) => ReactNode,
 ) => {
   const BalanceWrapper = (props: T) => {
@@ -208,5 +208,3 @@ const withBalance = <T,>(
 
   return BalanceWrapper;
 };
-
-export default withBalance;
