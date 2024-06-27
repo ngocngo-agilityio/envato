@@ -18,7 +18,7 @@ import { AUTH_SCHEMA } from '@/lib/constants';
 import { formatAmountNumber } from '@/lib/utils';
 
 // Types
-import { TAddMoneyForm } from '.';
+import { TAddMoneyForm } from '@/lib/interfaces';
 
 export type TAddMoneyInputFieldProps = {
   control: Control<TAddMoneyForm>;

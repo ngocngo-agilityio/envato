@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { authStore } from '@/lib/stores';
 
 // Hooks
-import { useAuth, useGetUserDetails, useMoney, usePinCode } from '@/lib/hooks';
+import { useAuth, useMoney, usePinCode } from '@/lib/hooks';
 
 // Constants
 import {
@@ -21,14 +21,13 @@ import {
 import { customToast, removeAmountFormat } from '@/lib/utils';
 
 // Types
-import { TPinCodeForm, TTransfer, TWithSendMoney } from '@/lib/interfaces';
+import { TAddMoneyForm, TPinCodeForm, TWithAddMoney } from '@/lib/interfaces';
 
 // Components
 import { PinCodeModal } from '@/ui/components';
-import { TAddMoneyForm } from '@/ui/components/TotalBalance';
 
 const withAddMoney = <T,>(
-  WrappedComponent: (props: TWithSendMoney<T>) => ReactNode,
+  WrappedComponent: (props: TWithAddMoney<T>) => ReactNode,
 ) => {
   const AddMoneyWrapper = (props: T) => {
     const toast = useToast();
@@ -54,9 +53,6 @@ const withAddMoney = <T,>(
 
     const { pinCode = '', id: userId = '', bonusTimes = 0 } = user || {};
 
-    // Users
-    const { filterDataUser: userList = [] } = useGetUserDetails(userId);
-
     const {
       control: controlPinCode,
       handleSubmit: submitPinCode,
@@ -73,7 +69,7 @@ const withAddMoney = <T,>(
     const {
       control: controlAddMoney,
       handleSubmit: submitAddMoney,
-      formState: { dirtyFields: addMoneyDirtyFields },
+      formState: { isDirty: isDirtyAddMoney },
       reset: resetAddMoney,
     } = useForm<TAddMoneyForm>({
       defaultValues: {
@@ -119,6 +115,8 @@ const withAddMoney = <T,>(
         ),
       );
 
+      resetAddMoney();
+
       bonusTimes &&
         user &&
         setUser({
@@ -127,9 +125,9 @@ const withAddMoney = <T,>(
             bonusTimes: bonusTimes - 1,
           },
         });
-    }, [bonusTimes, setUser, toast, user]);
+    }, [bonusTimes, resetAddMoney, setUser, toast, user]);
 
-    const handleSendMoneyError = useCallback(() => {
+    const handleAddMoneyError = useCallback(() => {
       toast(
         customToast(
           ERROR_MESSAGES.ADD_MONEY.title,
@@ -137,14 +135,16 @@ const withAddMoney = <T,>(
           STATUS.ERROR,
         ),
       );
-    }, [toast]);
+
+      resetAddMoney();
+    }, [resetAddMoney, toast]);
 
     const handleSubmitAddMoney: SubmitHandler<TAddMoneyForm> = useCallback(
       (data) => {
         const addMoneyAmount = removeAmountFormat(data.amount);
 
         const submitData = {
-          ...data,
+          userId,
           amount:
             addMoneyAmount +
             (bonusTimes ? addMoneyAmount * DEFAULT_DISCOUNT_PERCENTAGE : 0),
@@ -154,15 +154,13 @@ const withAddMoney = <T,>(
           onSuccess: handleAddMoneySuccess,
           onError: handleAddMoneyError,
         });
-
-        resetAddMoney();
       },
       [
+        userId,
         bonusTimes,
         addMoneyToUserWallet,
-        handleSendMoneySuccess,
-        handleSendMoneyError,
-        resetAddMoney,
+        handleAddMoneySuccess,
+        handleAddMoneyError,
       ],
     );
 
@@ -241,11 +239,10 @@ const withAddMoney = <T,>(
       <>
         <WrappedComponent
           control={controlAddMoney}
-          dirtyFields={addMoneyDirtyFields}
-          userList={userList}
-          isSendMoneySubmitting={isAddMoneySubmitting}
-          onSubmitSendMoneyHandler={submitAddMoney}
-          onSubmitSendMoney={onTogglePinCodeModal}
+          isDirty={isDirtyAddMoney}
+          isSubmitting={isAddMoneySubmitting}
+          onSubmitHandler={submitAddMoney}
+          onSubmit={onTogglePinCodeModal}
           {...props}
         />
         {isPinCodeModalOpen && (

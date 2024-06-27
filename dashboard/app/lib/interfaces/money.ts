@@ -3,6 +3,7 @@ import { Control, UseFormHandleSubmit } from 'react-hook-form';
 
 // Types
 import { TUserDetail } from './user';
+import { TAddMoneyForm } from './form';
 
 export type TMoney = {
   amount: number;
@@ -41,4 +42,12 @@ export type TWithSendMoney<T> = {
   isSendMoneySubmitting: boolean;
   onSubmitSendMoneyHandler: UseFormHandleSubmit<TTransfer>;
   onSubmitSendMoney: () => void;
+} & T;
+
+export type TWithAddMoney<T> = {
+  control: Control<TAddMoneyForm>;
+  isDirty: boolean;
+  isSubmitting: boolean;
+  onSubmitHandler: UseFormHandleSubmit<TAddMoneyForm>;
+  onSubmit: () => void;
 } & T;
