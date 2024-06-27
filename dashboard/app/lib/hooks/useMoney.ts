@@ -21,33 +21,34 @@ export const useMoney = () => {
   const { user } = authStore();
   const queryClient = useQueryClient();
 
-  const { mutate: addMoneyToUserWallet } = useMutation({
-    mutationFn: async (userData: TAddMoney) => {
-      await mainHttpService.post<TRecentActivities>({
-        path: END_POINTS.RECENT_ACTIVITIES,
-        data: {
-          userId: user?.id,
-          actionName: EActivity.ADD_MONEY,
-        },
-      });
+  const { mutate: addMoneyToUserWallet, isPending: isAddMoneySubmitting } =
+    useMutation({
+      mutationFn: async (userData: TAddMoney) => {
+        await mainHttpService.post<TRecentActivities>({
+          path: END_POINTS.RECENT_ACTIVITIES,
+          data: {
+            userId: user?.id,
+            actionName: EActivity.ADD_MONEY,
+          },
+        });
 
-      return mainHttpService.put({
-        path: END_POINTS.ADD_MONEY,
-        data: userData,
-      });
-    },
-    onSuccess: async () => {
-      queryClient.invalidateQueries({
-        queryKey: [END_POINTS.MY_WALLET],
-      });
-      queryClient.invalidateQueries({
-        queryKey: [END_POINTS.TRANSACTIONS],
-      });
-      queryClient.invalidateQueries({
-        queryKey: [END_POINTS.NOTIFICATION],
-      });
-    },
-  });
+        return mainHttpService.put({
+          path: END_POINTS.ADD_MONEY,
+          data: userData,
+        });
+      },
+      onSuccess: async () => {
+        queryClient.invalidateQueries({
+          queryKey: [END_POINTS.MY_WALLET],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [END_POINTS.TRANSACTIONS],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [END_POINTS.NOTIFICATION],
+        });
+      },
+    });
 
   const { mutate: sendMoneyToUserWallet, isPending: isSendMoneySubmitting } =
     useMutation({
@@ -79,6 +80,7 @@ export const useMoney = () => {
     });
 
   return {
+    isAddMoneySubmitting,
     isSendMoneySubmitting,
     addMoneyToUserWallet,
     sendMoneyToUserWallet,

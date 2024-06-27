@@ -18,7 +18,7 @@ import { AUTH_SCHEMA } from '@/lib/constants';
 import { formatAmountNumber } from '@/lib/utils';
 
 // Types
-import { TAddMoneyForm } from '.';
+import { TAddMoneyForm } from '@/lib/interfaces';
 
 export type TAddMoneyInputFieldProps = {
   control: Control<TAddMoneyForm>;
@@ -46,6 +46,8 @@ const AddMoneyInputField = ({
         render={({ field: { value, onChange }, fieldState: { error } }) => {
           const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             const value: string = event.target.value;
+
+            if (isNaN(+value.replaceAll(',', ''))) return;
 
             // Remove non-numeric characters and leading zeros
             const sanitizedValue = formatAmountNumber(value);

@@ -10,3 +10,8 @@ export type TAuthForm = Omit<TUserDetail, 'id' | 'createdAt'> & {
   isAcceptPrivacyPolicy: boolean;
   isRemember: boolean;
 };
+
+export type TAddMoneyForm = {
+  userId: string;
+  amount: string;
+};
