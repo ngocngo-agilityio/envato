@@ -1,12 +1,5 @@
-import { memo } from 'react';
 import dynamic from 'next/dynamic';
 
-const AuthForm = dynamic(() => import('@/ui/components/AuthForm'), {
-  ssr: false,
-});
+const SignUp = dynamic(() => import('@/ui/sections/SignUp'));
 
-const RegisterPage = () => <AuthForm isRegister />;
-
-const Register = memo(RegisterPage);
-
-export default Register;
+export default SignUp;

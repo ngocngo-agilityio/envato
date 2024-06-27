@@ -2,8 +2,7 @@
 
 import { ChangeEvent, memo, useCallback, MouseEvent } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import {
   Button,
   HStack,
@@ -23,50 +22,35 @@ import { InputField, PasswordSwitcher } from '@/ui/components';
 import { ROUTES, AUTH_SCHEMA } from '@/lib/constants';
 
 // Hooks
-import { useForm, useAuth } from '@/lib/hooks';
+import { useForm } from '@/lib/hooks';
 
 // Utils
-import {
-  isWindowDefined,
-  validatePassword,
-  app,
-  requestForToken,
-} from '@/lib/utils';
+import { validatePassword } from '@/lib/utils';
 
 // Types
-import { TUserDetail } from '@/lib/interfaces';
+import { TAuthForm } from '@/lib/interfaces';
 
 // Layouts
 import { AuthFooter } from '@/ui/layouts';
 
-// firebase
-import { getMessaging } from 'firebase/messaging';
-
-type TAuthForm = Omit<TUserDetail, 'id' | 'createdAt'> & {
-  confirmPassword: string;
-  isAcceptPrivacyPolicy: boolean;
-  isRemember: false;
-};
-
 interface AuthFormProps {
   isRegister?: boolean;
+  errorMessage?: string;
+  onSubmit: (data: TAuthForm) => void;
+  onClearErrorMessage: () => void;
 }
 
-const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
-  const { signIn, signUp } = useAuth();
-  const router = useRouter();
-
+const AuthForm = ({
+  isRegister = false,
+  errorMessage = '',
+  onSubmit,
+  onClearErrorMessage,
+}: AuthFormProps): JSX.Element => {
   // Control form
   const {
     control,
-    formState: {
-      errors: { root },
-      dirtyFields,
-      defaultValues,
-      isSubmitting,
-    },
+    formState: { dirtyFields, defaultValues, isSubmitting },
     handleSubmit,
-    setError,
     clearErrors,
   } = useForm<TAuthForm>({
     defaultValues: {
@@ -90,8 +74,6 @@ const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
   const { isOpen: isShowConfirmPassword, onToggle: onShowConfirmPassword } =
     useDisclosure();
 
-  const messaging = isWindowDefined() ? getMessaging(app) : null;
-
   const isDisabledSubmitBtn: boolean = (() => {
     const getLength = (object: object): number => Object.keys(object).length;
 
@@ -101,48 +83,6 @@ const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
 
     return isSubmitting || !isFillAllFields;
   })();
-
-  const handleLogin: SubmitHandler<TAuthForm> = useCallback(
-    async (data) => {
-      try {
-        const { email, password, isRemember } = data;
-        const fcmToken =
-          (messaging && (await requestForToken(messaging))) || '';
-
-        await signIn({ email, password, fcmToken }, isRemember);
-
-        router.push(ROUTES.ROOT);
-      } catch (error) {
-        const { message } = error as Error;
-
-        setError('root', { type: 'custom', message });
-      }
-    },
-    [messaging, router, setError, signIn],
-  );
-
-  const handleRegister: SubmitHandler<TAuthForm> = useCallback(
-    async (data) => {
-      const {
-        isAcceptPrivacyPolicy: _isAcceptPrivacyPolicy,
-        confirmPassword: _confirmPassword,
-        ...fieldValues
-      } = data;
-      try {
-        const fcmToken =
-          (messaging && (await requestForToken(messaging))) || '';
-
-        await signUp({ ...fieldValues, fcmToken });
-
-        router.push(ROUTES.ROOT);
-      } catch (error) {
-        const { message } = error as Error;
-
-        setError('root', { type: 'custom', message });
-      }
-    },
-    [messaging, router, setError, signUp],
-  );
 
   const handleClearErrorMessage = useCallback(
     (
@@ -155,11 +95,6 @@ const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
 
         onChange(data);
       },
-    [clearErrors],
-  );
-
-  const handleClearRootError = useCallback(
-    () => clearErrors('root'),
     [clearErrors],
   );
 
@@ -181,7 +116,7 @@ const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
     <Box
       id={!isRegister ? 'login-form' : 'register-form'}
       as="form"
-      onSubmit={handleSubmit(!isRegister ? handleLogin : handleRegister)}
+      onSubmit={handleSubmit(onSubmit)}
       w={{
         base: '100%',
         sm: 425,
@@ -273,7 +208,7 @@ const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
                 isDisabled={isSubmitting}
                 value={value}
                 onChange={handleChange}
-                onBlur={handleClearRootError}
+                onBlur={onClearErrorMessage}
               />
             );
           }}
@@ -298,7 +233,7 @@ const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
               errorMessages={error?.message}
               isDisabled={isSubmitting}
               {...field}
-              onBlur={handleClearRootError}
+              onBlur={onClearErrorMessage}
             />
           )}
         />
@@ -433,7 +368,7 @@ const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
       {/* Show API error */}
       <Box mb={7}>
         <Text color="red" textAlign="center" py={2} h={10}>
-          {root?.message}
+          {errorMessage}
         </Text>
         <Button
           type="submit"
