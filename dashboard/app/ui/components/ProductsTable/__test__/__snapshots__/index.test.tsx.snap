@@ -1,27 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Product table Match with snapshot with default prop 1`] = `
+exports[`ProductForm component should match with snapshot 1`] = `
 <div>
   <div
-    class="css-194coc3"
+    class="css-gfkryc"
   >
     <form
-      class="chakra-stack css-16wym0o"
+      class="chakra-stack css-yoechi"
       data-testid="search-bar"
     >
       <div
-        class="css-1b9rej7"
+        class="css-dcf2gz"
       >
         <div
-          class="chakra-form-control css-1kxonj9"
+          class="chakra-form-control css-0"
           role="group"
         >
           <div
-            class="chakra-input__group css-1091msq"
+            class="chakra-input__group css-169ufh8"
             data-group="true"
           >
             <div
-              class="chakra-input__left-element css-1kg931p"
+              class="chakra-input__left-element css-1u2k0bl"
             >
               <svg
                 class="chakra-icon css-onkibi"
@@ -35,9 +35,9 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </svg>
             </div>
             <input
-              class="chakra-input css-1x84oq"
+              class="chakra-input css-1ga50y9"
               data-testid="search-transaction"
-              id="field-:r0:"
+              id="field-:r1:"
               placeholder="Search by name"
               type="text"
               value=""
@@ -46,21 +46,21 @@ exports[`Product table Match with snapshot with default prop 1`] = `
         </div>
       </div>
       <div
-        class="css-tzs3vb"
+        class="css-88fnzk"
       >
         <button
-          aria-controls="menu-list-:r2:"
+          aria-controls="menu-list-:r3:"
           aria-expanded="false"
           aria-haspopup="menu"
-          class="chakra-button chakra-menu__menu-button css-10e6i5m"
-          id="menu-button-:r2:"
+          class="chakra-button chakra-menu__menu-button css-1n3vrsk"
+          id="menu-button-:r3:"
           type="button"
         >
           <span
             class="css-xl71ch"
           >
             <span
-              class="css-ccj5l2"
+              class="css-14zmob5"
             >
               <svg
                 fill="none"
@@ -82,55 +82,55 @@ exports[`Product table Match with snapshot with default prop 1`] = `
           </span>
         </button>
         <div
-          class="css-r6z5ec"
+          class="css-0"
           style="visibility: hidden; position: absolute; inset: 0 auto auto 0;"
         >
           <div
             aria-orientation="vertical"
-            class="chakra-menu__menu-list css-1k4isgz"
-            id="menu-list-:r2:"
+            class="chakra-menu__menu-list css-149xq91"
+            id="menu-list-:r3:"
             role="menu"
             style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
             tabindex="-1"
           >
             <button
-              class="chakra-menu__menuitem css-o9weuj"
+              class="chakra-menu__menuitem css-1oz22gy"
               data-index="0"
-              id="menu-list-:r2:-menuitem-:r3:"
+              id="menu-list-:r3:-menuitem-:r4:"
               role="menuitem"
               tabindex="-1"
               type="button"
             >
               <p
-                class="chakra-text css-15asmb0"
+                class="chakra-text css-1198d6z"
               >
                 Default
               </p>
             </button>
             <button
-              class="chakra-menu__menuitem css-o9weuj"
+              class="chakra-menu__menuitem css-1oz22gy"
               data-index="1"
-              id="menu-list-:r2:-menuitem-:r4:"
+              id="menu-list-:r3:-menuitem-:r5:"
               role="menuitem"
               tabindex="-1"
               type="button"
             >
               <p
-                class="chakra-text css-15asmb0"
+                class="chakra-text css-1198d6z"
               >
                 Sold
               </p>
             </button>
             <button
-              class="chakra-menu__menuitem css-o9weuj"
+              class="chakra-menu__menuitem css-1oz22gy"
               data-index="2"
-              id="menu-list-:r2:-menuitem-:r5:"
+              id="menu-list-:r3:-menuitem-:r6:"
               role="menuitem"
               tabindex="-1"
               type="button"
             >
               <p
-                class="chakra-text css-15asmb0"
+                class="chakra-text css-1198d6z"
               >
                 In stock
               </p>
@@ -141,7 +141,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
     </form>
     <button
       aria-label="Add User"
-      class="chakra-button css-gpwyvs"
+      class="chakra-button css-qjfhkf"
       data-testid="button-add"
       role="button"
       type="button"
@@ -150,13 +150,13 @@ exports[`Product table Match with snapshot with default prop 1`] = `
     </button>
   </div>
   <div
-    class="css-17qnj1m"
+    class="css-odz94x"
   >
     <div
-      class="chakra-table__container css-1d9a4hd"
+      class="chakra-table__container css-phaltv"
     >
       <table
-        class="chakra-table css-5605sr"
+        class="chakra-table css-0"
       >
         <thead
           class="css-0"
@@ -165,20 +165,20 @@ exports[`Product table Match with snapshot with default prop 1`] = `
             class="css-0"
           >
             <th
-              class="css-1fgb9gn"
+              class="css-1os40k8"
             >
               <div
-                class="css-1k9efnl"
+                class="css-j2at52"
               >
                 <p
-                  class="chakra-text css-10ze6i3"
+                  class="chakra-text css-18oyu9h"
                   title="Product Name"
                 >
                   Product Name
                 </p>
                 <button
                   aria-label="This is the icon for Product Name"
-                  class="chakra-button css-1c8sy4r"
+                  class="chakra-button css-1x5hsk6"
                   data-testid="sort-icon"
                   type="button"
                 >
@@ -206,13 +206,13 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </div>
             </th>
             <th
-              class="css-1fgb9gn"
+              class="css-1os40k8"
             >
               <div
-                class="css-1k9efnl"
+                class="css-j2at52"
               >
                 <p
-                  class="chakra-text css-10ze6i3"
+                  class="chakra-text css-18oyu9h"
                   title="Gallery Thumbnail"
                 >
                   Gallery Thumbnail
@@ -220,20 +220,20 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </div>
             </th>
             <th
-              class="css-1fgb9gn"
+              class="css-1os40k8"
             >
               <div
-                class="css-1k9efnl"
+                class="css-j2at52"
               >
                 <p
-                  class="chakra-text css-10ze6i3"
+                  class="chakra-text css-18oyu9h"
                   title="Price"
                 >
                   Price
                 </p>
                 <button
                   aria-label="This is the icon for Price"
-                  class="chakra-button css-1c8sy4r"
+                  class="chakra-button css-1x5hsk6"
                   data-testid="sort-icon"
                   type="button"
                 >
@@ -261,20 +261,20 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </div>
             </th>
             <th
-              class="css-1fgb9gn"
+              class="css-1os40k8"
             >
               <div
-                class="css-1k9efnl"
+                class="css-j2at52"
               >
                 <p
-                  class="chakra-text css-10ze6i3"
+                  class="chakra-text css-18oyu9h"
                   title="Status"
                 >
                   Status
                 </p>
                 <button
                   aria-label="This is the icon for Status"
-                  class="chakra-button css-1c8sy4r"
+                  class="chakra-button css-1x5hsk6"
                   data-testid="sort-icon"
                   type="button"
                 >
@@ -302,20 +302,20 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </div>
             </th>
             <th
-              class="css-1fgb9gn"
+              class="css-1os40k8"
             >
               <div
-                class="css-1k9efnl"
+                class="css-j2at52"
               >
                 <p
-                  class="chakra-text css-10ze6i3"
+                  class="chakra-text css-18oyu9h"
                   title="Quantity"
                 >
                   Quantity
                 </p>
                 <button
                   aria-label="This is the icon for Quantity"
-                  class="chakra-button css-1c8sy4r"
+                  class="chakra-button css-1x5hsk6"
                   data-testid="sort-icon"
                   type="button"
                 >
@@ -343,20 +343,20 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </div>
             </th>
             <th
-              class="css-1fgb9gn"
+              class="css-1os40k8"
             >
               <div
-                class="css-1k9efnl"
+                class="css-j2at52"
               >
                 <p
-                  class="chakra-text css-10ze6i3"
+                  class="chakra-text css-18oyu9h"
                   title="Date"
                 >
                   Date
                 </p>
                 <button
                   aria-label="This is the icon for Date"
-                  class="chakra-button css-1c8sy4r"
+                  class="chakra-button css-1x5hsk6"
                   data-testid="sort-icon"
                   type="button"
                 >
@@ -384,7 +384,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </div>
             </th>
             <th
-              class="css-1dmf4gl"
+              class="css-bsiblf"
             />
           </tr>
         </thead>
@@ -396,26 +396,26 @@ exports[`Product table Match with snapshot with default prop 1`] = `
             data-testid="table-row"
           >
             <td
-              class="css-1h4an4l"
+              class="css-xpdvke"
             >
               <div
                 class="css-1h2sv0j"
               >
                 <p
-                  class="chakra-text css-107vws0"
+                  class="chakra-text css-s51d82"
                 >
                   Ban phim
                 </p>
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <div
-                class="css-9ywnbm"
+                class="css-s2putz"
               >
                 <div
-                  class="css-1gb8e9t"
+                  class="css-sdavkg"
                 >
                   <img
                     alt="Image of Ban phim"
@@ -431,50 +431,50 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 $100.00
               </p>
             </td>
             <td
-              class="css-3qub4l"
+              class="css-dq40i2"
             >
               <span
-                class="chakra-badge css-1nt00i9"
+                class="chakra-badge css-3jdwwr"
               >
                 In-stock
               </span>
             </td>
             <td
-              class="css-8nbxwj"
+              class="css-6o06y7"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 1
               </p>
             </td>
             <td
-              class="css-1v6q597"
+              class="css-9l1yrg"
             >
               <p
-                class="chakra-text css-gmde4n"
+                class="chakra-text css-1axrwu4"
               >
                 Mar 13, 2024
               </p>
             </td>
             <td
-              class="css-kgr5cp"
+              class="css-lepxbj"
             >
               <button
-                aria-controls="menu-list-:rd:"
+                aria-controls="menu-list-:re:"
                 aria-expanded="false"
                 aria-haspopup="menu"
-                class="chakra-button chakra-menu__menu-button css-1of25bg"
-                id="menu-button-:rd:"
+                class="chakra-button chakra-menu__menu-button css-14rg285"
+                id="menu-button-:re:"
                 type="button"
               >
                 <span
@@ -482,7 +482,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 >
                   <button
                     aria-label="This is the icon action"
-                    class="chakra-button css-1c8sy4r"
+                    class="chakra-button css-1x5hsk6"
                     data-testid="dot-icon"
                     type="button"
                   >
@@ -506,30 +506,30 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 </span>
               </button>
               <div
-                class="css-r6z5ec"
+                class="css-0"
                 style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
               >
                 <div
                   aria-orientation="vertical"
-                  class="chakra-menu__menu-list css-19p6z7a"
-                  id="menu-list-:rd:"
+                  class="chakra-menu__menu-list css-6dyv79"
+                  id="menu-list-:re:"
                   role="menu"
                   style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
                   tabindex="-1"
                 >
                   <button
-                    class="chakra-menu__menuitem css-1m94u4a"
+                    class="chakra-menu__menuitem css-bjyw8u"
                     data-index="0"
-                    id="menu-list-:rd:-menuitem-:re:"
+                    id="menu-list-:re:-menuitem-:rf:"
                     role="menuitem"
                     tabindex="-1"
                     type="button"
                   >
                     <div
-                      class="css-1og1ejg"
+                      class="css-1s0smvb"
                     >
                       <svg
-                        class="chakra-icon css-n4g5d6"
+                        class="chakra-icon css-1etxpkf"
                         data-testid="edit-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -549,7 +549,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                         </g>
                       </svg>
                       <svg
-                        class="chakra-icon css-c8antd"
+                        class="chakra-icon css-1upoz8k"
                         data-testid="del-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -573,26 +573,26 @@ exports[`Product table Match with snapshot with default prop 1`] = `
             data-testid="table-row"
           >
             <td
-              class="css-1h4an4l"
+              class="css-xpdvke"
             >
               <div
                 class="css-1h2sv0j"
               >
                 <p
-                  class="chakra-text css-107vws0"
+                  class="chakra-text css-s51d82"
                 >
                   Tay cam xbox
                 </p>
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <div
-                class="css-9ywnbm"
+                class="css-s2putz"
               >
                 <div
-                  class="css-1gb8e9t"
+                  class="css-sdavkg"
                 >
                   <img
                     alt="Image of Tay cam xbox"
@@ -608,50 +608,50 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 $123.00
               </p>
             </td>
             <td
-              class="css-3qub4l"
+              class="css-dq40i2"
             >
               <span
-                class="chakra-badge css-oyldzo"
+                class="chakra-badge css-3jdwwr"
               >
                 Sold
               </span>
             </td>
             <td
-              class="css-8nbxwj"
+              class="css-6o06y7"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 0
               </p>
             </td>
             <td
-              class="css-1v6q597"
+              class="css-9l1yrg"
             >
               <p
-                class="chakra-text css-gmde4n"
+                class="chakra-text css-1axrwu4"
               >
                 Mar 13, 2024
               </p>
             </td>
             <td
-              class="css-kgr5cp"
+              class="css-lepxbj"
             >
               <button
-                aria-controls="menu-list-:rm:"
+                aria-controls="menu-list-:rn:"
                 aria-expanded="false"
                 aria-haspopup="menu"
-                class="chakra-button chakra-menu__menu-button css-1of25bg"
-                id="menu-button-:rm:"
+                class="chakra-button chakra-menu__menu-button css-14rg285"
+                id="menu-button-:rn:"
                 type="button"
               >
                 <span
@@ -659,7 +659,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 >
                   <button
                     aria-label="This is the icon action"
-                    class="chakra-button css-1c8sy4r"
+                    class="chakra-button css-1x5hsk6"
                     data-testid="dot-icon"
                     type="button"
                   >
@@ -683,30 +683,30 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 </span>
               </button>
               <div
-                class="css-r6z5ec"
+                class="css-0"
                 style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
               >
                 <div
                   aria-orientation="vertical"
-                  class="chakra-menu__menu-list css-19p6z7a"
-                  id="menu-list-:rm:"
+                  class="chakra-menu__menu-list css-6dyv79"
+                  id="menu-list-:rn:"
                   role="menu"
                   style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
                   tabindex="-1"
                 >
                   <button
-                    class="chakra-menu__menuitem css-1m94u4a"
+                    class="chakra-menu__menuitem css-bjyw8u"
                     data-index="0"
-                    id="menu-list-:rm:-menuitem-:rn:"
+                    id="menu-list-:rn:-menuitem-:ro:"
                     role="menuitem"
                     tabindex="-1"
                     type="button"
                   >
                     <div
-                      class="css-1og1ejg"
+                      class="css-1s0smvb"
                     >
                       <svg
-                        class="chakra-icon css-n4g5d6"
+                        class="chakra-icon css-1etxpkf"
                         data-testid="edit-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -726,7 +726,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                         </g>
                       </svg>
                       <svg
-                        class="chakra-icon css-c8antd"
+                        class="chakra-icon css-1upoz8k"
                         data-testid="del-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -750,26 +750,26 @@ exports[`Product table Match with snapshot with default prop 1`] = `
             data-testid="table-row"
           >
             <td
-              class="css-1h4an4l"
+              class="css-xpdvke"
             >
               <div
                 class="css-1h2sv0j"
               >
                 <p
-                  class="chakra-text css-107vws0"
+                  class="chakra-text css-s51d82"
                 >
                   Tay cam 3
                 </p>
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <div
-                class="css-9ywnbm"
+                class="css-s2putz"
               >
                 <div
-                  class="css-1gb8e9t"
+                  class="css-sdavkg"
                 >
                   <img
                     alt="Image of Tay cam 3"
@@ -777,58 +777,58 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                     decoding="async"
                     loading="lazy"
                     sizes="100vw"
-                    src="/_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=3840&q=75"
-                    srcset="/_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png%2Chttps%3A%2F%2Fi.ibb.co%2FHq9kqmc%2Fimage-58.png%2Chttps%3A%2F%2Fi.ibb.co%2FYdnfHMf%2Fimage-63.png&w=3840&q=75 3840w"
+                    src="/_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=3840&q=75"
+                    srcset="/_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2F3yzTC5Q%2Fimage-57.png&w=3840&q=75 3840w"
                     style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; object-fit: cover; color: transparent; border-radius: 15px; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;"
                   />
                 </div>
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 $111.00
               </p>
             </td>
             <td
-              class="css-3qub4l"
+              class="css-dq40i2"
             >
               <span
-                class="chakra-badge css-1nt00i9"
+                class="chakra-badge css-3jdwwr"
               >
                 In-stock
               </span>
             </td>
             <td
-              class="css-8nbxwj"
+              class="css-6o06y7"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 2
               </p>
             </td>
             <td
-              class="css-1v6q597"
+              class="css-9l1yrg"
             >
               <p
-                class="chakra-text css-gmde4n"
+                class="chakra-text css-1axrwu4"
               >
                 Mar 12, 2024
               </p>
             </td>
             <td
-              class="css-kgr5cp"
+              class="css-lepxbj"
             >
               <button
-                aria-controls="menu-list-:rv:"
+                aria-controls="menu-list-:r10:"
                 aria-expanded="false"
                 aria-haspopup="menu"
-                class="chakra-button chakra-menu__menu-button css-1of25bg"
-                id="menu-button-:rv:"
+                class="chakra-button chakra-menu__menu-button css-14rg285"
+                id="menu-button-:r10:"
                 type="button"
               >
                 <span
@@ -836,7 +836,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 >
                   <button
                     aria-label="This is the icon action"
-                    class="chakra-button css-1c8sy4r"
+                    class="chakra-button css-1x5hsk6"
                     data-testid="dot-icon"
                     type="button"
                   >
@@ -860,30 +860,30 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 </span>
               </button>
               <div
-                class="css-r6z5ec"
+                class="css-0"
                 style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
               >
                 <div
                   aria-orientation="vertical"
-                  class="chakra-menu__menu-list css-19p6z7a"
-                  id="menu-list-:rv:"
+                  class="chakra-menu__menu-list css-6dyv79"
+                  id="menu-list-:r10:"
                   role="menu"
                   style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
                   tabindex="-1"
                 >
                   <button
-                    class="chakra-menu__menuitem css-1m94u4a"
+                    class="chakra-menu__menuitem css-bjyw8u"
                     data-index="0"
-                    id="menu-list-:rv:-menuitem-:r10:"
+                    id="menu-list-:r10:-menuitem-:r11:"
                     role="menuitem"
                     tabindex="-1"
                     type="button"
                   >
                     <div
-                      class="css-1og1ejg"
+                      class="css-1s0smvb"
                     >
                       <svg
-                        class="chakra-icon css-n4g5d6"
+                        class="chakra-icon css-1etxpkf"
                         data-testid="edit-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -903,7 +903,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                         </g>
                       </svg>
                       <svg
-                        class="chakra-icon css-c8antd"
+                        class="chakra-icon css-1upoz8k"
                         data-testid="del-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -927,26 +927,26 @@ exports[`Product table Match with snapshot with default prop 1`] = `
             data-testid="table-row"
           >
             <td
-              class="css-1h4an4l"
+              class="css-xpdvke"
             >
               <div
                 class="css-1h2sv0j"
               >
                 <p
-                  class="chakra-text css-107vws0"
+                  class="chakra-text css-s51d82"
                 >
                   Envato market
                 </p>
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <div
-                class="css-9ywnbm"
+                class="css-s2putz"
               >
                 <div
-                  class="css-1gb8e9t"
+                  class="css-sdavkg"
                 >
                   <img
                     alt="Image of Envato market"
@@ -954,58 +954,58 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                     decoding="async"
                     loading="lazy"
                     sizes="100vw"
-                    src="/_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=3840&q=75"
-                    srcset="/_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png%2Chttps%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=3840&q=75 3840w"
+                    src="/_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=3840&q=75"
+                    srcset="/_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=3840&q=75 3840w"
                     style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; object-fit: cover; color: transparent; border-radius: 15px; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;"
                   />
                 </div>
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 $111.00
               </p>
             </td>
             <td
-              class="css-3qub4l"
+              class="css-dq40i2"
             >
               <span
-                class="chakra-badge css-1nt00i9"
+                class="chakra-badge css-3jdwwr"
               >
                 In-stock
               </span>
             </td>
             <td
-              class="css-8nbxwj"
+              class="css-6o06y7"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 4
               </p>
             </td>
             <td
-              class="css-1v6q597"
+              class="css-9l1yrg"
             >
               <p
-                class="chakra-text css-gmde4n"
+                class="chakra-text css-1axrwu4"
               >
                 Mar 12, 2024
               </p>
             </td>
             <td
-              class="css-kgr5cp"
+              class="css-lepxbj"
             >
               <button
-                aria-controls="menu-list-:r18:"
+                aria-controls="menu-list-:r19:"
                 aria-expanded="false"
                 aria-haspopup="menu"
-                class="chakra-button chakra-menu__menu-button css-1of25bg"
-                id="menu-button-:r18:"
+                class="chakra-button chakra-menu__menu-button css-14rg285"
+                id="menu-button-:r19:"
                 type="button"
               >
                 <span
@@ -1013,7 +1013,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 >
                   <button
                     aria-label="This is the icon action"
-                    class="chakra-button css-1c8sy4r"
+                    class="chakra-button css-1x5hsk6"
                     data-testid="dot-icon"
                     type="button"
                   >
@@ -1037,30 +1037,30 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 </span>
               </button>
               <div
-                class="css-r6z5ec"
+                class="css-0"
                 style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
               >
                 <div
                   aria-orientation="vertical"
-                  class="chakra-menu__menu-list css-19p6z7a"
-                  id="menu-list-:r18:"
+                  class="chakra-menu__menu-list css-6dyv79"
+                  id="menu-list-:r19:"
                   role="menu"
                   style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
                   tabindex="-1"
                 >
                   <button
-                    class="chakra-menu__menuitem css-1m94u4a"
+                    class="chakra-menu__menuitem css-bjyw8u"
                     data-index="0"
-                    id="menu-list-:r18:-menuitem-:r19:"
+                    id="menu-list-:r19:-menuitem-:r1a:"
                     role="menuitem"
                     tabindex="-1"
                     type="button"
                   >
                     <div
-                      class="css-1og1ejg"
+                      class="css-1s0smvb"
                     >
                       <svg
-                        class="chakra-icon css-n4g5d6"
+                        class="chakra-icon css-1etxpkf"
                         data-testid="edit-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -1080,7 +1080,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                         </g>
                       </svg>
                       <svg
-                        class="chakra-icon css-c8antd"
+                        class="chakra-icon css-1upoz8k"
                         data-testid="del-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -1104,26 +1104,26 @@ exports[`Product table Match with snapshot with default prop 1`] = `
             data-testid="table-row"
           >
             <td
-              class="css-1h4an4l"
+              class="css-xpdvke"
             >
               <div
                 class="css-1h2sv0j"
               >
                 <p
-                  class="chakra-text css-107vws0"
+                  class="chakra-text css-s51d82"
                 >
                   Tay cam 2
                 </p>
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <div
-                class="css-9ywnbm"
+                class="css-s2putz"
               >
                 <div
-                  class="css-1gb8e9t"
+                  class="css-sdavkg"
                 >
                   <img
                     alt="Image of Tay cam 2"
@@ -1131,58 +1131,58 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                     decoding="async"
                     loading="lazy"
                     sizes="100vw"
-                    src="/_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=3840&q=75"
-                    srcset="/_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png%2Chttps%3A%2F%2Fi.ibb.co%2FvxCVqcz%2Fimage-59.png&w=3840&q=75 3840w"
+                    src="/_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=3840&q=75"
+                    srcset="/_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fi.ibb.co%2Fd0D0csn%2Fimage-61.png&w=3840&q=75 3840w"
                     style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; object-fit: cover; color: transparent; border-radius: 15px; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;"
                   />
                 </div>
               </div>
             </td>
             <td
-              class="css-5x3kvh"
+              class="css-oe3t8o"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 $1,111.00
               </p>
             </td>
             <td
-              class="css-3qub4l"
+              class="css-dq40i2"
             >
               <span
-                class="chakra-badge css-oyldzo"
+                class="chakra-badge css-3jdwwr"
               >
                 Sold
               </span>
             </td>
             <td
-              class="css-8nbxwj"
+              class="css-6o06y7"
             >
               <p
-                class="chakra-text css-n4848l"
+                class="chakra-text css-13lljhc"
               >
                 0
               </p>
             </td>
             <td
-              class="css-1v6q597"
+              class="css-9l1yrg"
             >
               <p
-                class="chakra-text css-gmde4n"
+                class="chakra-text css-1axrwu4"
               >
                 Mar 12, 2024
               </p>
             </td>
             <td
-              class="css-kgr5cp"
+              class="css-lepxbj"
             >
               <button
-                aria-controls="menu-list-:r1h:"
+                aria-controls="menu-list-:r1i:"
                 aria-expanded="false"
                 aria-haspopup="menu"
-                class="chakra-button chakra-menu__menu-button css-1of25bg"
-                id="menu-button-:r1h:"
+                class="chakra-button chakra-menu__menu-button css-14rg285"
+                id="menu-button-:r1i:"
                 type="button"
               >
                 <span
@@ -1190,7 +1190,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 >
                   <button
                     aria-label="This is the icon action"
-                    class="chakra-button css-1c8sy4r"
+                    class="chakra-button css-1x5hsk6"
                     data-testid="dot-icon"
                     type="button"
                   >
@@ -1214,30 +1214,30 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                 </span>
               </button>
               <div
-                class="css-r6z5ec"
+                class="css-0"
                 style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
               >
                 <div
                   aria-orientation="vertical"
-                  class="chakra-menu__menu-list css-19p6z7a"
-                  id="menu-list-:r1h:"
+                  class="chakra-menu__menu-list css-6dyv79"
+                  id="menu-list-:r1i:"
                   role="menu"
                   style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
                   tabindex="-1"
                 >
                   <button
-                    class="chakra-menu__menuitem css-1m94u4a"
+                    class="chakra-menu__menuitem css-bjyw8u"
                     data-index="0"
-                    id="menu-list-:r1h:-menuitem-:r1i:"
+                    id="menu-list-:r1i:-menuitem-:r1j:"
                     role="menuitem"
                     tabindex="-1"
                     type="button"
                   >
                     <div
-                      class="css-1og1ejg"
+                      class="css-1s0smvb"
                     >
                       <svg
-                        class="chakra-icon css-n4g5d6"
+                        class="chakra-icon css-1etxpkf"
                         data-testid="edit-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -1257,7 +1257,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
                         </g>
                       </svg>
                       <svg
-                        class="chakra-icon css-c8antd"
+                        class="chakra-icon css-1upoz8k"
                         data-testid="del-icon"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -1281,26 +1281,26 @@ exports[`Product table Match with snapshot with default prop 1`] = `
     </div>
   </div>
   <div
-    class="css-cyp3zu"
+    class="css-1dqn28w"
     data-testid="pagination"
   >
     <div
       class="css-70qvj9"
     >
       <p
-        class="chakra-text css-r5mmfv"
+        class="chakra-text css-10v9eea"
       >
         Show result:
       </p>
       <div
-        class="css-110fpu2"
+        class="css-18gn0nf"
       >
         <button
-          aria-controls="menu-list-:r1k:"
+          aria-controls="menu-list-:r1l:"
           aria-expanded="false"
           aria-haspopup="menu"
-          class="chakra-button chakra-menu__menu-button css-10e6i5m"
-          id="menu-button-:r1k:"
+          class="chakra-button chakra-menu__menu-button css-1n3vrsk"
+          id="menu-button-:r1l:"
           type="button"
         >
           <span
@@ -1310,12 +1310,12 @@ exports[`Product table Match with snapshot with default prop 1`] = `
               class="css-1n2mv2k"
             >
               <span
-                class="chakra-text css-1ftaikx"
+                class="chakra-text css-mj5ko4"
               >
                 10
               </span>
               <div
-                class="css-zaxsyz"
+                class="css-v0v9en"
               >
                 <svg
                   fill="none"
@@ -1338,55 +1338,55 @@ exports[`Product table Match with snapshot with default prop 1`] = `
           </span>
         </button>
         <div
-          class="css-r6z5ec"
+          class="css-0"
           style="visibility: hidden; position: absolute; inset: 0 auto auto 0;"
         >
           <div
             aria-orientation="vertical"
-            class="chakra-menu__menu-list css-1k4isgz"
-            id="menu-list-:r1k:"
+            class="chakra-menu__menu-list css-149xq91"
+            id="menu-list-:r1l:"
             role="menu"
             style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
             tabindex="-1"
           >
             <button
-              class="chakra-menu__menuitem css-o9weuj"
+              class="chakra-menu__menuitem css-1oz22gy"
               data-index="0"
-              id="menu-list-:r1k:-menuitem-:r1l:"
+              id="menu-list-:r1l:-menuitem-:r1m:"
               role="menuitem"
               tabindex="-1"
               type="button"
             >
               <p
-                class="chakra-text css-15asmb0"
+                class="chakra-text css-1198d6z"
               >
                 10
               </p>
             </button>
             <button
-              class="chakra-menu__menuitem css-o9weuj"
+              class="chakra-menu__menuitem css-1oz22gy"
               data-index="1"
-              id="menu-list-:r1k:-menuitem-:r1m:"
+              id="menu-list-:r1l:-menuitem-:r1n:"
               role="menuitem"
               tabindex="-1"
               type="button"
             >
               <p
-                class="chakra-text css-15asmb0"
+                class="chakra-text css-1198d6z"
               >
                 20
               </p>
             </button>
             <button
-              class="chakra-menu__menuitem css-o9weuj"
+              class="chakra-menu__menuitem css-1oz22gy"
               data-index="2"
-              id="menu-list-:r1k:-menuitem-:r1n:"
+              id="menu-list-:r1l:-menuitem-:r1o:"
               role="menuitem"
               tabindex="-1"
               type="button"
             >
               <p
-                class="chakra-text css-15asmb0"
+                class="chakra-text css-1198d6z"
               >
                 50
               </p>
@@ -1400,7 +1400,7 @@ exports[`Product table Match with snapshot with default prop 1`] = `
     >
       <button
         aria-label="btn-prev"
-        class="chakra-button css-1u5n2r4"
+        class="chakra-button css-1d6knu5"
         data-testid="prev-button"
         type="button"
       >
@@ -1423,10 +1423,36 @@ exports[`Product table Match with snapshot with default prop 1`] = `
       </button>
       <div
         class="css-70qvj9"
-      />
+      >
+        <button
+          aria-label="btn-pages"
+          class="chakra-button css-1vs89a4"
+          data-testid="page-1-button"
+          type="button"
+        >
+          1
+        </button>
+        <button
+          aria-label="btn-pages"
+          class="chakra-button css-179yk2q"
+          data-testid="page-2-button"
+          disabled=""
+          type="button"
+        >
+          2
+        </button>
+        <button
+          aria-label="btn-pages"
+          class="chakra-button css-1vs89a4"
+          data-testid="page-3-button"
+          type="button"
+        >
+          3
+        </button>
+      </div>
       <button
         aria-label="btn-next"
-        class="chakra-button css-5dzvs"
+        class="chakra-button css-14pgy6q"
         data-testid="next-button"
         type="button"
       >
@@ -1449,9 +1475,5 @@ exports[`Product table Match with snapshot with default prop 1`] = `
       </button>
     </div>
   </div>
-  <span
-    hidden=""
-    id="__chakra_env"
-  />
 </div>
 `;
