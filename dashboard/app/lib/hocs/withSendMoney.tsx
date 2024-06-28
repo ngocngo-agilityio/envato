@@ -1,13 +1,13 @@
 // Libs
 import { ReactNode, useCallback } from 'react';
-import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 // Stores
 import { authStore } from '@/lib/stores';
 
 // Hooks
-import { useAuth, useGetUserDetails, useMoney, usePinCode } from '@/lib/hooks';
+import { useAuth, useGetUserDetails, useMoney } from '@/lib/hooks';
 
 // Constants
 import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
@@ -16,18 +16,13 @@ import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 import { customToast, removeAmountFormat } from '@/lib/utils';
 
 // Types
-import { TPinCodeForm, TTransfer, TWithSendMoney } from '@/lib/interfaces';
+import { TTransfer, TWithSendMoney } from '@/lib/interfaces';
 
-// Components
-import { PinCodeModal } from '@/ui/components';
-
-const withSendMoney = <T,>(
-  WrappedComponent: (props: TWithSendMoney<T>) => ReactNode,
+export const withSendMoney = (
+  WrappedComponent: (props: TWithSendMoney) => ReactNode,
 ) => {
-  const SendMoneyWrapper = (props: T) => {
+  const SendMoneyWrapper = () => {
     const toast = useToast();
-    const { isOpen: isPinCodeModalOpen, onToggle: onTogglePinCodeModal } =
-      useDisclosure();
 
     // Stores
     const user = authStore((state) => state.user);
@@ -35,34 +30,13 @@ const withSendMoney = <T,>(
     // Auth
     const { setUser } = useAuth();
 
-    // Pin code
-    const {
-      isSetNewPinCode: isLoadingSetNewPinCode,
-      isConfirmPinCode: isLoadingConfirmPinCode,
-      setNewPinCode,
-      confirmPinCode,
-    } = usePinCode();
-
     // Transfer
     const { sendMoneyToUserWallet, isSendMoneySubmitting } = useMoney();
 
-    const { pinCode = '', id: userId = '', bonusTimes = 0 } = user || {};
+    const { id: userId = '', bonusTimes = 0 } = user || {};
 
     // Users
     const { filterDataUser: userList = [] } = useGetUserDetails(userId);
-
-    const {
-      control: controlPinCode,
-      handleSubmit: submitPinCode,
-      formState: { isValid: isPinCodeValid },
-      reset: resetPinCodeForm,
-    } = useForm<TPinCodeForm>({
-      defaultValues: {
-        pinCode: '',
-      },
-      mode: 'onSubmit',
-      reValidateMode: 'onSubmit',
-    });
 
     const {
       control: controlSendMoney,
@@ -85,35 +59,6 @@ const withSendMoney = <T,>(
         )?._id || '',
       [userList],
     );
-
-    const handleSetNewPinCodeSuccess = useCallback(
-      (pinCode: string) => {
-        user && setUser({ user: { ...user, pinCode } });
-        onTogglePinCodeModal();
-        resetPinCodeForm();
-
-        toast(
-          customToast(
-            SUCCESS_MESSAGES.SET_PIN_CODE.title,
-            SUCCESS_MESSAGES.SET_PIN_CODE.description,
-            STATUS.SUCCESS,
-          ),
-        );
-      },
-      [onTogglePinCodeModal, resetPinCodeForm, setUser, toast, user],
-    );
-
-    const handleSetNewPinCodeError = useCallback(() => {
-      toast(
-        customToast(
-          ERROR_MESSAGES.SET_PIN_CODE.title,
-          ERROR_MESSAGES.SET_PIN_CODE.description,
-          STATUS.ERROR,
-        ),
-      );
-
-      resetPinCodeForm();
-    }, [resetPinCodeForm, toast]);
 
     const handleSendMoneySuccess = useCallback(() => {
       toast(
@@ -171,111 +116,20 @@ const withSendMoney = <T,>(
     );
 
     const handleConfirmPinCodeSuccess = useCallback(() => {
-      onTogglePinCodeModal();
-      resetPinCodeForm();
-
-      toast(
-        customToast(
-          SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
-          SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
-          STATUS.SUCCESS,
-        ),
-      );
-
       submitSendMoney(handleSubmitSendMoney)();
-    }, [
-      handleSubmitSendMoney,
-      onTogglePinCodeModal,
-      resetPinCodeForm,
-      submitSendMoney,
-      toast,
-    ]);
-
-    const handleConfirmPinCodeError = useCallback(() => {
-      toast(
-        customToast(
-          ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
-          ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
-          STATUS.ERROR,
-        ),
-      );
-
-      resetPinCodeForm();
-    }, [resetPinCodeForm, toast]);
-
-    const handleSubmitPinCode = useCallback(
-      (data: TPinCodeForm) => {
-        const payload = {
-          ...data,
-          userId,
-        };
-
-        if (pinCode) {
-          confirmPinCode(payload, {
-            onSuccess: handleConfirmPinCodeSuccess,
-            onError: handleConfirmPinCodeError,
-          });
-
-          return;
-        }
-
-        setNewPinCode(payload, {
-          onSuccess: () => handleSetNewPinCodeSuccess(pinCode),
-          onError: handleSetNewPinCodeError,
-        });
-      },
-      [
-        confirmPinCode,
-        handleConfirmPinCodeError,
-        handleConfirmPinCodeSuccess,
-        handleSetNewPinCodeError,
-        handleSetNewPinCodeSuccess,
-        pinCode,
-        setNewPinCode,
-        userId,
-      ],
-    );
-
-    const handleClosePinCodeModal = useCallback(() => {
-      onTogglePinCodeModal();
-      resetPinCodeForm();
-    }, [onTogglePinCodeModal, resetPinCodeForm]);
+    }, [handleSubmitSendMoney, submitSendMoney]);
 
     return (
-      <>
-        <WrappedComponent
-          control={controlSendMoney}
-          dirtyFields={sendMoneyDirtyFields}
-          userList={userList}
-          isSendMoneySubmitting={isSendMoneySubmitting}
-          onSubmitSendMoneyHandler={submitSendMoney}
-          onSubmitSendMoney={onTogglePinCodeModal}
-          {...props}
-        />
-        {isPinCodeModalOpen && (
-          <PinCodeModal
-            title={
-              pinCode
-                ? 'Please enter your PIN code'
-                : 'Please set the PIN code to your account'
-            }
-            control={controlPinCode}
-            isOpen={true}
-            isDisabled={
-              !isPinCodeValid ||
-              isLoadingSetNewPinCode ||
-              isLoadingConfirmPinCode
-            }
-            isLoading={isLoadingSetNewPinCode || isLoadingConfirmPinCode}
-            onclose={handleClosePinCodeModal}
-            onSubmit={submitPinCode(handleSubmitPinCode)}
-          />
-        )}
-      </>
+      <WrappedComponent
+        control={controlSendMoney}
+        dirtyFields={sendMoneyDirtyFields}
+        userList={userList}
+        isSendMoneySubmitting={isSendMoneySubmitting}
+        onSubmitSendMoneyHandler={submitSendMoney}
+        onConfirmPinCodeSuccess={handleConfirmPinCodeSuccess}
+      />
     );
   };
 
   return SendMoneyWrapper;
 };
-
-export default withSendMoney;

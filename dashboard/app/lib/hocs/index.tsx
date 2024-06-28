@@ -1,3 +1,4 @@
 export { withBalance } from './withBalance';
-export { default as withSendMoney } from './withSendMoney';
+export { withSendMoney } from './withSendMoney';
 export { default as withAddMoney } from './withAddMoney';
+export { withPinCode } from './withPinCode';

@@ -1,5 +1,5 @@
 // Libs
-import { ReactElement, memo } from 'react';
+import { ReactElement, memo, useCallback } from 'react';
 import { Center, Flex, IconButton, Text } from '@chakra-ui/react';
 
 // Components
@@ -9,31 +9,49 @@ import { Eye, EyeSlash } from '@/ui/components';
 import { IMAGES } from '@/lib/constants';
 
 // HOCs
-import { withBalance } from '@/lib/hocs';
+import { withBalance, withPinCode } from '@/lib/hocs';
 
 // Utils
 import { formatDecimalNumber } from '@/lib/utils';
+
+// Types
+import { TWithBalance, TWithPinCode } from '@/lib/interfaces';
 
 type TBalanceStatus = {
   balance: string;
   iconBalance: ReactElement;
 };
 
-export type TCardProps = {
+interface TCardBalanceProps {
   balance: number;
   isShowBalance: boolean;
   onToggleShowBalance: () => void;
-};
+}
+
+export type TCardBalanceWithPinCode = TWithBalance &
+  TWithPinCode<TCardBalanceProps>;
 
 const CardBalance = ({
   balance,
   isShowBalance,
+  onTogglePinCodeModal,
   onToggleShowBalance,
-}: TCardProps) => {
+}: TCardBalanceWithPinCode) => {
   const { iconBalance, balance: balanceStatus }: TBalanceStatus = {
     iconBalance: isShowBalance ? <EyeSlash /> : <Eye />,
     balance: isShowBalance ? `$${formatDecimalNumber(balance)}` : '******',
   };
+
+  const handleToggleShowBalance = useCallback(() => {
+    if (isShowBalance) {
+      onToggleShowBalance();
+
+      return;
+    }
+
+    // Open Pin Code modal
+    onTogglePinCodeModal();
+  }, [isShowBalance, onTogglePinCodeModal, onToggleShowBalance]);
 
   return (
     <Center>
@@ -59,7 +77,7 @@ const CardBalance = ({
             icon={iconBalance}
             w="fit-content"
             bg="none"
-            onClick={onToggleShowBalance}
+            onClick={handleToggleShowBalance}
             sx={{
               _hover: {
                 bg: 'none',
@@ -81,6 +99,6 @@ const CardBalance = ({
   );
 };
 
-const CardBalanceMemorized = memo(withBalance(CardBalance));
+const CardBalanceMemorized = memo(withBalance(withPinCode(CardBalance)));
 
 export default CardBalanceMemorized;

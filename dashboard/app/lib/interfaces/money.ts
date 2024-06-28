@@ -31,7 +31,7 @@ export type TTransferDirtyFields = {
   [K in keyof TTransfer]?: Readonly<boolean>;
 };
 
-export type TWithSendMoney<T> = {
+export type TWithSendMoney = {
   control: Control<TTransfer>;
   dirtyFields: TTransferDirtyFields;
   userList: Array<
@@ -41,8 +41,8 @@ export type TWithSendMoney<T> = {
   >;
   isSendMoneySubmitting: boolean;
   onSubmitSendMoneyHandler: UseFormHandleSubmit<TTransfer>;
-  onSubmitSendMoney: () => void;
-} & T;
+  onConfirmPinCodeSuccess: () => void;
+};
 
 export type TWithAddMoney<T> = {
   control: Control<TAddMoneyForm>;
@@ -51,3 +51,10 @@ export type TWithAddMoney<T> = {
   onSubmitHandler: UseFormHandleSubmit<TAddMoneyForm>;
   onSubmit: () => void;
 } & T;
+
+export type TWithBalance = {
+  balance: number;
+  isShowBalance: boolean;
+  onConfirmPinCodeSuccess: () => void;
+  onToggleShowBalance: () => void;
+};
