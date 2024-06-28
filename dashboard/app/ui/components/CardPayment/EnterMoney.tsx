@@ -23,11 +23,13 @@ import { TTransfer } from '@/lib/interfaces';
 export type TEnterMoneyProps = {
   control: Control<TTransfer>;
   isDisabled?: boolean;
+  isLoading?: boolean;
 };
 
 const EnterMoney = ({
   control,
   isDisabled = false,
+  isLoading = false,
 }: TEnterMoneyProps): JSX.Element => (
   <>
     <Box
@@ -100,6 +102,7 @@ const EnterMoney = ({
       fontWeight="bold"
       type="submit"
       isDisabled={isDisabled}
+      isLoading={isLoading}
     >
       Send Money
     </Button>

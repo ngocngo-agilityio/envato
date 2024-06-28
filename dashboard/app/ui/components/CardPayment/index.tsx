@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import { Box, Heading } from '@chakra-ui/react';
-import isEqual from 'react-fast-compare';
+import { Control, UseFormHandleSubmit } from 'react-hook-form';
 
 // Components
 import CardBalance from './CardBalance';
@@ -13,14 +13,33 @@ import EnterMoney from './EnterMoney';
 import { isEnableSubmitButton } from '@/lib/utils';
 
 // HOCs
-import { withSendMoney } from '@/lib/hocs';
+import { withSendMoney, withPinCode } from '@/lib/hocs';
 
 // Types
-import { TTransfer, TWithSendMoney } from '@/lib/interfaces';
-
-interface CardPaymentProps {}
+import {
+  TTransfer,
+  TTransferDirtyFields,
+  TUserDetail,
+  TWithPinCode,
+  TWithSendMoney,
+} from '@/lib/interfaces';
 
 const REQUIRE_FIELDS = ['amount', 'memberId'];
+
+interface TCardPaymentProps {
+  control: Control<TTransfer>;
+  dirtyFields: TTransferDirtyFields;
+  userList: Array<
+    Omit<TUserDetail, 'id'> & {
+      _id: string;
+    }
+  >;
+  isSendMoneySubmitting: boolean;
+  onSubmitSendMoneyHandler: UseFormHandleSubmit<TTransfer>;
+}
+
+export type TCardPaymentWithPinCode = TWithSendMoney &
+  TWithPinCode<TCardPaymentProps>;
 
 export const CardPayment = ({
   control,
@@ -28,8 +47,8 @@ export const CardPayment = ({
   userList,
   isSendMoneySubmitting,
   onSubmitSendMoneyHandler,
-  onSubmitSendMoney,
-}: TWithSendMoney<CardPaymentProps>): JSX.Element => {
+  onTogglePinCodeModal,
+}: TCardPaymentWithPinCode): JSX.Element => {
   const dirtyItems = Object.keys(dirtyFields).filter(
     (key) => dirtyFields[key as keyof TTransfer],
   );
@@ -60,11 +79,12 @@ export const CardPayment = ({
       <Box
         as="form"
         mt={4}
-        onSubmit={onSubmitSendMoneyHandler(onSubmitSendMoney)}
+        onSubmit={onSubmitSendMoneyHandler(onTogglePinCodeModal)}
       >
         <UserSelector control={control} listUser={userList} />
         <EnterMoney
           isDisabled={!shouldEnable || isSendMoneySubmitting}
+          isLoading={isSendMoneySubmitting}
           control={control}
         />
       </Box>
@@ -72,6 +92,6 @@ export const CardPayment = ({
   );
 };
 
-const CardPaymentMemorized = memo(withSendMoney(CardPayment), isEqual);
+const CardPaymentMemorized = memo(withSendMoney(withPinCode(CardPayment)));
 
 export default CardPaymentMemorized;
