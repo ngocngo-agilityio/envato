@@ -25,7 +25,7 @@ export type TCardProps = {
   onToggleShowBalance: () => void;
 };
 
-export const CardBalance = ({
+const CardBalance = ({
   balance,
   isShowBalance,
   onToggleShowBalance,

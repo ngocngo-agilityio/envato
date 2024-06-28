@@ -19,7 +19,7 @@ import { customToast } from '@/lib/utils';
 import { TPinCodeForm } from '@/lib/interfaces';
 
 // Components
-import PinCodeModal from '@/ui/components/PinCodeModal';
+import { PinCodeModal } from '@/ui/components';
 
 export type TWithBalance<T> = {
   isShowBalance: boolean;
