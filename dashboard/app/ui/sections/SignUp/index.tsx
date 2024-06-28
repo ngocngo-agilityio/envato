@@ -55,7 +55,7 @@ const SignUp = () => {
     [messaging, router, signUp],
   );
 
-  const handleClearErrorMessage = useCallback(() => {
+  const handleResetError = useCallback(() => {
     setErrorMessage('');
   }, []);
 
@@ -64,7 +64,7 @@ const SignUp = () => {
       isRegister={true}
       onSubmit={handleSignUp}
       errorMessage={errorMessage}
-      onClearErrorMessage={handleClearErrorMessage}
+      onResetError={handleResetError}
     />
   );
 };

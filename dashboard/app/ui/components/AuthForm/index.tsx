@@ -37,14 +37,14 @@ interface AuthFormProps {
   isRegister?: boolean;
   errorMessage?: string;
   onSubmit: (data: TAuthForm) => void;
-  onClearErrorMessage: () => void;
+  onResetError: () => void;
 }
 
 const AuthForm = ({
   isRegister = false,
   errorMessage = '',
   onSubmit,
-  onClearErrorMessage,
+  onResetError,
 }: AuthFormProps): JSX.Element => {
   // Control form
   const {
@@ -208,7 +208,7 @@ const AuthForm = ({
                 isDisabled={isSubmitting}
                 value={value}
                 onChange={handleChange}
-                onBlur={onClearErrorMessage}
+                onBlur={onResetError}
               />
             );
           }}
@@ -233,7 +233,7 @@ const AuthForm = ({
               errorMessages={error?.message}
               isDisabled={isSubmitting}
               {...field}
-              onBlur={onClearErrorMessage}
+              onBlur={onResetError}
             />
           )}
         />

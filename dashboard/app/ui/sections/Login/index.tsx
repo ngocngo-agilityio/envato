@@ -50,7 +50,7 @@ const Login = () => {
     [messaging, router, signIn],
   );
 
-  const handleClearErrorMessage = useCallback(() => {
+  const handleResetError = useCallback(() => {
     setErrorMessage('');
   }, []);
 
@@ -58,7 +58,7 @@ const Login = () => {
     <AuthForm
       onSubmit={handleLogin}
       errorMessage={errorMessage}
-      onClearErrorMessage={handleClearErrorMessage}
+      onResetError={handleResetError}
     />
   );
 };
