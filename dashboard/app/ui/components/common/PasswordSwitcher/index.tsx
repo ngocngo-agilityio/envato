@@ -19,6 +19,7 @@ const PasswordSwitcher = ({
     cursor="pointer"
     onClick={onClick}
     as={isShow ? ViewIcon : ViewOffIcon}
+    data-testid="eye-icon"
   />
 );
 

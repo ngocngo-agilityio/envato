@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, memo, useCallback, MouseEvent } from 'react';
+import { ChangeEvent, memo, useCallback } from 'react';
 import Link from 'next/link';
 import { Controller } from 'react-hook-form';
 import {
@@ -25,13 +25,22 @@ import { ROUTES, AUTH_SCHEMA } from '@/lib/constants';
 import { useForm } from '@/lib/hooks';
 
 // Utils
-import { validatePassword } from '@/lib/utils';
+import { validatePassword, isEnableSubmitButton } from '@/lib/utils';
 
 // Types
 import { TAuthForm } from '@/lib/interfaces';
 
 // Layouts
 import { AuthFooter } from '@/ui/layouts';
+
+const LOGIN_REQUIRED_FIELDS = ['email', 'password'];
+const SIGN_UP_REQUIRED_FIELDS = [
+  ...LOGIN_REQUIRED_FIELDS,
+  'firstName',
+  'lastName',
+  'confirmPassword',
+  'isAcceptPrivacyPolicy',
+];
 
 interface AuthFormProps {
   isRegister?: boolean;
@@ -49,7 +58,7 @@ const AuthForm = ({
   // Control form
   const {
     control,
-    formState: { dirtyFields, defaultValues, isSubmitting },
+    formState: { dirtyFields, isSubmitting },
     handleSubmit,
     clearErrors,
   } = useForm<TAuthForm>({
@@ -74,15 +83,15 @@ const AuthForm = ({
   const { isOpen: isShowConfirmPassword, onToggle: onShowConfirmPassword } =
     useDisclosure();
 
-  const isDisabledSubmitBtn: boolean = (() => {
-    const getLength = (object: object): number => Object.keys(object).length;
+  const dirtyItems = Object.keys(dirtyFields).filter(
+    (key) => dirtyFields[key as keyof TAuthForm],
+  );
 
-    const isFillAllFields: boolean = isRegister
-      ? getLength(dirtyFields) === getLength(defaultValues ?? {})
-      : !!(dirtyFields.email && dirtyFields.password);
-
-    return isSubmitting || !isFillAllFields;
-  })();
+  const isDisabledSubmitBtn =
+    !isEnableSubmitButton(
+      isRegister ? SIGN_UP_REQUIRED_FIELDS : LOGIN_REQUIRED_FIELDS,
+      dirtyItems,
+    ) || isSubmitting;
 
   const handleClearErrorMessage = useCallback(
     (
@@ -96,20 +105,6 @@ const AuthForm = ({
         onChange(data);
       },
     [clearErrors],
-  );
-
-  const handleClickForgotPassword = useCallback(
-    (e: MouseEvent<HTMLButtonElement>) => {
-      isSubmitting && e.preventDefault();
-    },
-    [isSubmitting],
-  );
-
-  const handleClickSubmit = useCallback(
-    (e: MouseEvent<HTMLButtonElement>) => {
-      isSubmitting && e.preventDefault();
-    },
-    [isSubmitting],
   );
 
   return (
@@ -273,7 +268,6 @@ const AuthForm = ({
               fontWeight="semibold"
               textTransform="capitalize"
               textDecoration="underline"
-              onClick={handleClickForgotPassword}
             >
               forgot password?
             </Button>
@@ -315,10 +309,7 @@ const AuthForm = ({
                 control={control}
                 rules={AUTH_SCHEMA.AGREE_POLICY}
                 name="isAcceptPrivacyPolicy"
-                render={({
-                  field: { value, onChange },
-                  fieldState: { error },
-                }) => (
+                render={({ field: { value, onChange } }) => (
                   <Checkbox
                     size="md"
                     isChecked={value}
@@ -326,13 +317,6 @@ const AuthForm = ({
                     onChange={(e: ChangeEvent<HTMLInputElement>) =>
                       onChange(e.target.checked)
                     }
-                    {...(error && {
-                      sx: {
-                        '> span': {
-                          borderColor: 'danger.400',
-                        },
-                      },
-                    })}
                   >
                     <Text
                       color="text.secondary"
@@ -410,7 +394,7 @@ const AuthForm = ({
           fontWeight="semibold"
           textDecoration="underline"
           ml={2}
-          onClick={handleClickSubmit}
+          type="submit"
         >
           {!isRegister ? 'Sign Up' : 'Sign In'}
         </Button>
