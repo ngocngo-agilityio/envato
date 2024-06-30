@@ -98,8 +98,8 @@ const Products = () => {
           onError: () => {
             toast(
               customToast(
-                ERROR_MESSAGES.CREATE_TRANSACTION_FAIL.title,
-                ERROR_MESSAGES.CREATE_TRANSACTION_FAIL.description,
+                ERROR_MESSAGES.CREATE_PRODUCT_FAIL.title,
+                ERROR_MESSAGES.CREATE_PRODUCT_FAIL.description,
                 STATUS.ERROR,
               ),
             );
@@ -112,28 +112,11 @@ const Products = () => {
 
   const handleUpdateProduct = useCallback(
     (data: TProductRequest) => {
-      const {
-        _id: productId = '',
-        name = '',
-        imageURLs = [],
-        currency = '',
-        amount = '',
-        stock = '',
-        description = '',
-        createdAt = '',
-      } = data || {};
-
       updateProduct(
         {
-          productId,
+          ...data,
+          productId: data._id,
           userId,
-          name,
-          imageURLs,
-          currency,
-          amount,
-          stock,
-          description,
-          createdAt,
         },
         {
           onSuccess: () => {
@@ -194,7 +177,13 @@ const Products = () => {
 
   const handleUploadImageError = useCallback(
     () =>
-      toast(customToast('', ERROR_MESSAGES.UPDATE_FAIL.title, STATUS.ERROR)),
+      toast(
+        customToast(
+          ERROR_MESSAGES.UPDATE_PRODUCT_FAIL.title,
+          ERROR_MESSAGES.UPDATE_PRODUCT_FAIL.description,
+          STATUS.ERROR,
+        ),
+      ),
     [toast],
   );
 
@@ -238,8 +227,8 @@ const Products = () => {
           onError: () => {
             toast(
               customToast(
-                ERROR_MESSAGES.DELETE_FAIL.title,
-                ERROR_MESSAGES.DELETE_FAIL.description,
+                ERROR_MESSAGES.DELETE_PRODUCT_FAIL.title,
+                ERROR_MESSAGES.DELETE_PRODUCT_FAIL.description,
                 STATUS.ERROR,
               ),
             );

@@ -99,6 +99,10 @@ export const ERROR_MESSAGES = {
     title: 'Create failed',
     description: 'Your product has not been created successfully',
   },
+  DELETE_PRODUCT_FAIL: {
+    title: 'Delete failed',
+    description: 'Your product been deleted failed',
+  },
   CREATE_EVENT_FAIL: {
     title: 'Create failed',
     description: 'Your event has been created failed',
