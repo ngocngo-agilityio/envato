@@ -82,8 +82,8 @@ export const withSendMoney = (
     const handleSendMoneyError = useCallback(() => {
       toast(
         customToast(
-          ERROR_MESSAGES.ADD_MONEY.title,
-          ERROR_MESSAGES.ADD_MONEY.description,
+          ERROR_MESSAGES.SEND_MONEY.title,
+          ERROR_MESSAGES.SEND_MONEY.description,
           STATUS.ERROR,
         ),
       );
