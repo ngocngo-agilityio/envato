@@ -90,7 +90,7 @@ export const MOCK_PRODUCTS_SUCCESS_RES = {
 };
 
 export const MOCK_ADD_PRODUCT_PAYLOAD: Omit<TProductRequest, '_id'> = {
-  amount: ' 1',
+  amount: '1',
   currency: '$',
   description: '',
   imageURLs: ['https://i.ibb.co/xXd07BD/Img-01.png'],
