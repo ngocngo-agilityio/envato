@@ -120,7 +120,7 @@ const EventForm = ({
         <Controller
           control={control}
           name="date"
-          rules={EVENT_SCHEMA.DATE}
+          rules={EVENT_SCHEMA.DATE(!!id)}
           render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
             <InputField
               {...rest}

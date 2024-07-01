@@ -178,9 +178,11 @@ export const EVENT_SCHEMA = {
     validate: (value: string) =>
       !value.trim() ? ERROR_MESSAGES.FIELD_REQUIRED('Title') : true,
   },
-  DATE: {
+  DATE: (isUpdateEvent: boolean) => ({
     required: ERROR_MESSAGES.FIELD_REQUIRED('Date'),
     validate: (value: string) => {
+      if (isUpdateEvent) return true;
+
       const selectedDate = new Date(value).setHours(0, 0, 0, 0);
       const today = new Date().setHours(0, 0, 0, 0);
 
@@ -188,7 +190,7 @@ export const EVENT_SCHEMA = {
         ? ERROR_MESSAGES.MIN_DATE
         : true;
     },
-  },
+  }),
   START_TIME: {
     required: ERROR_MESSAGES.FIELD_REQUIRED('Start time'),
   },

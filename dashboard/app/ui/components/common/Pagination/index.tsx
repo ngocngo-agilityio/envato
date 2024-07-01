@@ -52,7 +52,14 @@ const PaginationComponent = ({
   );
 
   return (
-    <Flex data-testid="pagination" justifyContent="space-between" mt={8}>
+    <Flex
+      data-testid="pagination"
+      justifyContent="space-between"
+      mt={8}
+      flexDir={{ base: 'column', default: 'row' }}
+      flexWrap="wrap"
+      gap={{ base: 5, default: 0 }}
+    >
       <Flex alignItems="center">
         <Text w={100} fontSize="sm" fontWeight="semibold" color="text.primary">
           Show result:
@@ -71,10 +78,10 @@ const PaginationComponent = ({
           />
         </Box>
       </Flex>
-      <Flex justifyContent="space-between" alignItems="center">
+      <Flex alignItems="center">
         <Button
-          width={30}
-          height={30}
+          width={{ base: 6, default: 30 }}
+          height={{ base: 6, default: 30 }}
           data-testid="prev-button"
           aria-label="btn-prev"
           variant="iconSecondary"
@@ -84,7 +91,11 @@ const PaginationComponent = ({
         >
           <Arrow color={colorFill} rotate="90deg" />
         </Button>
-        <Flex alignItems="center">
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          w={{ base: '100%', default: 'auto' }}
+        >
           {arrOfCurrButtons.map((item: string, index: number) => {
             const isDots = item === DOTS;
             const isDisable = currentPage === +item || isDots;
@@ -109,9 +120,9 @@ const PaginationComponent = ({
                 aria-label="btn-pages"
                 isDisabled={isDisable}
                 mx={0.5}
-                h={{ base: 30, '2xl': 53 }}
+                h={{ base: 7, default: 30, '3xl': 53 }}
                 fontSize={{ base: 'xs', lg: 'sm' }}
-                px={{ base: 4, '2xl': 6 }}
+                px={{ base: 3, default: 4, '3xl': 6 }}
                 bg={
                   currentPage === +item
                     ? 'background.body.quinary'
@@ -137,8 +148,8 @@ const PaginationComponent = ({
           cursor={isDisableNext ? 'not-allowed' : ''}
           isDisabled={isDisableNext}
           onClick={handleNextPage}
-          width={30}
-          height={30}
+          width={{ base: 6, default: 30 }}
+          height={{ base: 6, default: 30 }}
         >
           <Arrow color={colorFill} rotate="-90deg" />
         </Button>
