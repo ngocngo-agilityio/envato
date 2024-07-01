@@ -132,3 +132,17 @@ export const MOCK_ADD_PRODUCT_SUCCESS_RES = {
     headers: {} as AxiosRequestHeaders,
   },
 };
+
+export const MOCK_IMAGE_FILES = [
+  new File(['Shoe'], './shoe.png', { type: 'image/png' }),
+];
+
+export const MOCK_UPLOAD_IMAGE_RES_SUCCESS: AxiosResponse = {
+  data: [{ data: { data: { url: 'https://i.ibb.co/xXd07BD/Img-01.png' } } }],
+  status: 200,
+  statusText: 'Ok',
+  headers: {},
+  config: {
+    headers: {} as AxiosRequestHeaders,
+  },
+};
