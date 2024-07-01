@@ -44,13 +44,13 @@ export type TWithSendMoney = {
   onConfirmPinCodeSuccess: () => void;
 };
 
-export type TWithAddMoney<T> = {
+export type TWithAddMoney = {
   control: Control<TAddMoneyForm>;
   isDirty: boolean;
   isSubmitting: boolean;
   onSubmitHandler: UseFormHandleSubmit<TAddMoneyForm>;
-  onSubmit: () => void;
-} & T;
+  onConfirmPinCodeSuccess: () => void;
+};
 
 export type TWithBalance = {
   balance: number;
