@@ -287,20 +287,26 @@ const ProductForm = ({ data, onSubmit, onCloseModal }: ProductProps) => {
         )}
       />
 
-      <Flex my={4}>
+      <Flex
+        w="100%"
+        my={4}
+        flexDir={{ base: 'column', md: 'row' }}
+        justifyContent="space-between"
+        wrap="wrap"
+        gap={3}
+      >
         <Button
           type="submit"
           form="update-product-form"
           data-testid="submit-product-form"
-          w={44}
+          w={{ md: 240 }}
           bg="green.600"
-          mr={3}
           isDisabled={disabled}
         >
           Save
         </Button>
         <Button
-          w={44}
+          w={{ md: 240 }}
           bg="orange.300"
           _hover={{ bg: 'orange.400' }}
           onClick={onCloseModal}
