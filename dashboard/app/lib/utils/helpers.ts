@@ -13,46 +13,26 @@ export const formatPageArray = ({
   totalPage = 0,
   currentPage = 0,
 }: PaginationTableType): string[] => {
-  // If the number of pages is less than or equal to 4, display all page buttons
-  if (totalPage <= 7) {
+  // If the number of pages is less than or equal to 5, display all page buttons
+  if (totalPage <= 5) {
     return formatNumberButton(totalPage);
   }
 
-  // If totalPage is 8 and current page is in the first half,
-  // show the first 5 pages, then DOTS, then the last page
-  if (totalPage == 8 && currentPage <= 4) {
-    return [...formatNumberButton(5), DOTS, totalPage.toString()];
+  // If the current page is near the start (pages 1 to 3),
+  // Display the first 3 pages and then DOTS and the last page
+  if (currentPage <= 3) {
+    return [...formatNumberButton(3), DOTS, totalPage.toString()];
   }
 
-  // If totalPage is 8 and current page is in the last half,
-  // show the first page, DOTS, and the last 5 pages
-  if (totalPage == 8 && currentPage > 4) {
-    return ['1', DOTS, ...formatNumberButton(totalPage).splice(-5)];
-  }
-
-  // If the current page is near the start (pages 1 to 4),
-  // Display the first 5 pages and then DOTS and the last page
-  if (currentPage <= 4) {
-    return [...formatNumberButton(5), DOTS, totalPage.toString()];
-  }
-
-  // If the current page is near the end (within the last 4 pages),
-  // display the first page, DOTS, and the last 5 pages
-  if (currentPage >= totalPage - 3) {
-    return ['1', DOTS, ...formatNumberButton(totalPage).splice(-5)];
+  // If the current page is near the end (within the last 3 pages),
+  // display the first page, DOTS, and the last 3 pages
+  if (currentPage >= totalPage - 2) {
+    return ['1', DOTS, ...formatNumberButton(totalPage).splice(-3)];
   }
 
   // If the current page is in the middle,
-  // Display the first page, DOTS, currentPage - 1, currentPage, currentPage + 1, DOTS, and the last page
-  return [
-    '1',
-    DOTS,
-    (currentPage - 1).toString(),
-    currentPage.toString(),
-    (currentPage + 1).toString(),
-    DOTS,
-    totalPage.toString(),
-  ];
+  // Display the first page, DOTS, currentPage, DOTS, and the last page
+  return ['1', DOTS, currentPage.toString(), DOTS, totalPage.toString()];
 };
 
 export const formatPagination = ({
