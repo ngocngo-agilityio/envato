@@ -5,10 +5,10 @@ import { Box, Button } from '@chakra-ui/react';
 import { Control, UseFormHandleSubmit } from 'react-hook-form';
 
 // Types
-import { TAddMoneyForm } from '@/lib/interfaces';
+import { TAddMoneyForm, TWithAddMoney, TWithPinCode } from '@/lib/interfaces';
 
 // HOCs
-import { withAddMoney } from '@/lib/hocs';
+import { withAddMoney, withPinCode } from '@/lib/hocs';
 
 // Components
 import { AddMoneyInput } from './AddMoneyInput';
@@ -18,18 +18,19 @@ interface TotalBalanceProps {
   isDirty: boolean;
   isSubmitting: boolean;
   onSubmitHandler: UseFormHandleSubmit<TAddMoneyForm>;
-  onSubmit: () => void;
 }
+
+type TTotalBalanceWithPinCode = TWithAddMoney & TWithPinCode<TotalBalanceProps>;
 
 const TotalBalance = ({
   control,
   isDirty,
   isSubmitting,
   onSubmitHandler,
-  onSubmit,
-}: TotalBalanceProps): JSX.Element => (
+  onTogglePinCodeModal,
+}: TTotalBalanceWithPinCode): JSX.Element => (
   <Box w="full" bg="background.body.quaternary" px={8} py={7} borderRadius="lg">
-    <form onSubmit={onSubmitHandler(onSubmit)}>
+    <form onSubmit={onSubmitHandler(onTogglePinCodeModal)}>
       <AddMoneyInput control={control} />
       <Button
         aria-label="btn-add-money"
@@ -47,6 +48,6 @@ const TotalBalance = ({
   </Box>
 );
 
-const TotalBalanceMemorized = memo(withAddMoney(TotalBalance));
+const TotalBalanceMemorized = memo(withAddMoney(withPinCode(TotalBalance)));
 
 export default TotalBalanceMemorized;
