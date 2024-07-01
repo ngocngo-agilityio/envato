@@ -79,7 +79,7 @@ exports[`CardPayment should match with snapshot 1`] = `
             >
               <input
                 class="chakra-input css-18ql1xp"
-                id="field-:r4:"
+                id="field-:r3:"
                 name="memberId"
                 placeholder="Choose an account to transfer"
                 type="text"
@@ -167,7 +167,7 @@ exports[`CardPayment should match with snapshot 1`] = `
             <input
               autocomplete="off"
               class="chakra-input css-cz5fpu"
-              id="field-:r5:"
+              id="field-:r4:"
               name="amount"
               placeholder="0.00"
               type="text"

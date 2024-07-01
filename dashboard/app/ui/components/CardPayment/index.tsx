@@ -41,7 +41,7 @@ interface TCardPaymentProps {
 export type TCardPaymentWithPinCode = TWithSendMoney &
   TWithPinCode<TCardPaymentProps>;
 
-export const CardPayment = ({
+const CardPayment = ({
   control,
   dirtyFields,
   userList,
