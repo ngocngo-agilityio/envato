@@ -1,3 +1,5 @@
+'use client';
+
 import { FormEventHandler, memo, useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Box, HStack } from '@chakra-ui/react';

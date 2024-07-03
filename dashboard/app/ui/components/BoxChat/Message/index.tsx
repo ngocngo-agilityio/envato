@@ -1,3 +1,5 @@
+'use client';
+
 // Libs
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
 import { useEffect, useState, memo, useCallback } from 'react';
