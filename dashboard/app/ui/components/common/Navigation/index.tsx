@@ -1,3 +1,5 @@
+'use client';
+
 import { MouseEvent, ReactNode, memo } from 'react';
 import { Link } from '@chakra-ui/next-js';
 import { usePathname } from 'next/navigation';

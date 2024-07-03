@@ -68,3 +68,5 @@ export { default as CustomToolBar } from './Calendar/CustomToolBar';
 export { default as EventForm } from './Calendar/EventForm';
 export { default as EventDetails } from './Calendar/EventDetails';
 export { default as PasswordSwitcher } from './common/PasswordSwitcher';
+export { default as CalendarSkeleton } from './Skeleton/CalendarSkeleton';
+export { default as CardPaymentSkeleton } from './Skeleton/CardPaymentSkeleton';

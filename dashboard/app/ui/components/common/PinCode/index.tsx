@@ -1,3 +1,5 @@
+'use client';
+
 import { FormEvent, memo } from 'react';
 import {
   Button,

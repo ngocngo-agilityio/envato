@@ -1,3 +1,5 @@
+'use client';
+
 // Libs
 import { memo } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';

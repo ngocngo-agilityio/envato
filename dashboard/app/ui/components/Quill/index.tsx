@@ -1,5 +1,6 @@
-import dynamic from 'next/dynamic';
+'use client';
 
+import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useId, memo } from 'react';
 import { VStack, Flex, Text } from '@chakra-ui/react';
 import 'react-quill/dist/quill.snow.css';
