@@ -22,7 +22,7 @@ const Calendar = async () => {
   const queryClient = new QueryClient();
   const cookieStore = cookies();
 
-  const userId = cookieStore.get('userId')?.value;
+  const userId = cookieStore.get('userId')?.value || '';
   const endpoint = `${END_POINTS.EVENT}/${userId}/${DEFAULT_PAGE}`;
   const queryKey = [END_POINTS.EVENT, userId];
 
@@ -30,7 +30,7 @@ const Calendar = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CalendarSection />
+      <CalendarSection userId={userId} />
     </HydrationBoundary>
   );
 };
