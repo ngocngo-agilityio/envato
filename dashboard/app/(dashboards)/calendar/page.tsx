@@ -4,7 +4,6 @@ import {
   QueryClient,
   dehydrate,
 } from '@tanstack/react-query';
-import lazy from 'next/dynamic';
 import { cookies } from 'next/headers';
 
 // Constants
@@ -16,9 +15,8 @@ import { TEventsResponse } from '@/lib/interfaces';
 // Utils
 import { prefetch } from '@/lib/utils';
 
-const CalendarSection = lazy(() => import('@/ui/sections/Calendar'));
-
-export const dynamic = 'force-dynamic';
+// Sections
+import CalendarSection from '@/ui/sections/Calendar';
 
 const Calendar = async () => {
   const queryClient = new QueryClient();
