@@ -2,7 +2,7 @@
 
 // Libs
 import { memo, useCallback, useMemo } from 'react';
-import { Button, Flex, Heading, useMediaQuery } from '@chakra-ui/react';
+import { Button, Flex, Heading, Show } from '@chakra-ui/react';
 import { Navigate, ToolbarProps, Views } from 'react-big-calendar';
 
 // Components
@@ -13,7 +13,6 @@ import { useColorfill } from '@/ui/themes/bases';
 
 const CustomToolbar = ({ label, view, onView, onNavigate }: ToolbarProps) => {
   const { primary } = useColorfill();
-  const [isLargeThanMobile] = useMediaQuery('(min-width: 768px)');
 
   const handleViewDay = useCallback(() => onView(Views.DAY), [onView]);
 
@@ -73,8 +72,7 @@ const CustomToolbar = ({ label, view, onView, onNavigate }: ToolbarProps) => {
       >
         {label}
       </Heading>
-
-      {!isLargeThanMobile && renderNextBackBtn}
+      <Show below="md">{renderNextBackBtn}</Show>
 
       <Flex
         alignItems="center"
@@ -115,7 +113,8 @@ const CustomToolbar = ({ label, view, onView, onNavigate }: ToolbarProps) => {
             Day
           </Button>
         </Flex>
-        {isLargeThanMobile && renderNextBackBtn}
+
+        <Show above="md">{renderNextBackBtn}</Show>
       </Flex>
     </Flex>
   );
