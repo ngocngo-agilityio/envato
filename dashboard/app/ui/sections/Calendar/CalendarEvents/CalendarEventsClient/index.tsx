@@ -18,6 +18,9 @@ import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 // Utils
 import { customToast } from '@/lib/utils';
 
+// Actions
+import { updateEvent, addEvent } from '@/lib/actions';
+
 // Components
 import { Calendar as CalendarComponent } from '@/ui/components';
 
@@ -28,24 +31,31 @@ interface CalendarProps {
 const Calendar = ({ events }: CalendarProps): JSX.Element => {
   const toast = useToast();
   const [date, setDate] = useState(new Date());
+  const [isMutatingEvents, setIsMutatingEvents] = useState(false);
 
   // TODO: Update later when refactoring for mutate Event on Server component
   // Events
-  const {
-    isAddEvent,
-    addEvent,
-    isUpdateEvent,
-    updateEvent,
-    isDeleteEvent,
-    deleteEvent,
-  } = useEvents();
+  const { isDeleteEvent, deleteEvent } = useEvents();
 
-  const isLoading = isAddEvent || isUpdateEvent || isDeleteEvent;
+  const isLoading = isMutatingEvents || isDeleteEvent;
 
-  const handleAddEventSuccess = useCallback(
-    (eventDate: Date) => {
+  const handleAddEvent = useCallback(
+    async (data: Omit<TEvent, '_id'>) => {
+      setIsMutatingEvents(true);
+      const { startTime } = data;
+      const eventDate = new Date(startTime);
+
+      const { error } = await addEvent(data);
+
+      setIsMutatingEvents(false);
+
+      if (error) {
+        toast(customToast(error.title, error.description, STATUS.ERROR));
+
+        return;
+      }
+
       setDate(eventDate);
-
       toast(
         customToast(
           SUCCESS_MESSAGES.CREATE_EVENT_SUCCESS.title,
@@ -57,56 +67,9 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
     [toast],
   );
 
-  const handleAddEventError = useCallback(() => {
-    toast(
-      customToast(
-        ERROR_MESSAGES.CREATE_EVENT_FAIL.title,
-        ERROR_MESSAGES.CREATE_EVENT_FAIL.description,
-        STATUS.ERROR,
-      ),
-    );
-  }, [toast]);
-
-  const handleAddEvent = useCallback(
-    (data: Omit<TEvent, '_id'>) => {
-      const { startTime } = data;
-      const eventDate = new Date(startTime);
-
-      addEvent(data, {
-        onSuccess: () => handleAddEventSuccess(eventDate),
-        onError: handleAddEventError,
-      });
-    },
-    [addEvent, handleAddEventError, handleAddEventSuccess],
-  );
-
-  const handleUpdateEventSuccess = useCallback(
-    (eventDate: Date) => {
-      setDate(eventDate);
-
-      toast(
-        customToast(
-          SUCCESS_MESSAGES.UPDATE_EVENT_SUCCESS.title,
-          SUCCESS_MESSAGES.UPDATE_EVENT_SUCCESS.description,
-          STATUS.SUCCESS,
-        ),
-      );
-    },
-    [toast],
-  );
-
-  const handleUpdateEventError = useCallback(() => {
-    toast(
-      customToast(
-        ERROR_MESSAGES.UPDATE_EVENT_FAIL.title,
-        ERROR_MESSAGES.UPDATE_EVENT_FAIL.description,
-        STATUS.ERROR,
-      ),
-    );
-  }, [toast]);
-
   const handleUpdateEvent = useCallback(
-    (data: TEvent) => {
+    async (data: TEvent) => {
+      setIsMutatingEvents(true);
       const { startTime } = data;
       const eventDate = new Date(startTime);
 
@@ -115,12 +78,26 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
         eventId: data._id,
       };
 
-      updateEvent(payload, {
-        onSuccess: () => handleUpdateEventSuccess(eventDate),
-        onError: handleUpdateEventError,
-      });
+      const { error } = await updateEvent(payload);
+      setIsMutatingEvents(false);
+
+      if (error) {
+        toast(customToast(error.title, error.description, STATUS.ERROR));
+
+        return;
+      }
+
+      setDate(eventDate);
+      toast(
+        customToast(
+          SUCCESS_MESSAGES.UPDATE_EVENT_SUCCESS.title,
+          SUCCESS_MESSAGES.UPDATE_EVENT_SUCCESS.description,
+          STATUS.SUCCESS,
+        ),
+      );
     },
-    [handleUpdateEventError, handleUpdateEventSuccess, updateEvent],
+
+    [toast],
   );
 
   const handleDeleteEventSuccess = useCallback(() => {
