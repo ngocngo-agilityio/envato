@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { getEvents } from '@/lib/actions';
 
 // Components
-import Calendar from './Calendar';
+import CalendarEventsClient from './CalendarEventsClient';
 
 const CalendarEvents = async () => {
   const { events } = await getEvents();
@@ -21,7 +21,7 @@ const CalendarEvents = async () => {
     };
   });
 
-  return <Calendar events={formattedEvents} />;
+  return <CalendarEventsClient events={formattedEvents} />;
 };
 
 export default CalendarEvents;
