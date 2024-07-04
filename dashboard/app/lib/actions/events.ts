@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { unstable_cache } from 'next/cache';
 
 // Constants
-import { DEFAULT_PAGE, END_POINTS } from '@/lib/constants';
+import { DEFAULT_PAGE, END_POINTS, QUERY_TAGS } from '@/lib/constants';
 
 // Types
 import { TEventsResponse } from '@/lib/interfaces';
@@ -25,4 +25,4 @@ export const getEvents = unstable_cache(async () => {
   const { result = [], totalPage = 0 } = data || {};
 
   return { events: result, totalPage };
-}, [END_POINTS.EVENT]);
+}, [QUERY_TAGS.EVENTS]);
