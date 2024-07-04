@@ -1,5 +1,4 @@
 // Libs
-import { memo } from 'react';
 import dayjs from 'dayjs';
 
 // Actions
@@ -8,14 +7,8 @@ import { getEvents } from '@/lib/actions';
 // Components
 import Calendar from './Calendar';
 
-interface CalendarEventsProps {
-  userId: string;
-}
-
-const CalendarEvents = async ({ userId }: CalendarEventsProps) => {
-  const { events } = await getEvents(userId);
-
-  console.log('events', events);
+const CalendarEvents = async () => {
+  const { events } = await getEvents();
 
   const formattedEvents = events.map((event) => {
     const { eventName = '', startTime, endTime } = event || {};
@@ -31,6 +24,4 @@ const CalendarEvents = async ({ userId }: CalendarEventsProps) => {
   return <Calendar events={formattedEvents} />;
 };
 
-const CalendarEventsMemorized = memo(CalendarEvents);
-
-export default CalendarEventsMemorized;
+export default CalendarEvents;

@@ -1,8 +1,8 @@
 // Libs
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 // Constants
-import { END_POINTS, DEFAULT_PAGE } from '@/lib/constants';
+import { END_POINTS } from '@/lib/constants';
 
 // Types
 import {
@@ -28,21 +28,6 @@ export const useEvents = () => {
   const user = authStore((state) => state.user);
 
   const { id: userId = '' } = user || {};
-
-  // Get events
-  const { data: res, ...query } = useQuery<TEventsResponse>({
-    queryKey: [END_POINTS.EVENT, userId],
-    queryFn: async () =>
-      (
-        await mainHttpService.get<TEventsResponse>({
-          path: END_POINTS.EVENT,
-          userId,
-          page: DEFAULT_PAGE,
-        })
-      ).data,
-  });
-
-  const { result = [], totalPage = 0 } = res || {};
 
   // Add an event
   const { mutate: addEvent, isPending: isAddEvent } = useMutation({
@@ -162,9 +147,6 @@ export const useEvents = () => {
   });
 
   return {
-    ...query,
-    data: result,
-    totalPage,
     isAddEvent,
     addEvent,
     isUpdateEvent,

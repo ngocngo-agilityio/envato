@@ -7,11 +7,7 @@ import { CalendarSkeleton } from '@/ui/components';
 import CalendarEvents from './CalendarEvents';
 import CardPaymentWithInView from './CardPaymentWithInView';
 
-interface CalendarProps {
-  userId: string;
-}
-
-const CalendarSection = ({ userId }: CalendarProps) => (
+const CalendarSection = () => (
   <Grid
     bg="background.body.primary"
     py={12}
@@ -29,7 +25,7 @@ const CalendarSection = ({ userId }: CalendarProps) => (
         py={{ base: 4, md: 5 }}
       >
         <Suspense fallback={<CalendarSkeleton />}>
-          <CalendarEvents userId={userId} />
+          <CalendarEvents />
         </Suspense>
       </Box>
     </GridItem>

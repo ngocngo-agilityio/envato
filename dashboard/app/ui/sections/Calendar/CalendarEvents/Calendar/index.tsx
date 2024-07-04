@@ -25,15 +25,13 @@ interface CalendarProps {
   events: (Event & TEvent & { userId: string })[];
 }
 
-// TODO: Update later when refactoring for fetching Events on Server component
 const Calendar = ({ events }: CalendarProps): JSX.Element => {
   const toast = useToast();
   const [date, setDate] = useState(new Date());
 
+  // TODO: Update later when refactoring for mutate Event on Server component
   // Events
   const {
-    // data: events = [],
-    // isLoading: isLoadingEvents,
     isAddEvent,
     addEvent,
     isUpdateEvent,
@@ -43,21 +41,6 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
   } = useEvents();
 
   const isLoading = isAddEvent || isUpdateEvent || isDeleteEvent;
-
-  // const formattedEvents = useMemo(
-  //   () =>
-  //     events.map((event) => {
-  //       const { eventName = '', startTime, endTime } = event || {};
-
-  //       return {
-  //         ...event,
-  //         title: eventName,
-  //         start: dayjs(startTime).toDate(),
-  //         end: dayjs(endTime).toDate(),
-  //       };
-  //     }),
-  //   [events],
-  // );
 
   const handleAddEventSuccess = useCallback(
     (eventDate: Date) => {

@@ -1,17 +1,28 @@
-import { DEFAULT_PAGE, END_POINTS } from '../constants';
-import { TEventsResponse } from '../interfaces';
-import { mainHttpService } from '../services';
+// Libs
+import { cookies } from 'next/headers';
+import { unstable_cache } from 'next/cache';
 
-export const getEvents = async (userId: string) => {
-  const res = (
-    await mainHttpService.get<TEventsResponse>({
-      path: END_POINTS.EVENT,
-      userId,
-      page: DEFAULT_PAGE,
-    })
-  ).data;
+// Constants
+import { DEFAULT_PAGE, END_POINTS } from '@/lib/constants';
 
-  const { result = [], totalPage = 0 } = res || {};
+// Types
+import { TEventsResponse } from '@/lib/interfaces';
+
+// Services
+import { mainHttpService } from '@/lib/services';
+
+export const getEvents = unstable_cache(async () => {
+  const cookieStore = cookies();
+  const userId = cookieStore.get('userId')?.value || '';
+
+  const res = await mainHttpService.get<TEventsResponse>({
+    path: END_POINTS.EVENT,
+    userId,
+    page: DEFAULT_PAGE,
+  });
+
+  const { data } = res || {};
+  const { result = [], totalPage = 0 } = data || {};
 
   return { events: result, totalPage };
-};
+}, [END_POINTS.EVENT]);

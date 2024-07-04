@@ -32,3 +32,4 @@ export * from './og-properties';
 export * from './chat';
 export * from './product';
 export * from './amount';
+export * from './queryTags';
