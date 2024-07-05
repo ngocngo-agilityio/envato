@@ -64,3 +64,26 @@ export const updateEvent = async (
     return { error: ERROR_MESSAGES.UPDATE_EVENT_FAIL };
   }
 };
+
+export const deleteEvent = async (
+  eventId: string,
+): Promise<{ error?: ErrorMessage } | void> => {
+  try {
+    const cookieStore = cookies();
+    const userId = cookieStore.get('userId')?.value || '';
+
+    await mainHttpServiceWithFetch.deleteRequest({
+      endpoint: END_POINTS.EVENT,
+      body: {
+        eventId,
+        userId,
+      },
+    });
+
+    await addRecentActivity(EActivity.DELETE_EVENT, userId);
+
+    revalidateTag(QUERY_TAGS.EVENTS);
+  } catch (error) {
+    return { error: ERROR_MESSAGES.DELETE_EVENT_FAIL };
+  }
+};
