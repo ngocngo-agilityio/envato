@@ -45,8 +45,9 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
       const { startTime } = data;
       const eventDate = new Date(startTime);
 
-      const { error } = await addEvent(data);
+      const res = await addEvent(data);
 
+      const { error } = res || {};
       setIsMutatingEvents(false);
 
       if (error) {
@@ -78,7 +79,8 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
         eventId: data._id,
       };
 
-      const { error } = await updateEvent(payload);
+      const res = await updateEvent(payload);
+      const { error } = res || {};
       setIsMutatingEvents(false);
 
       if (error) {

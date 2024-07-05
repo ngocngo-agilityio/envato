@@ -21,7 +21,7 @@ type ErrorMessage = { title: string; description: string };
 
 export const addEvent = async (
   eventData: AddEventPayload,
-): Promise<{ error?: ErrorMessage }> => {
+): Promise<{ error?: ErrorMessage } | void> => {
   try {
     const cookieStore = cookies();
     const userId = cookieStore.get('userId')?.value || '';
@@ -37,8 +37,6 @@ export const addEvent = async (
     await addRecentActivity(EActivity.ADD_EVENT, userId);
 
     revalidateTag(QUERY_TAGS.EVENTS);
-
-    return {};
   } catch (error) {
     return { error: ERROR_MESSAGES.CREATE_EVENT_FAIL };
   }
@@ -46,7 +44,7 @@ export const addEvent = async (
 
 export const updateEvent = async (
   eventData: UpdateEventPayload,
-): Promise<{ error?: ErrorMessage }> => {
+): Promise<{ error?: ErrorMessage } | void> => {
   try {
     const cookieStore = cookies();
     const userId = cookieStore.get('userId')?.value || '';
@@ -62,8 +60,6 @@ export const updateEvent = async (
     await addRecentActivity(EActivity.UPDATE_EVENT, userId);
 
     revalidateTag(QUERY_TAGS.EVENTS);
-
-    return {};
   } catch (error) {
     return { error: ERROR_MESSAGES.UPDATE_EVENT_FAIL };
   }
