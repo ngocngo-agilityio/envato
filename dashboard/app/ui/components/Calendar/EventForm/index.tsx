@@ -44,7 +44,7 @@ const EventForm = ({
     clearErrors,
     handleSubmit,
     watch,
-    formState: { isDirty },
+    formState: { isDirty, isSubmitting },
     reset,
   } = useForm<TEventForm>({
     defaultValues: {
@@ -196,7 +196,7 @@ const EventForm = ({
           type="submit"
           bg="green.600"
           w={{ md: 240 }}
-          isDisabled={!isDirty}
+          isDisabled={!isDirty || isSubmitting}
         >
           Save
         </Button>
