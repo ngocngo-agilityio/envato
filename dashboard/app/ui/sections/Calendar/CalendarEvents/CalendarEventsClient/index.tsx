@@ -3,7 +3,7 @@
 // Libs
 import { memo, useCallback, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
-
+import isEqual from 'react-fast-compare';
 import { Event } from 'react-big-calendar';
 
 // Types
@@ -132,6 +132,6 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
   );
 };
 
-const CalendarMemorized = memo(Calendar);
+const CalendarMemorized = memo(Calendar, isEqual);
 
 export default CalendarMemorized;
