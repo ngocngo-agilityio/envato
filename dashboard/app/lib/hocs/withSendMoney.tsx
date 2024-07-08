@@ -1,5 +1,5 @@
 // Libs
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -7,7 +7,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { authStore } from '@/lib/stores';
 
 // Hooks
-import { useAuth, useGetUserDetails, useMoney } from '@/lib/hooks';
+import {
+  useAuth,
+  //  useGetUserDetails,
+  useMoney,
+} from '@/lib/hooks';
+
+// Services
+import { UsersResponse, getUserList } from '@/lib/services';
 
 // Constants
 import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
@@ -21,7 +28,8 @@ import { TTransfer, TWithSendMoney } from '@/lib/interfaces';
 export const withSendMoney = (
   WrappedComponent: (props: TWithSendMoney) => ReactNode,
 ) => {
-  const SendMoneyWrapper = () => {
+  const SendMoneyWrapper = async () => {
+    const [userList, setUserList] = useState<UsersResponse>([]);
     const toast = useToast();
 
     // Stores
@@ -36,7 +44,7 @@ export const withSendMoney = (
     const { id: userId = '', bonusTimes = 0 } = user || {};
 
     // Users
-    const { filterDataUser: userList = [] } = useGetUserDetails(userId);
+    // const { filterDataUser: userList = [] } = useGetUserDetails(userId);
 
     const {
       control: controlSendMoney,
@@ -118,6 +126,18 @@ export const withSendMoney = (
     const handleConfirmPinCodeSuccess = useCallback(() => {
       submitSendMoney(handleSubmitSendMoney)();
     }, [handleSubmitSendMoney, submitSendMoney]);
+
+    console.log('userList', userList);
+
+    const fetchUserList = useCallback(async () => {
+      const { data: userList } = await getUserList(userId);
+
+      setUserList(userList);
+    }, [userId]);
+
+    useEffect(() => {
+      fetchUserList();
+    }, [fetchUserList]);
 
     return (
       <WrappedComponent
