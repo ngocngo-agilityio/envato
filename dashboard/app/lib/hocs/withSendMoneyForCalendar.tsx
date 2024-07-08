@@ -6,12 +6,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 // Stores
 import { authStore } from '@/lib/stores';
 
+// Actions
+import { sendMoney } from '@/lib/actions';
+
 // Hooks
-import {
-  useAuth,
-  // useGetUserDetails,
-  useMoney,
-} from '@/lib/hooks';
+import { useAuth, useMoney } from '@/lib/hooks';
 
 // Constants
 import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
@@ -51,14 +50,14 @@ export const withSendMoneyForCalendar = (
     const { setUser } = useAuth();
 
     // Transfer
-    const { sendMoneyToUserWallet, isSendMoneySubmitting } = useMoney();
+    // const { sendMoneyToUserWallet, isSendMoneySubmitting } = useMoney();
 
     const { id: userId = '', bonusTimes = 0 } = user || {};
 
     const {
       control: controlSendMoney,
       handleSubmit: submitSendMoney,
-      formState: { dirtyFields: sendMoneyDirtyFields },
+      formState: { dirtyFields: sendMoneyDirtyFields, isSubmitting },
       reset: resetSendMoney,
     } = useForm<TTransfer>({
       defaultValues: {
@@ -107,7 +106,7 @@ export const withSendMoneyForCalendar = (
     }, [toast]);
 
     const handleSubmitSendMoney: SubmitHandler<TTransfer> = useCallback(
-      (data) => {
+      async (data) => {
         const submitData = {
           ...data,
           userId,
@@ -115,21 +114,41 @@ export const withSendMoneyForCalendar = (
           amount: removeAmountFormat(data.amount),
         };
 
-        sendMoneyToUserWallet(submitData, {
-          onSuccess: handleSendMoneySuccess,
-          onError: handleSendMoneyError,
-        });
+        // sendMoneyToUserWallet(submitData, {
+        //   onSuccess: handleSendMoneySuccess,
+        //   onError: handleSendMoneyError,
+        // });
 
+        const res = await sendMoney(submitData);
+
+        const { error } = res || {};
+
+        if (error) {
+          toast(customToast(error.title, error.description, STATUS.ERROR));
+          resetSendMoney();
+
+          return;
+        }
+
+        toast(
+          customToast(
+            SUCCESS_MESSAGES.SEND_MONEY.title,
+            SUCCESS_MESSAGES.SEND_MONEY.description,
+            STATUS.SUCCESS,
+          ),
+        );
+
+        bonusTimes &&
+          user &&
+          setUser({
+            user: {
+              ...user,
+              bonusTimes: bonusTimes - 1,
+            },
+          });
         resetSendMoney();
       },
-      [
-        getMemberId,
-        handleSendMoneyError,
-        handleSendMoneySuccess,
-        resetSendMoney,
-        sendMoneyToUserWallet,
-        userId,
-      ],
+      [bonusTimes, getMemberId, resetSendMoney, setUser, toast, user, userId],
     );
 
     const handleConfirmPinCodeSuccess = useCallback(() => {
@@ -142,7 +161,7 @@ export const withSendMoneyForCalendar = (
         control={controlSendMoney}
         dirtyFields={sendMoneyDirtyFields}
         userList={userList}
-        isSendMoneySubmitting={isSendMoneySubmitting}
+        isSendMoneySubmitting={isSubmitting}
         onSubmitSendMoneyHandler={submitSendMoney}
         onConfirmPinCodeSuccess={handleConfirmPinCodeSuccess}
       />
