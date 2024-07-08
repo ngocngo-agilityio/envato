@@ -13,14 +13,16 @@ export const sendMoney = async (
   payload: TAddMoney,
 ): Promise<{ error?: TCustomErrorMessage } | void> => {
   try {
-    await mainHttpServiceWithFetch.postRequest({
+    await mainHttpServiceWithFetch.putRequest({
       endpoint: END_POINTS.SEND_MONEY,
-      body: {
-        ...payload,
-      },
+      body: payload,
     });
 
-    await addRecentActivity(EActivity.SEND_MONEY, payload.userId);
+    // Add the recent activity after a delay of 1 second
+    // This is done to avoid 503 Service Unavailable errors that may occur when the service is  overloaded
+    setTimeout(async () => {
+      await addRecentActivity(EActivity.SEND_MONEY, payload.userId);
+    }, 5000);
   } catch (error) {
     return { error: ERROR_MESSAGES.SEND_MONEY };
   }

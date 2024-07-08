@@ -10,10 +10,10 @@ import { authStore } from '@/lib/stores';
 import { sendMoney } from '@/lib/actions';
 
 // Hooks
-import { useAuth, useMoney } from '@/lib/hooks';
+import { useAuth } from '@/lib/hooks';
 
 // Constants
-import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
+import { STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 
 // Utils
 import { customToast, removeAmountFormat } from '@/lib/utils';
@@ -49,9 +49,6 @@ export const withSendMoneyForCalendar = (
     // Auth
     const { setUser } = useAuth();
 
-    // Transfer
-    // const { sendMoneyToUserWallet, isSendMoneySubmitting } = useMoney();
-
     const { id: userId = '', bonusTimes = 0 } = user || {};
 
     const {
@@ -76,35 +73,6 @@ export const withSendMoneyForCalendar = (
       [userList],
     );
 
-    const handleSendMoneySuccess = useCallback(() => {
-      toast(
-        customToast(
-          SUCCESS_MESSAGES.SEND_MONEY.title,
-          SUCCESS_MESSAGES.SEND_MONEY.description,
-          STATUS.SUCCESS,
-        ),
-      );
-
-      bonusTimes &&
-        user &&
-        setUser({
-          user: {
-            ...user,
-            bonusTimes: bonusTimes - 1,
-          },
-        });
-    }, [bonusTimes, setUser, toast, user]);
-
-    const handleSendMoneyError = useCallback(() => {
-      toast(
-        customToast(
-          ERROR_MESSAGES.SEND_MONEY.title,
-          ERROR_MESSAGES.SEND_MONEY.description,
-          STATUS.ERROR,
-        ),
-      );
-    }, [toast]);
-
     const handleSubmitSendMoney: SubmitHandler<TTransfer> = useCallback(
       async (data) => {
         const submitData = {
@@ -113,11 +81,6 @@ export const withSendMoneyForCalendar = (
           memberId: getMemberId(data.memberId),
           amount: removeAmountFormat(data.amount),
         };
-
-        // sendMoneyToUserWallet(submitData, {
-        //   onSuccess: handleSendMoneySuccess,
-        //   onError: handleSendMoneyError,
-        // });
 
         const res = await sendMoney(submitData);
 
