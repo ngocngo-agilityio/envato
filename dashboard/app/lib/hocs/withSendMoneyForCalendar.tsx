@@ -7,7 +7,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { authStore } from '@/lib/stores';
 
 // Hooks
-import { useAuth, useGetUserDetails, useMoney } from '@/lib/hooks';
+import {
+  useAuth,
+  // useGetUserDetails,
+  useMoney,
+} from '@/lib/hooks';
 
 // Constants
 import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
@@ -16,12 +20,28 @@ import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 import { customToast, removeAmountFormat } from '@/lib/utils';
 
 // Types
-import { TTransfer, TWithSendMoney } from '@/lib/interfaces';
+import {
+  TTransfer,
+  TUserDetail,
+  TWithSendMoneyForCalendar,
+} from '@/lib/interfaces';
 
-export const withSendMoney = (
-  WrappedComponent: (props: TWithSendMoney) => ReactNode,
+interface SendMoneyForCalendarWrapperProps {
+  userList: Array<
+    Omit<TUserDetail, 'id'> & {
+      _id: string;
+    }
+  >;
+  balance: number;
+}
+
+export const withSendMoneyForCalendar = (
+  WrappedComponent: (props: TWithSendMoneyForCalendar) => ReactNode,
 ) => {
-  const SendMoneyWrapper = () => {
+  const SendMoneyForCalendarWrapper = async ({
+    userList,
+    balance,
+  }: SendMoneyForCalendarWrapperProps) => {
     const toast = useToast();
 
     // Stores
@@ -34,9 +54,6 @@ export const withSendMoney = (
     const { sendMoneyToUserWallet, isSendMoneySubmitting } = useMoney();
 
     const { id: userId = '', bonusTimes = 0 } = user || {};
-
-    // Users
-    const { filterDataUser: userList = [] } = useGetUserDetails(userId);
 
     const {
       control: controlSendMoney,
@@ -121,6 +138,7 @@ export const withSendMoney = (
 
     return (
       <WrappedComponent
+        balance={balance}
         control={controlSendMoney}
         dirtyFields={sendMoneyDirtyFields}
         userList={userList}
@@ -131,5 +149,5 @@ export const withSendMoney = (
     );
   };
 
-  return SendMoneyWrapper;
+  return SendMoneyForCalendarWrapper;
 };

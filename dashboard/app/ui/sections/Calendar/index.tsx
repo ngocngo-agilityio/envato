@@ -3,9 +3,9 @@ import { Suspense } from 'react';
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 
 // Components
-import { CalendarSkeleton } from '@/ui/components';
+import { CalendarSkeleton, CardPaymentSkeleton } from '@/ui/components';
 import CalendarEvents from './CalendarEvents';
-import CardPaymentWithInView from './CardPaymentWithInView';
+import CardPayment from './CardPayment';
 
 const CalendarSection = () => (
   <Grid
@@ -30,7 +30,11 @@ const CalendarSection = () => (
       </Box>
     </GridItem>
 
-    <CardPaymentWithInView />
+    <GridItem mt={{ base: 6, '2xl': 0 }}>
+      <Suspense fallback={<CardPaymentSkeleton />}>
+        <CardPayment />
+      </Suspense>
+    </GridItem>
   </Grid>
 );
 

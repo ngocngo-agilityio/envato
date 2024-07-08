@@ -44,6 +44,10 @@ export type TWithSendMoney = {
   onConfirmPinCodeSuccess: () => void;
 };
 
+export type TWithSendMoneyForCalendar = TWithSendMoney & {
+  balance: number;
+};
+
 export type TWithAddMoney = {
   control: Control<TAddMoneyForm>;
   isDirty: boolean;
