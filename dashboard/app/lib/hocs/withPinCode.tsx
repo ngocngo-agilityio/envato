@@ -6,11 +6,14 @@ import { useForm } from 'react-hook-form';
 // Stores
 import { authStore } from '@/lib/stores';
 
+// Hocs
+import { confirmPinCode, setPinCode } from '@/lib/actions';
+
 // Hooks
-import { useAuth, usePinCode } from '@/lib/hooks';
+import { useAuth } from '@/lib/hooks';
 
 // Constants
-import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
+import { STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 
 // Utils
 import { customToast } from '@/lib/utils';
@@ -42,20 +45,12 @@ export const withPinCode = <T,>(
     // Auth
     const { setUser } = useAuth();
 
-    // Pin code
-    const {
-      isSetNewPinCode: isLoadingSetNewPinCode,
-      isConfirmPinCode: isLoadingConfirmPinCode,
-      setNewPinCode,
-      confirmPinCode,
-    } = usePinCode();
-
     const { pinCode = '', id: userId = '' } = user || {};
 
     const {
       control: controlPinCode,
       handleSubmit: submitPinCode,
-      formState: { isValid: isPinCodeValid },
+      formState: { isValid: isPinCodeValid, isSubmitting },
       reset: resetPinCodeForm,
     } = useForm<TPinCodeForm>({
       defaultValues: {
@@ -65,8 +60,47 @@ export const withPinCode = <T,>(
       reValidateMode: 'onSubmit',
     });
 
-    const handleSetNewPinCodeSuccess = useCallback(
-      (pinCode: string) => {
+    const handleConfirmPinCode = useCallback(
+      async (pinCode: string, userId: string) => {
+        const res = await confirmPinCode(pinCode, userId);
+
+        const { error } = res || {};
+
+        if (error) {
+          toast(customToast(error.title, error.description, STATUS.ERROR));
+          resetPinCodeForm();
+
+          return;
+        }
+
+        onTogglePinCodeModal();
+        resetPinCodeForm();
+        toast(
+          customToast(
+            SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
+            SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
+            STATUS.SUCCESS,
+          ),
+        );
+
+        onConfirmPinCodeSuccess();
+      },
+      [onConfirmPinCodeSuccess, onTogglePinCodeModal, resetPinCodeForm, toast],
+    );
+
+    const handleSetPinCode = useCallback(
+      async (pinCode: string, userId: string) => {
+        const res = await setPinCode(pinCode, userId);
+
+        const { error } = res || {};
+
+        if (error) {
+          toast(customToast(error.title, error.description, STATUS.ERROR));
+          resetPinCodeForm();
+
+          return;
+        }
+
         user && setUser({ user: { ...user, pinCode } });
         onTogglePinCodeModal();
         resetPinCodeForm();
@@ -82,81 +116,15 @@ export const withPinCode = <T,>(
       [onTogglePinCodeModal, resetPinCodeForm, setUser, toast, user],
     );
 
-    const handleSetNewPinCodeError = useCallback(() => {
-      toast(
-        customToast(
-          ERROR_MESSAGES.SET_PIN_CODE.title,
-          ERROR_MESSAGES.SET_PIN_CODE.description,
-          STATUS.ERROR,
-        ),
-      );
-
-      resetPinCodeForm();
-    }, [resetPinCodeForm, toast]);
-
-    const handleConfirmPinCodeSuccess = useCallback(() => {
-      onTogglePinCodeModal();
-      resetPinCodeForm();
-
-      toast(
-        customToast(
-          SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
-          SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
-          STATUS.SUCCESS,
-        ),
-      );
-
-      onConfirmPinCodeSuccess();
-    }, [
-      onConfirmPinCodeSuccess,
-      onTogglePinCodeModal,
-      resetPinCodeForm,
-      toast,
-    ]);
-
-    const handleConfirmPinCodeError = useCallback(() => {
-      toast(
-        customToast(
-          ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
-          ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
-          STATUS.ERROR,
-        ),
-      );
-
-      resetPinCodeForm();
-    }, [resetPinCodeForm, toast]);
-
     const handleSubmitPinCode = useCallback(
       (data: TPinCodeForm) => {
-        const payload = {
-          ...data,
-          userId,
-        };
-
         if (pinCode) {
-          confirmPinCode(payload, {
-            onSuccess: handleConfirmPinCodeSuccess,
-            onError: handleConfirmPinCodeError,
-          });
-
-          return;
+          return handleConfirmPinCode(data.pinCode, userId);
         }
 
-        setNewPinCode(payload, {
-          onSuccess: () => handleSetNewPinCodeSuccess(pinCode),
-          onError: handleSetNewPinCodeError,
-        });
+        return handleSetPinCode(data.pinCode, userId);
       },
-      [
-        confirmPinCode,
-        handleConfirmPinCodeError,
-        handleConfirmPinCodeSuccess,
-        handleSetNewPinCodeError,
-        handleSetNewPinCodeSuccess,
-        pinCode,
-        setNewPinCode,
-        userId,
-      ],
+      [handleConfirmPinCode, handleSetPinCode, pinCode, userId],
     );
 
     const handleClosePinCodeModal = useCallback(() => {
@@ -179,12 +147,8 @@ export const withPinCode = <T,>(
             }
             control={controlPinCode}
             isOpen={true}
-            isDisabled={
-              !isPinCodeValid ||
-              isLoadingSetNewPinCode ||
-              isLoadingConfirmPinCode
-            }
-            isLoading={isLoadingSetNewPinCode || isLoadingConfirmPinCode}
+            isDisabled={!isPinCodeValid || isSubmitting}
+            isLoading={isSubmitting}
             onclose={handleClosePinCodeModal}
             onSubmit={submitPinCode(handleSubmitPinCode)}
           />
