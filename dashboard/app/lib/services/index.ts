@@ -5,3 +5,5 @@ export * from './httpClientWithFetch';
 export * from './mainHttpClientWithFetch';
 export * from './recentActivities';
 export * from './events';
+export * from './users';
+export * from './wallet';

@@ -29,6 +29,7 @@ export { default as TransactionTable } from './TransactionTable';
 export { default as SearchBar } from './common/SearchBar';
 export { default as SwitchTheme } from './SwitchTheme';
 export { default as CardPayment } from './CardPayment';
+export { default as CardPaymentForCalendar } from './CardPaymentForCalendar';
 export { default as BoxChat } from './BoxChat';
 export { default as TotalStatisticCard } from './TotalStatisticCard';
 export { default as Fetching } from './Skeleton/Fetching';
