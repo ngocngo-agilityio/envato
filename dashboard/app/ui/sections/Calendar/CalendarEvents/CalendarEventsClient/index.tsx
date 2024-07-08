@@ -3,23 +3,20 @@
 // Libs
 import { memo, useCallback, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
-
+import isEqual from 'react-fast-compare';
 import { Event } from 'react-big-calendar';
-
-// Hooks
-import { useEvents } from '@/lib/hooks';
 
 // Types
 import { TEvent } from '@/lib/interfaces';
 
 // Constants
-import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
+import { STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 
 // Utils
 import { customToast } from '@/lib/utils';
 
 // Actions
-import { updateEvent, addEvent } from '@/lib/actions';
+import { updateEvent, addEvent, deleteEvent } from '@/lib/actions';
 
 // Components
 import { Calendar as CalendarComponent } from '@/ui/components';
@@ -32,12 +29,6 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
   const toast = useToast();
   const [date, setDate] = useState(new Date());
   const [isMutatingEvents, setIsMutatingEvents] = useState(false);
-
-  // TODO: Update later when refactoring for mutate Event on Server component
-  // Events
-  const { isDeleteEvent, deleteEvent } = useEvents();
-
-  const isLoading = isMutatingEvents || isDeleteEvent;
 
   const handleAddEvent = useCallback(
     async (data: Omit<TEvent, '_id'>) => {
@@ -102,45 +93,37 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
     [toast],
   );
 
-  const handleDeleteEventSuccess = useCallback(() => {
-    toast(
-      customToast(
-        SUCCESS_MESSAGES.DELETE_EVENT_SUCCESS.title,
-        SUCCESS_MESSAGES.DELETE_EVENT_SUCCESS.description,
-        STATUS.SUCCESS,
-      ),
-    );
-  }, [toast]);
-
-  const handleDeleteEventError = useCallback(() => {
-    toast(
-      customToast(
-        ERROR_MESSAGES.DELETE_EVENT_FAIL.title,
-        ERROR_MESSAGES.DELETE_EVENT_FAIL.description,
-        STATUS.ERROR,
-      ),
-    );
-  }, [toast]);
-
   const handleDeleteEvent = useCallback(
-    (eventId: string) => {
-      const payload = {
-        eventId,
-      };
+    async (eventId: string) => {
+      setIsMutatingEvents(true);
 
-      deleteEvent(payload, {
-        onSuccess: handleDeleteEventSuccess,
-        onError: handleDeleteEventError,
-      });
+      const res = await deleteEvent(eventId);
+
+      const { error } = res || {};
+      setIsMutatingEvents(false);
+
+      if (error) {
+        toast(customToast(error.title, error.description, STATUS.ERROR));
+
+        return;
+      }
+
+      toast(
+        customToast(
+          SUCCESS_MESSAGES.DELETE_EVENT_SUCCESS.title,
+          SUCCESS_MESSAGES.DELETE_EVENT_SUCCESS.description,
+          STATUS.SUCCESS,
+        ),
+      );
     },
-    [deleteEvent, handleDeleteEventError, handleDeleteEventSuccess],
+    [toast],
   );
 
   return (
     <CalendarComponent
       events={events}
       date={date}
-      isLoading={isLoading}
+      isLoading={isMutatingEvents}
       onSetDate={setDate}
       onAddEvent={handleAddEvent}
       onEditEvent={handleUpdateEvent}
@@ -149,6 +132,6 @@ const Calendar = ({ events }: CalendarProps): JSX.Element => {
   );
 };
 
-const CalendarMemorized = memo(Calendar);
+const CalendarMemorized = memo(Calendar, isEqual);
 
 export default CalendarMemorized;
