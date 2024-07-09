@@ -101,7 +101,7 @@ export const withPinCode = <T,>(
           return;
         }
 
-        user && setUser({ user: { ...user, pinCode } });
+        setUser({ user: { ...user, pinCode } });
         onTogglePinCodeModal();
         resetPinCodeForm();
 

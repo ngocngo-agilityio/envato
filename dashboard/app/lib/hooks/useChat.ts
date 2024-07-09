@@ -45,7 +45,7 @@ export const useGetRoomChat = () => {
 };
 
 // Author: Loc Vo
-export const getInfoRoomChat = async (user: TUserInfo) => {
+export const getInfoRoomChat = async (user: Partial<TUserInfo>) => {
   const res = await mainHttpService.get<AdminDetailsResponse>({
     path: END_POINTS.ADMIN,
     userId: user?.id,

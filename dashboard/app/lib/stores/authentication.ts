@@ -22,7 +22,7 @@ import {
 
 export type TUserInfo = Omit<TUserDetail, 'password'> | null;
 export type TAuthStoreData = {
-  user: TUserInfo | null;
+  user: Partial<TUserInfo> | null;
   isRemember: boolean;
   date: number;
 };
