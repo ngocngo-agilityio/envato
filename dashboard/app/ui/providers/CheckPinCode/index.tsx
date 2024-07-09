@@ -46,7 +46,7 @@ const CheckPinCodeProvider = () => {
   const { setNewPinCode, isSetNewPinCode } = usePinCode();
 
   const handleSetNewPinCodeSuccess = useCallback(
-    (user: Omit<TUserDetail, 'password'>, pinCode: string) => {
+    (user: Partial<Omit<TUserDetail, 'password'>>, pinCode: string) => {
       setUser({ user: { ...user, pinCode } });
       onClosePinCodeModal();
 

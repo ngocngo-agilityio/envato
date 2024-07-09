@@ -12,16 +12,15 @@ import {
   AddEventPayload,
   EActivity,
   UpdateEventPayload,
+  TCustomErrorMessage,
 } from '@/lib/interfaces';
 
 // Services
 import { addRecentActivity, mainHttpServiceWithFetch } from '@/lib/services';
 
-type ErrorMessage = { title: string; description: string };
-
 export const addEvent = async (
   eventData: AddEventPayload,
-): Promise<{ error?: ErrorMessage } | void> => {
+): Promise<{ error?: TCustomErrorMessage } | void> => {
   try {
     const cookieStore = cookies();
     const userId = cookieStore.get('userId')?.value || '';
@@ -44,7 +43,7 @@ export const addEvent = async (
 
 export const updateEvent = async (
   eventData: UpdateEventPayload,
-): Promise<{ error?: ErrorMessage } | void> => {
+): Promise<{ error?: TCustomErrorMessage } | void> => {
   try {
     const cookieStore = cookies();
     const userId = cookieStore.get('userId')?.value || '';
@@ -67,7 +66,7 @@ export const updateEvent = async (
 
 export const deleteEvent = async (
   eventId: string,
-): Promise<{ error?: ErrorMessage } | void> => {
+): Promise<{ error?: TCustomErrorMessage } | void> => {
   try {
     const cookieStore = cookies();
     const userId = cookieStore.get('userId')?.value || '';
