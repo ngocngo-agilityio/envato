@@ -102,7 +102,6 @@ export const withSendMoneyForCalendar = (
         );
 
         bonusTimes &&
-          user &&
           setUser({
             user: {
               ...user,
