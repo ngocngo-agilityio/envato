@@ -48,8 +48,10 @@ export const PRIVATE_ROUTES = (role: string) => [
     path: ROUTES.SETTING,
   },
   {
-    id: 6,
-    path: ROUTES.USER,
+    ...(role === AUTHENTICATION_ROLE.SUPER_ADMIN && {
+      id: 6,
+      path: ROUTES.USER,
+    }),
   },
   {
     id: 7,
