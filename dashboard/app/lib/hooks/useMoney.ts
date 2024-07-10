@@ -52,20 +52,11 @@ export const useMoney = () => {
 
   const { mutate: sendMoneyToUserWallet, isPending: isSendMoneySubmitting } =
     useMutation({
-      mutationFn: async (userData: TSendMoney) => {
-        await mainHttpService.post<TRecentActivities>({
-          path: END_POINTS.RECENT_ACTIVITIES,
-          data: {
-            userId: user?.id,
-            actionName: EActivity.SEND_MONEY,
-          },
-        });
-
-        return mainHttpService.put({
+      mutationFn: async (userData: TSendMoney) =>
+        mainHttpService.put({
           path: END_POINTS.SEND_MONEY,
-          data: userData,
-        });
-      },
+          data: { ...userData, actionName: EActivity.SEND_MONEY },
+        }),
       onSettled: () => {
         queryClient.invalidateQueries({
           queryKey: [END_POINTS.MY_WALLET],

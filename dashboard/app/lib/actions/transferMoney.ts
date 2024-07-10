@@ -7,7 +7,7 @@ import { END_POINTS, ERROR_MESSAGES } from '@/lib/constants';
 import { EActivity, TCustomErrorMessage, TAddMoney } from '@/lib/interfaces';
 
 // Services
-import { addRecentActivity, mainHttpServiceWithFetch } from '@/lib/services';
+import { mainHttpServiceWithFetch } from '@/lib/services';
 
 export const sendMoney = async (
   payload: TAddMoney,
@@ -15,14 +15,11 @@ export const sendMoney = async (
   try {
     await mainHttpServiceWithFetch.putRequest({
       endpoint: END_POINTS.SEND_MONEY,
-      body: payload,
+      body: {
+        ...payload,
+        actionName: EActivity.SEND_MONEY,
+      },
     });
-
-    // Add the recent activity after a delay of 1 second
-    // This is done to avoid 503 Service Unavailable errors that may occur when the service is  overloaded
-    setTimeout(async () => {
-      await addRecentActivity(EActivity.SEND_MONEY, payload.userId);
-    }, 5000);
   } catch (error) {
     return { error: ERROR_MESSAGES.SEND_MONEY };
   }
