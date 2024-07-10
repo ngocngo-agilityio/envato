@@ -1,5 +1,5 @@
 // Libs
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useTransition } from 'react';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
@@ -38,6 +38,7 @@ export const withPinCode = <T,>(
     const toast = useToast();
     const { isOpen: isPinCodeModalOpen, onToggle: onTogglePinCodeModal } =
       useDisclosure();
+    const [, startTransition] = useTransition();
 
     // Stores
     const user = authStore((state) => state.user);
@@ -73,8 +74,11 @@ export const withPinCode = <T,>(
           return;
         }
 
-        onTogglePinCodeModal();
-        resetPinCodeForm();
+        startTransition(() => {
+          onTogglePinCodeModal();
+          resetPinCodeForm();
+        });
+
         toast(
           customToast(
             SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
@@ -96,14 +100,16 @@ export const withPinCode = <T,>(
 
         if (error) {
           toast(customToast(error.title, error.description, STATUS.ERROR));
-          resetPinCodeForm();
+          startTransition(() => resetPinCodeForm());
 
           return;
         }
 
-        setUser({ user: { ...user, pinCode } });
-        onTogglePinCodeModal();
-        resetPinCodeForm();
+        startTransition(() => {
+          onTogglePinCodeModal();
+          setUser({ user: { ...user, pinCode } });
+          resetPinCodeForm();
+        });
 
         toast(
           customToast(
