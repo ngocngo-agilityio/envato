@@ -20,7 +20,11 @@ const CardPayment = async () => {
   const { currentWalletMoney } = walletResponse;
   const { balance = 0 } = currentWalletMoney || {};
 
-  return <CardPaymentForCalendar userList={userList} balance={balance} />;
+  const filteredUserList = userList.filter((user) => user._id !== userId);
+
+  return (
+    <CardPaymentForCalendar userList={filteredUserList} balance={balance} />
+  );
 };
 
 export default CardPayment;
