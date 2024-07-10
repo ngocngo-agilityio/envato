@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 // Stores
 import { authStore } from '@/lib/stores';
 
-// Hocs
+// Actions
 import { confirmPinCode, setPinCode } from '@/lib/actions';
 
 // Hooks
