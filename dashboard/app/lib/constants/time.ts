@@ -16,7 +16,7 @@ export const TIME_DETAIL_FORMAT = 'HH:mm:ss MMM DD, YYYY';
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 
-export const TIME_FORMAT_HH_MM = 'hh:mm';
+export const TIME_FORMAT_HH_MM = 'HH:mm';
 
 export const MONTH_DATE_FORMAT = 'dddd, MMMM D';
 
