@@ -1,5 +1,5 @@
 // Libs
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useTransition } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -43,6 +43,7 @@ export const withSendMoneyForCalendar = (
     balance,
   }: SendMoneyForCalendarWrapperProps) => {
     const toast = useToast();
+    const [, startTransition] = useTransition();
 
     // Stores
     const user = authStore((state) => state.user);
@@ -78,6 +79,19 @@ export const withSendMoneyForCalendar = (
     );
 
     const handleSendMoneySuccess = useCallback(() => {
+      startTransition(() => {
+        resetSendMoney();
+
+        bonusTimes &&
+          user &&
+          setUser({
+            user: {
+              ...user,
+              bonusTimes: bonusTimes - 1,
+            },
+          });
+      });
+
       toast(
         customToast(
           SUCCESS_MESSAGES.SEND_MONEY.title,
@@ -85,18 +99,13 @@ export const withSendMoneyForCalendar = (
           STATUS.SUCCESS,
         ),
       );
-
-      bonusTimes &&
-        user &&
-        setUser({
-          user: {
-            ...user,
-            bonusTimes: bonusTimes - 1,
-          },
-        });
-    }, [bonusTimes, setUser, toast, user]);
+    }, [bonusTimes, resetSendMoney, setUser, toast, user]);
 
     const handleSendMoneyError = useCallback(() => {
+      startTransition(() => {
+        resetSendMoney();
+      });
+
       toast(
         customToast(
           ERROR_MESSAGES.SEND_MONEY.title,
@@ -104,7 +113,7 @@ export const withSendMoneyForCalendar = (
           STATUS.ERROR,
         ),
       );
-    }, [toast]);
+    }, [resetSendMoney, toast]);
 
     const handleSubmitSendMoney: SubmitHandler<TTransfer> = useCallback(
       (data) => {
@@ -119,14 +128,11 @@ export const withSendMoneyForCalendar = (
           onSuccess: handleSendMoneySuccess,
           onError: handleSendMoneyError,
         });
-
-        resetSendMoney();
       },
       [
         getMemberId,
         handleSendMoneyError,
         handleSendMoneySuccess,
-        resetSendMoney,
         sendMoneyToUserWallet,
         userId,
       ],
