@@ -32,8 +32,8 @@ const ProductGallery = ({ previewURL, index, onRemove }: Props) => {
         right={0}
       />
       <Image
-        w={{ base: 320, md: 150 }}
-        h={{ base: 320, md: 150 }}
+        w={{ base: 250, default: 320, md: 150 }}
+        h={{ base: 250, default: 320, md: 150 }}
         src={previewURL || IMAGES.SIGN_UP.url}
         alt={IMAGES.AVATAR_SIGN_UP.alt}
         fallbackSrc={IMAGES.SIGN_UP.url}

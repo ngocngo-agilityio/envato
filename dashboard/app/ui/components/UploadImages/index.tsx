@@ -41,7 +41,7 @@ const UploadImages = ({
           alignItems="center"
           justify="center"
           gap={3}
-          w={{ base: 320, md: 474 }}
+          w={{ base: 250, default: 320, md: 474 }}
           flexWrap="wrap"
         >
           {previewURLs
