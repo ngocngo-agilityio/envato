@@ -2,7 +2,7 @@
 
 // Libs
 import { memo, useCallback, useMemo } from 'react';
-import { Button, Flex, Heading, Show } from '@chakra-ui/react';
+import { Button, Flex, Heading, Hide, Show } from '@chakra-ui/react';
 import { Navigate, ToolbarProps, Views } from 'react-big-calendar';
 
 // Components
@@ -72,7 +72,7 @@ const CustomToolbar = ({ label, view, onView, onNavigate }: ToolbarProps) => {
       >
         {label}
       </Heading>
-      <Show below="md">{renderNextBackBtn}</Show>
+      <Hide above="md">{renderNextBackBtn}</Hide>
 
       <Flex
         alignItems="center"

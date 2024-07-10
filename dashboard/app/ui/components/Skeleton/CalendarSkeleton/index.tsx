@@ -2,7 +2,7 @@
 
 // Libs
 import { memo, useMemo } from 'react';
-import { Flex, Show, Skeleton } from '@chakra-ui/react';
+import { Flex, Hide, Show, Skeleton } from '@chakra-ui/react';
 
 const CalendarSkeleton = () => {
   const renderNextBackBtnSkeleton = useMemo(
@@ -25,7 +25,7 @@ const CalendarSkeleton = () => {
       >
         <Skeleton w={{ base: '100px', md: '150px' }} h={8} />
         <Skeleton w={{ base: '80px', md: '100px' }} h={8} />
-        <Show below="md">{renderNextBackBtnSkeleton}</Show>
+        <Hide above="md">{renderNextBackBtnSkeleton}</Hide>
 
         <Flex
           alignItems="center"

@@ -103,16 +103,14 @@ const HeaderComponent = ({
       <Flex
         gap={{ md: 5, '3xl': '43px' }}
         mt={{ base: 3, default: 0 }}
-        alignSelf={{
-          base: 'end',
-          xl: 'baseline',
-        }}
+        w="full"
+        justifyContent="end"
       >
-        <Flex>
+        <Flex w={{ base: 'full', '0.8sm': 'auto' }}>
           <Flex
             aria-hidden="false"
             aria-modal="true"
-            minW={{ base: 325, sm: 280, md: 310 }}
+            minW={{ base: 'full', '0.8sm': 325, sm: 280, md: 310 }}
             justifyContent="space-between"
           >
             <SwitchTheme />
