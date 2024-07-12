@@ -16,7 +16,6 @@ import {
   useCallback,
   useEffect,
   useState,
-  useTransition,
 } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import isEqual from 'react-fast-compare';
@@ -122,7 +121,6 @@ const UserSelector = ({
 }: TUseSelectorProps): JSX.Element => {
   const [isOpenOptions, setOpenOptions] = useState<boolean>(false);
   const [options, setOptions] = useState<TUseSelectorProps['listUser']>();
-  const [, startTransition] = useTransition();
 
   const filter: TUseSelectorProps['listUser'] = options ?? listUser;
 
@@ -142,11 +140,9 @@ const UserSelector = ({
 
   const handleChangeSearch = useCallback(
     (searchValue: string, onChange: (val: string) => void) => {
-      startTransition(() => {
-        onChange(searchValue);
-        setOpenOptions(true);
-        handleFilterOptions(searchValue);
-      });
+      onChange(searchValue);
+      setOpenOptions(true);
+      handleFilterOptions(searchValue);
     },
     [handleFilterOptions],
   );
@@ -178,10 +174,8 @@ const UserSelector = ({
     (email: string, onChange: (val: string) => void) => (e: MouseEvent) => {
       e.stopPropagation();
 
-      startTransition(() => {
-        onChange(email);
-        setOpenOptions(false);
-      });
+      onChange(email);
+      setOpenOptions(false);
     },
     [],
   );
