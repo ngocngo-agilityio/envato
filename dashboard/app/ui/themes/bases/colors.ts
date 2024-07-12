@@ -295,6 +295,10 @@ export const colors = {
     },
   },
 
+  icon: {
+    closeIcon: '#A0AEC0',
+  },
+
   danger: {
     300: '#E53E3E',
     400: '#FF4747',

@@ -1,6 +1,7 @@
 // Libs
 import {
   Box,
+  CloseButton,
   IconButton,
   InputGroup,
   InputRightElement,
@@ -217,9 +218,11 @@ const UserSelector = ({
             ...AUTH_SCHEMA.EMAIL,
             validate: () => !!filter.length,
           }}
-          render={({ field: { onChange, ...field } }) => {
+          render={({ field: { onChange, value, ...field } }) => {
             const handleChange = (search: string) =>
               handleChangeSearch(search, onChange);
+
+            const handleClearValue = () => onChange('');
 
             return (
               <>
@@ -227,27 +230,27 @@ const UserSelector = ({
                   <InputField
                     variant="authentication"
                     placeholder="Choose an account to transfer"
-                    rightIcon={
-                      <IconButton
-                        p={1}
-                        w="fit-content"
-                        h="fit-content"
-                        aria-label="Icon dropdown"
-                        bg="transparent"
-                        _hover={{
-                          bg: 'transparent',
-                        }}
-                      >
-                        <ChevronIcon />
-                      </IconButton>
-                    }
+                    pr="80px"
                     {...field}
+                    value={value}
                     onChange={handleChange}
                     onFocus={handleFocusOrBlur}
                     onBlur={handleFocusOrBlur}
                     onClick={handleClick}
                   />
-                  <InputRightElement>
+                  <InputRightElement w="80px" justifyContent="end" p={4}>
+                    <CloseButton
+                      color="icon.closeIcon"
+                      size="sm"
+                      cursor="pointer"
+                      mr={1.5}
+                      _hover={{
+                        bg: 'transparent',
+                      }}
+                      onClick={handleClearValue}
+                      display={value.trim() ? 'block' : 'none'}
+                    />
+
                     <IconButton
                       p={1}
                       w="fit-content"
