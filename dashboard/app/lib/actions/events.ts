@@ -25,6 +25,8 @@ export const addEvent = async (
     const cookieStore = cookies();
     const userId = cookieStore.get('userId')?.value || '';
 
+    console.log('1111111111');
+
     await mainHttpServiceWithFetch.postRequest({
       endpoint: END_POINTS.EVENT,
       body: {
@@ -34,6 +36,8 @@ export const addEvent = async (
     });
 
     await addRecentActivity(EActivity.ADD_EVENT, userId);
+
+    console.log('2222222222222');
 
     revalidateTag(QUERY_TAGS.EVENTS);
   } catch (error) {
